@@ -7,9 +7,11 @@ I. Người dùng (Anh Duy):
 
 .........
 II. Bài hát (Anh Quân):
-.........
+tenBaiHat
+tenCaSi
+thoiLuong
+theLoai
 
-.........
 III. Thư viện nhạc (Thái Sơn):
 .........
 
