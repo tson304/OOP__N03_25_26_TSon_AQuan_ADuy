@@ -2,17 +2,18 @@
 
 Xây dựng ứng dụng quản lý nhạc
 
-I. Người dùng:
+I. Người dùng (Anh Duy):
 .........
 
 .........
-II. Bài hát:
+II. Bài hát (Anh Quân):
 .........
 
 .........
-III. Thư viện nhạc:
+III. Thư viện nhạc (Thái Sơn):
 .........
 
 .........
+
 
 
