@@ -1,29 +1,29 @@
 public class NguoiDung {
-    public string tenNguoiDung;
-    public string ngaySinh;
-    public string gioiTinh;
+    public String tenNguoiDung;
+    public String ngaySinh;
+    public String gioiTinh;
 
-    public NguoiDung (string tenNguoiDung, string ngaySinh; string gioiTinh){
+    public NguoiDung (String tenNguoiDung, String ngaySinh; String gioiTinh){
         this.tenNguoiDung = tenNguoiDung;
         this.ngaySinh = ngaySinh;
         this.gioiTinh = gioiTinh;   
     }
-    public string getTenNguoiDung(){
+    public String getTenNguoiDung(){
         return tenNguoiDung;
     }
-    public void setTennguoidung (string tenNguoiDung){
+    public void setTennguoidung (String tenNguoiDung){
         this.tenNguoiDung = tenNguoiDung;
     }
-    public string getNgaySinh(){
+    public String getNgaySinh(){
         return ngaySinh;
     }
-    public void setNgaySinh(string ngaySinh){
+    public void setNgaySinh(String ngaySinh){
         this.ngaySinh = ngaySinh;
     }
-    public string getGioiTinh(){
+    public String getGioiTinh(){
         return gioiTinh;
     }
-    public void setGioiTinh(string gioiTinh){
+    public void setGioiTinh(String gioiTinh){
         this.gioiTinh = gioiTinh;
     }
     public void hienthiThongTin(){
@@ -33,3 +33,4 @@ public class NguoiDung {
     }
 
 }
+
