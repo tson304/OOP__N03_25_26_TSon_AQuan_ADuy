@@ -1,0 +1,7 @@
+public class testBaiHat{
+    public static void testBaiHat(){
+        BaiHat b1 =new BaiHat(1,"1","1",1,"1");
+
+    }
+    System.out.println ("b1:"+b1.tenBaiHat);
+}
