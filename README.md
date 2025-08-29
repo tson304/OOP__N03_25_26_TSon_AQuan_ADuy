@@ -18,7 +18,7 @@ Cụ thể:
 
 + Thêm, sửa, xóa bài hát .
 
-+ Cần tạo các lớp liên quan đến “bài hát”, “người dùng” để đọc, ghi xuống 1 hay nhiều file.
++ Cần tạo các lớp liên quan đến “bài hát”, “người dùng”,"danh sách các bài hát" để đọc, ghi xuống 1 hay nhiều file.
 
 - Khi làm việc với dữ liệu trong bộ nhớ, dữ liệu cần được lưu trữ dưới dạng các Collection tùy chọn như ArrayList, LinkedList, Map, ....
 
