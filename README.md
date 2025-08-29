@@ -2,9 +2,9 @@ Xây dựng ứng dụng quản lý thư viện nhạc
 
 Yêu cầu chính:
 
-- Giao diện <b>Java Spring Boot</b>.
+- Giao diện: Java Spring Boot
 - Có chức năng quản lý ca sĩ, bài hát và danh sách bài hát
-- Và các chức năng khá ( tìm kiếm
+- Và các chức năng khác( tìm kiếm bài hát, thêm bài hát vào danh sách,...)
 
 
 Cụ thể:
