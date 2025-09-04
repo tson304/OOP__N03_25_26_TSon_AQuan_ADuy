@@ -1,7 +1,7 @@
 public class NguoiDung {
-    public String tenNguoiDung;
-    public String ngaySinh;
-    public String gioiTinh;
+    private String tenNguoiDung;
+    private String ngaySinh;
+    private String gioiTinh;
 
     public NguoiDung (String tenNguoiDung, String ngaySinh; String gioiTinh){
         this.tenNguoiDung = tenNguoiDung;
@@ -33,4 +33,5 @@ public class NguoiDung {
     }
 
 }
+
 
