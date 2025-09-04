@@ -15,7 +15,7 @@ public class BaiHat {
         this.theLoai = theLoai;
         
     }
-        public int getId() {
+    public int getId() {
         return id;
     }
 
@@ -33,6 +33,9 @@ public class BaiHat {
 
     public String getTheLoai() {
         return theLoai;
+    }
+    public void setId(int id){
+        this.id=id;
     }
     public void setTenBaiHat(String tenBaiHat) {
         this.tenBaiHat = tenBaiHat;
