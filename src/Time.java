@@ -3,7 +3,7 @@ public class Time {
     private int minute;
     private int second;
 
-    // Constructor overload
+
     public Time() {
         setTime(0, 0, 0);
     }
