@@ -15,7 +15,7 @@ public class testRecursion{
         Scanner sc= new Scanner(System.in);
         System.err.println("Nhap so tu nhien:");
         n=sc.nextInt();
-        System.err.println("Fibonacci tu 1 den "+ n +" la: ");
+        System.err.println("Fibonacci tu 0 den "+ n +" la: ");
          for (int i = 0; i <= n; i++) {
             System.out.print(fibo(i) + " ");
         }
