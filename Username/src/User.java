@@ -1,26 +1,43 @@
 package Username.src;
 
-public class User{
-    private String userName;
-    private String password;
-    
 
-    public User( String userName, String password){
-        this.userName= userName;
-        this.password= password;
+
+public class User implements People{
+    private String fullName;
+    private String dateOfBirth;
+    Identity identity;
+    private String userRole;
+
+    public User(String fullName, String dateOfBirth, Identity identity, String userRole){
+        this.dateOfBirth=dateOfBirth;
+        this.fullName=fullName;
+        this.identity=identity;
+        this.userRole=userRole;
     }
-    
-    public String getuserName() {
-        return userName;
+    @Override
+    public void setInfon(Identity identity){
+        this.identity=identity;
+
     }
-    
-    public String getpassword() {
-        return password;
+    @Override
+    public String getInfo(Identity identity){
+        if(this.identity!=null && this.identity.equals(identity)){
+            return "Name: "+ fullName +",Date: "+dateOfBirth+",identity: "+identity+",Role: "+userRole;
+         }else{
+            return "sai roi!";
+         }
+        }
+    public String getUserRole(){
+        return userRole;
     }
-    public void setuserName(String userName){
-        this.userName=userName;
+    public void setUserRole(String userRole){
+        this.userRole=userRole;
     }
-    public void setpassword(String password){
-        this.password=password;
+    @Override
+    public String toString(){
+        return getInfo(identity);
     }
+ 
+
+
 }
