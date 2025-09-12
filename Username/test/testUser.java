@@ -1,18 +1,17 @@
+
 package Username.test;
+import Username.src.Identity;
 import Username.src.User;
 
 public class testUser{
     public static void main(String[] args){
-        User user1 =new User("anhquan","12345");
-        System.out.println("ten tai khoan:"+ user1.getuserName());
-        System.out.println("mat khau:"+ user1.getpassword());
+        Identity id1 =new Identity("01");
+        Identity id2 =new Identity("02");
 
-        user1.setuserName("le anh quan");
-        user1.setpassword("anhquannn");
-        
-        System.out.println("ten tai khoan sau sua:"+ user1.getuserName());
-        System.out.println("mat khau sau sua:"+ user1.getpassword());
+        User user1 =new User("Le Anh Quan", "27/10/2005", id1, "sinh vien");
+        User user2 =new User("A B C", "2/12/2004", id2, "hoc sinh");
 
-
+        System.err.println(user1);
+        System.err.println(user2);
     }
 }
