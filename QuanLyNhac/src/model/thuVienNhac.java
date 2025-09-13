@@ -1,27 +1,27 @@
-package model;
+import java.util.*;
 
 public class thuVienNhac {
-    private String caSi;
-    private String theLoai;
-    private String baiHat;
+    private String tenNguoiDung;
+    private List<String> danhSachBaiHat;
 
-    public thuVienNhac(){}
+    thuVienNhac(String tenNguoiDung) {
+        this.tenNguoiDung = tenNguoiDung;
+        this.danhSachBaiHat = new ArrayList<>();
+    }
     
-    public thuVienNhac(String caSi, String theLoai, String baiHat){
-        this.caSi = caSi;
-        this.theLoai = theLoai;
-        this.baiHat = baiHat;
+    public String layTenNguoiDung() {
+        return tenNguoiDung;
     }
 
-    public String getCaSi() {
-        return caSi;
+    public List<String> layDanhSachBaiHat(){
+        return danhSachBaiHat;
     }
 
-    public String getTheLoai() {
-        return theLoai;
+    public void themBaiHat(String tenBaiHat) {
+        danhSachBaiHat.add(tenBaiHat);
     }
 
-    public String getBaiHat() {
-        return baiHat;
+    public void xoaBaiHat(String tenBaiHat) {
+        danhSachBaiHat.remove(tenBaiHat);
     }
 }
