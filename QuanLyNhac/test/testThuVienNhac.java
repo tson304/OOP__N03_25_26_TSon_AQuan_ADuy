@@ -19,6 +19,7 @@ public class testThuVienNhac {
     }
 
     public void giaoDien(){
+        boolean isRunningLibrary = true;
         boolean isRunning = true;
         int choice;
 
@@ -26,9 +27,39 @@ public class testThuVienNhac {
 
         thuVienNhac nguoiDung = ds.get(0);
 
+
+        while (isRunningLibrary) {
+            System.out.println("________________________________________________________________________________________________________________________");
+            System.out.println("QUAN LY NHAC");
+            System.out.println("________________________________________________________________________________________________________________________");
+            System.out.println("Chuc nang: ");
+            System.out.println("1. Danh sach thu vien");
+            System.out.println("2. Them thu vien");
+            System.out.println("3. Xoa thu vien");
+            System.out.println("4. Thoat");
+            System.out.println("________________________________________________________________________________________________________________________");
+
+            while (isRunning) {
+                boolean option = true;
+                System.out.print("Lua chon: ");
+                choice = userInput.nextInt();
+                userInput.nextInt();
+
+                switch (choice) {
+                    case 1:
+                        
+                        break;
+                
+                    default:
+                        break;
+                }
+            }
+        }
+        
+        isRunning = true;
+
         System.out.println("________________________________________________________________________________________________________________________");
         System.out.println("Danh sach bai hat cua " + nguoiDung.layTenNguoiDung() + " (So luong: " + nguoiDung.layDanhSachBaiHat().size() + " bai hat)");
-        System.out.println(nguoiDung.layDanhSachBaiHat());
         System.out.println("________________________________________________________________________________________________________________________");
         System.out.println("Chuc nang: ");
         System.out.println("1. Danh sach bai hat");
@@ -49,6 +80,7 @@ public class testThuVienNhac {
                     System.out.println("Danh sach bai hat (So luong: " + nguoiDung.layDanhSachBaiHat().size() + " bai hat)\n" + nguoiDung.layDanhSachBaiHat());
                     System.out.println("________________________________________________________________________________________________________________________");
                     break;
+
                 case 2:
                     while (option) {
                         System.out.println("Nhap (quit) de quay lai");
@@ -67,6 +99,7 @@ public class testThuVienNhac {
                         System.out.println("________________________________________________________________________________________________________________________");
                     }
                     break;
+
                 case 3:
                     System.out.println("Nhap (quit) de quay lai");
                     System.out.println("Danh sach bai hat: \n" + nguoiDung.layDanhSachBaiHat());
@@ -85,11 +118,13 @@ public class testThuVienNhac {
                     System.out.println("________________________________________________________________________________________________________________________");
 
                     break;
+
                 case 4:
                     System.out.print("----> ");
                     System.out.println("Hen gap lai!");
                     isRunning = false;
                     break;
+
                 default:
                     System.out.print("----> ");
                     System.out.println("Sai cu phap!");
