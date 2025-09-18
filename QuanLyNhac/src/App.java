@@ -13,6 +13,6 @@ public class App {
 
         // Test thư viện nhạc (Trần Đức Thái Sơn - 23017229)
         testThuVienNhac test = new testThuVienNhac();
-        test.giaoDien();
+        test.quanLyBaiHat("TranSon");
     }
 }

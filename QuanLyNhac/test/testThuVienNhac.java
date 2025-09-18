@@ -1,75 +1,23 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class testThuVienNhac {
     Scanner userInput = new Scanner(System.in);
 
-    private ArrayList<thuVienNhac> danhSachThuVien = new ArrayList<thuVienNhac>();
-
-    public ArrayList<thuVienNhac> addList(){
-        thuVienNhac thuVien_1 = new thuVienNhac("TranSon");
-        thuVienNhac thuVien_2 = new thuVienNhac("Sora");
-        thuVienNhac thuVien_3 = new thuVienNhac("Bibo");
-
-        danhSachThuVien.add(thuVien_1);
-        danhSachThuVien.add(thuVien_2);
-        danhSachThuVien.add(thuVien_3);
-
-        return danhSachThuVien;
-    }
-
-    public void giaoDien(){
-        boolean isRunningLibrary = true;
+    public void quanLyNguoiDung(){
         boolean isRunning = true;
+        boolean option = true;
         int choice;
-
-        ArrayList<thuVienNhac> ds = this.addList();
-
-        thuVienNhac nguoiDung = ds.get(0);
-
-
-        while (isRunningLibrary) {
-            System.out.println("________________________________________________________________________________________________________________________");
-            System.out.println("QUAN LY NHAC");
-            System.out.println("________________________________________________________________________________________________________________________");
-            System.out.println("Chuc nang: ");
-            System.out.println("1. Danh sach thu vien");
-            System.out.println("2. Them thu vien");
-            System.out.println("3. Xoa thu vien");
-            System.out.println("4. Thoat");
-            System.out.println("________________________________________________________________________________________________________________________");
-
-            while (isRunning) {
-                boolean option = true;
-                System.out.print("Lua chon: ");
-                choice = userInput.nextInt();
-                userInput.nextInt();
-
-                switch (choice) {
-                    case 1:
-                        
-                        break;
-                
-                    default:
-                        break;
-                }
-            }
-        }
-        
-        isRunning = true;
-
-        System.out.println("________________________________________________________________________________________________________________________");
-        System.out.println("Danh sach bai hat cua " + nguoiDung.layTenNguoiDung() + " (So luong: " + nguoiDung.layDanhSachBaiHat().size() + " bai hat)");
-        System.out.println("________________________________________________________________________________________________________________________");
-        System.out.println("Chuc nang: ");
-        System.out.println("1. Danh sach bai hat");
-        System.out.println("2. Them bai hat");
-        System.out.println("3. Xoa bai hat");
-        System.out.println("4. Thoat");
-        System.out.println("________________________________________________________________________________________________________________________");
+        thuVienNhac nguoiDung = new thuVienNhac();
         
         while (isRunning) {
-            boolean option = true;
+            System.out.println("________________________________________________________________________________________________________________________");
+            System.out.println("                                              QUAN LY NHAC                                                              ");
+            System.out.println("________________________________________________________________________________________________________________________");
+            System.out.println("Chuc nang: ");
+            System.out.println("1. Danh sach nguoi dung");
+            System.out.println("2. Them nguoi dung");
+            System.out.println("3. Thoat");
+            System.out.println("________________________________________________________________________________________________________________________");
             System.out.print("Lua chon: ");
             choice = userInput.nextInt();
             userInput.nextLine();
@@ -77,7 +25,63 @@ public class testThuVienNhac {
             switch (choice) {
                 case 1:
                     System.out.print("----> ");
-                    System.out.println("Danh sach bai hat (So luong: " + nguoiDung.layDanhSachBaiHat().size() + " bai hat)\n" + nguoiDung.layDanhSachBaiHat());
+                    System.out.println("Danh sach nguoi dung (So luong: " + nguoiDung.layDanhSachNguoiDung().size() + " nguoi dung)\n" + nguoiDung.layDanhSachNguoiDung());
+                    System.out.println("________________________________________________________________________________________________________________________");
+                    break;
+                case 2:
+                    while (option) {
+                        System.out.println("Nhap (quit) de quay lai");
+                        System.out.print("Nhap ten nguoi dung moi: ");
+                        String themNguoiDung = userInput.nextLine();
+
+                        if (themNguoiDung.equals("quit")) {
+                            System.out.println("________________________________________________________________________________________________________________________");
+                            option = false;
+                            break;
+                        }
+
+                        nguoiDung.themNguoiDung(themNguoiDung);
+                        System.out.print("----> ");
+                        System.out.println("Da them: " + themNguoiDung);
+                        System.out.println("________________________________________________________________________________________________________________________");
+                    }
+                    break;
+                case 3:
+                    System.out.print("----> ");
+                    System.out.println("Hen gap lai!");
+                    isRunning = false;
+                    break;
+                default:
+                    System.out.print("----> ");
+                    System.out.println("Sai cu phap!");
+                    System.out.println("________________________________________________________________________________________________________________________");
+                    break;
+            }
+        }
+    }
+
+    private void quanLyBaiHat(String tenNguoiDung){
+        boolean option = true;
+        int choice;
+        boolean isRunning = true;
+        while (isRunning) {
+            System.out.println("________________________________________________________________________________________________________________________");
+            System.out.println("Danh sach bai hat cua " + tenNguoiDung + " (So luong: " + tenNguoiDung.layDanhSachBaiHat().size() + " bai hat)");
+            System.out.println("________________________________________________________________________________________________________________________");
+            System.out.println("Chuc nang: ");
+            System.out.println("1. Danh sach bai hat");
+            System.out.println("2. Them bai hat");
+            System.out.println("3. Xoa bai hat");
+            System.out.println("4. Thoat");
+            System.out.println("________________________________________________________________________________________________________________________");
+            System.out.print("Lua chon: ");
+            choice = userInput.nextInt();
+            userInput.nextLine();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("----> ");
+                    System.out.println("Danh sach bai hat (So luong: " + tenNguoiDung.layDanhSachBaiHat().size() + " bai hat)\n" + tenNguoiDung.layDanhSachBaiHat());
                     System.out.println("________________________________________________________________________________________________________________________");
                     break;
 
@@ -93,7 +97,7 @@ public class testThuVienNhac {
                             break;
                         }
 
-                        nguoiDung.themBaiHat(themBaiHat);
+                        tenNguoiDung.themBaiHat(themBaiHat);
                         System.out.print("----> ");
                         System.out.println("Da them: " + themBaiHat);
                         System.out.println("________________________________________________________________________________________________________________________");
@@ -101,22 +105,23 @@ public class testThuVienNhac {
                     break;
 
                 case 3:
-                    System.out.println("Nhap (quit) de quay lai");
-                    System.out.println("Danh sach bai hat: \n" + nguoiDung.layDanhSachBaiHat());
-                    System.out.print("Nhap bai hat can xoa: ");
-                    String xoaBaiHat = userInput.nextLine();
+                    while(option) {
+                        System.out.println("Nhap (quit) de quay lai");
+                        System.out.println("Danh sach bai hat: \n" + tenNguoiDung.layDanhSachBaiHat());
+                        System.out.print("Nhap bai hat can xoa: ");
+                        String xoaBaiHat = userInput.nextLine();
 
-                    if (xoaBaiHat.equals("quit")) {
+                        if (xoaBaiHat.equals("quit")) {
+                            System.out.println("________________________________________________________________________________________________________________________");
+                            option = false;
+                            break;
+                        }
+
+                        tenNguoiDung.xoaBaiHat(xoaBaiHat);
+                        System.out.print("----> ");
+                        System.out.println("Da xoa: " + xoaBaiHat);
                         System.out.println("________________________________________________________________________________________________________________________");
-                        option = false;
-                        break;
                     }
-
-                    nguoiDung.xoaBaiHat(xoaBaiHat);
-                    System.out.print("----> ");
-                    System.out.println("Da xoa: " + xoaBaiHat);
-                    System.out.println("________________________________________________________________________________________________________________________");
-
                     break;
 
                 case 4:
@@ -135,6 +140,7 @@ public class testThuVienNhac {
 
         userInput.close();
     }
+
 }
 
 

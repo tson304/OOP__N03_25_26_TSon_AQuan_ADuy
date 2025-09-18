@@ -1,16 +1,24 @@
 import java.util.*;
 
 public class thuVienNhac {
-    private String tenNguoiDung;
+    private List<String> danhSachNguoiDung;
     private List<String> danhSachBaiHat;
 
-    thuVienNhac(String tenNguoiDung) {
-        this.tenNguoiDung = tenNguoiDung;
+    thuVienNhac() {
+        this.danhSachNguoiDung = new ArrayList<>();
         this.danhSachBaiHat = new ArrayList<>();
     }
     
-    public String layTenNguoiDung() {
-        return tenNguoiDung;
+    public List<String> layDanhSachNguoiDung() {
+        return danhSachNguoiDung;
+    }
+
+    public void themNguoiDung(String tenNguoiDung) {
+        danhSachNguoiDung.add(tenNguoiDung);
+    }
+
+    public void xoaNguoiDung(String tenNguoiDung) {
+        danhSachNguoiDung.remove(tenNguoiDung);
     }
 
     public List<String> layDanhSachBaiHat(){
