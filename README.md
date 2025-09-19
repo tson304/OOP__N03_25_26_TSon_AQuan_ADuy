@@ -1,47 +1,40 @@
-Xây dựng ứng dụng quản lý thư viện nhạc
+🔹 Chức năng Thêm bài hát
 
-Yêu cầu chính:
+Người dùng nhập thông tin bài hát (ID, tên bài hát, ca sĩ, thể loại, thời lượng).
 
-- Giao diện: Java Spring Boot
-- Có chức năng quản lý ca sĩ, bài hát và danh sách bài hát
-- Và các chức năng khác( tìm kiếm bài hát, thêm bài hát vào danh sách,...)
+Hệ thống kiểm tra danh sách còn chỗ trống không.
 
+Nếu còn chỗ → thêm bài hát vào danh sách.
 
-Cụ thể:
--Quản lý người dùng
+Nếu hết chỗ → thông báo không thể thêm.
 
-+ Thêm, sửa, xóa người dùng.
+🔹 Chức năng Sửa bài hát
 
-+ Liệt kê thông tin về người dùng, có thể lọc ra các người dùng theo tiêu chí bất kỳ.
+Người dùng nhập ID bài hát muốn sửa.
 
-- Có chức năng quản lý các bài hát.
+Hệ thống tìm bài hát theo ID:
 
-+ Thêm, sửa, xóa bài hát .
+Nếu tìm thấy: cho phép sửa các thông tin như
 
-+ Cần tạo các lớp liên quan đến “bài hát”, “người dùng”,"danh sách các bài hát" để đọc, ghi xuống 1 hay nhiều file.
+Tên bài hát
 
-- Khi làm việc với dữ liệu trong bộ nhớ, dữ liệu cần được lưu trữ dưới dạng các Collection tùy chọn như ArrayList, LinkedList, Map, ....
+Tên ca sĩ
 
-~~ Quản Lý Nhạc - Thái Sơn, Anh Duy, Anh Quân
+Thể loại
 
-Xây dựng ứng dụng quản lý nhạc
+Thời lượng
 
-I. Người dùng (Anh Duy):
-.........
+Nếu không tìm thấy: báo lỗi "Không tồn tại ID này".
 
-.........
-II. Bài hát (Anh Quân):
-tenBaiHat
-tenCaSi
-thoiLuong
-theLoai
+🔹 Chức năng Xóa bài hát
 
-III. Thư viện nhạc (Thái Sơn):
-.........
-caSi
-theLoai
-baiHat
-.........
+Người dùng nhập ID hoặc Tên bài hát muốn xóa.
+
+Hệ thống tìm bài hát trong danh sách:
+
+Nếu có → xóa khỏi danh sách, dịch chuyển các phần tử còn lại.
+
+Nếu không có → báo "Không tìm thấy bài hát".
 # UML Diagram
 
 
