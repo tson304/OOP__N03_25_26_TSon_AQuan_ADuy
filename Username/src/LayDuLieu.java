@@ -31,4 +31,16 @@ public class LayDuLieu {
         String theLoai = layChuoi("Nhap the loai: ");
         return new BaiHat(id, tenBaiHat, tenCaSi, thoiLuong, theLoai);
     }
+    public String layTenCaSi() {
+        return layChuoi("Nhap ten ca si moi: ");
+    }
+    public String layTenBaiHat() {
+        return layChuoi("Nhap ten bai hat moi: ");
+    }
+    public int layThoiLuong() {
+        return laySoNguyen("Nhap thoi luong moi (giay): ");
+    }
+    public String layTheLoai() {
+        return layChuoi("Nhap the loai moi: ");
+    }
 }
