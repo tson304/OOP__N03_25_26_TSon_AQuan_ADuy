@@ -42,6 +42,9 @@ caSi
 theLoai
 baiHat
 .........
+# UML Diagram
+
+![UML Diagram](3c1106be-18c7-4662-a9c7-bfe9ef2eb1ff.png)
 
 
 
