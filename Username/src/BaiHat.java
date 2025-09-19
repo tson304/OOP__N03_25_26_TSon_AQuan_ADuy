@@ -1,6 +1,6 @@
 package Username.src;
 
-public class BaiHat implements PlaySong {
+public class BaiHat {
     private int id;
     private String tenBaiHat;
     private String tenCaSi;
@@ -53,23 +53,14 @@ public class BaiHat implements PlaySong {
         this.theLoai = theLoai;
     }
     @Override
-    public void hienThiThongTin() {
-        System.out.println("Tên bài hát:"+ tenBaiHat);
-        System.out.println("Tên người hat:"+ tenCaSi);
-        System.out.println("Thể loại:"+ theLoai);
-        System.out.println("Thời Lượng:"+ thoiLuong + " giây");
-    }
-    @Override
-    public void play(){
-        System.err.println("Dang phat bai:"+tenBaiHat);
-    }
-    @Override
-    public void pause(){
-        System.err.println("dang tam dung bai"+tenBaiHat);
-    }
-     @Override
-    public void stop(){
-        System.err.println("dung phat bai"+tenBaiHat);
+    public String toString() {
+        return "BaiHat{" +
+                "id=" + id +
+                ", tenBaiHat='" + tenBaiHat + '\'' +
+                ", tenCaSi='" + tenCaSi + '\'' +
+                ", thoiLuong=" + thoiLuong +
+                ", theLoai='" + theLoai + '\'' +
+                '}';
     }
 
 }
