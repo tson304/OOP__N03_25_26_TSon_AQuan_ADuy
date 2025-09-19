@@ -1,6 +1,5 @@
 package Username.test;
 
-import Username.src.BaiHat;
 import Username.src.DsBaiHat;
 import Username.src.XoaBaiHat;
 

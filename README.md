@@ -42,6 +42,9 @@ caSi
 theLoai
 baiHat
 .........
+# UML Diagram
 
 
+
+<img width="1015" height="733" alt="3c1106be-18c7-4662-a9c7-bfe9ef2eb1ff" src="https://github.com/user-attachments/assets/3b000733-ea62-470a-8c6b-01a51960d7f4" />
 
