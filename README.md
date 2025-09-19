@@ -45,7 +45,7 @@ Cụ thể:
         4 -> Sửa phần tử trong danh sách. (EDIT)
         5 -> Kết thúc chương trình
     Nếu nhập cú pháp không trong khoảng (1 - 5):
-        Báo cú pháp lỗi.
+        -> Báo cú pháp lỗi.
 
 6. Quay lại menu tương tác cho đến khi chọn "5".
 

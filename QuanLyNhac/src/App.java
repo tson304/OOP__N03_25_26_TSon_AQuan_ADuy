@@ -13,7 +13,7 @@ public class App {
 
         // Test thư viện nhạc (Trần Đức Thái Sơn - 23017229)
         thuVienNhacController test = new thuVienNhacController();
-        // test.dsNguoiDung();
+        test.dsNguoiDung();
         test.danhSachBaiHat();
     }
 }
