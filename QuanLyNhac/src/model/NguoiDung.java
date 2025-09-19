@@ -1,15 +1,25 @@
+package model;
+
 public class NguoiDung {
+    private String maNguoiDung;
     private String tenNguoiDung;
     private String ngaySinh;
     private String gioiTinh;
 
- 
-    public NguoiDung(String tenNguoiDung, String ngaySinh, String gioiTinh) {
+    public NguoiDung(String maNguoiDung, String tenNguoiDung, String ngaySinh, String gioiTinh) {
+        this.maNguoiDung = maNguoiDung;
         this.tenNguoiDung = tenNguoiDung;
         this.ngaySinh = ngaySinh;
         this.gioiTinh = gioiTinh;
     }
 
+    public String getMaNguoiDung() {
+        return maNguoiDung;
+    }
+
+    public void setMaNguoiDung(String maNguoiDung) {
+        this.maNguoiDung = maNguoiDung;
+    }
 
     public String getTenNguoiDung() {
         return tenNguoiDung;
@@ -36,8 +46,12 @@ public class NguoiDung {
     }
 
     public void hienThiThongTin() {
-        System.out.println("Tên người dùng: " + tenNguoiDung);
-        System.out.println("Ngày sinh: " + ngaySinh);
-        System.out.println("Giới tính: " + gioiTinh);
+        System.out.println("Mã: " + maNguoiDung + " | Tên: " + tenNguoiDung + " | Ngày sinh: " + ngaySinh + " | Giới tính: " + gioiTinh);
     }
+
+    @Override
+    public String toString() {
+        return maNguoiDung + " - " + tenNguoiDung + " (" + gioiTinh + ", " + ngaySinh + ")";
+    }
+
 }
