@@ -1,47 +1,43 @@
-Xây dựng ứng dụng quản lý thư viện nhạc
+Xây dựng ứng dụng quản lý nhạc.
 
-Yêu cầu chính:
-
-- Giao diện: Java Spring Boot
-- Có chức năng quản lý ca sĩ, bài hát và danh sách bài hát
-- Và các chức năng khác( tìm kiếm bài hát, thêm bài hát vào danh sách,...)
-
+ĐỐI TƯỢNG: THƯ VIỆN NHẠC
 
 Cụ thể:
--Quản lý người dùng
 
-+ Thêm, sửa, xóa người dùng.
+- Quản lý người dùng
 
-+ Liệt kê thông tin về người dùng, có thể lọc ra các người dùng theo tiêu chí bất kỳ.
+    + Thêm, sửa, xóa người dùng.
 
-- Có chức năng quản lý các bài hát.
+    + Liệt kê danh sách người dùng.
 
-+ Thêm, sửa, xóa bài hát .
+- Quản lý bài hát.
 
-+ Cần tạo các lớp liên quan đến “bài hát”, “người dùng”,"danh sách các bài hát" để đọc, ghi xuống 1 hay nhiều file.
+    + Thêm, sửa, xóa bài hát.
 
-- Khi làm việc với dữ liệu trong bộ nhớ, dữ liệu cần được lưu trữ dưới dạng các Collection tùy chọn như ArrayList, LinkedList, Map, ....
-
-~~ Quản Lý Nhạc - Thái Sơn, Anh Duy, Anh Quân
-
-Xây dựng ứng dụng quản lý nhạc
-
-I. Người dùng (Anh Duy):
-.........
-
-.........
-II. Bài hát (Anh Quân):
-tenBaiHat
-tenCaSi
-thoiLuong
-theLoai
-
-III. Thư viện nhạc (Thái Sơn):
-.........
-caSi
-theLoai
-baiHat
-.........
+    + Liệt kê danh sách bài hát.
 
 
+- Sơ đồ thuật toán (activity diagram):
 
+1. Khởi tạo chương trình.
+
+2. Tạo một danh sách phẩn tử rỗng (ds1).
+
+3. Hiển thị menu tương tác với các chức năng:
+
+4. Lấy dữ liệu nhập vào từ người dùng.
+
+5. Kiểm tra dữ liệu nhập vào (từ 1 - 5):
+
+    Nếu nhập vào:
+        1 -> Hiển thị tất cả phần tử. (READ)
+        2 -> Thêm vào phần tử mới vào danh sách. (CREATE)
+        3 -> Xóa phần tử trong danh sách. (DELETE)
+        4 -> Sửa phần tử trong danh sách. (EDIT)
+        5 -> Kết thúc chương trình
+    Nếu nhập cú pháp không trong khoảng (1 - 5):
+        Báo cú pháp lỗi.
+
+6. Quay lại menu tương tác cho đến khi chọn "5".
+
+7. Kết thúc.

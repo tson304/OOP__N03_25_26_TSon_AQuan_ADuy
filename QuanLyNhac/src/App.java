@@ -12,7 +12,7 @@ public class App {
         //testRecursion.Recursion();
 
         // Test thư viện nhạc (Trần Đức Thái Sơn - 23017229)
-        testThuVienNhac test = new testThuVienNhac();
-        test.quanLyBaiHat("TranSon");
+        thuVienNhacController test = new thuVienNhacController();
+        test.dsNguoiDung();
     }
 }
