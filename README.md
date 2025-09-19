@@ -28,6 +28,34 @@ Xây dựng ứng dụng quản lý nhạc
 
 I. Người dùng (Anh Duy):
 .........
+maNguoiDung
+tenNguoiDung
+ngaySinh
+gioiTinh
+<img width="637" height="321" alt="image" src="https://github.com/user-attachments/assets/83d0feb1-6669-422f-8544-41a6baffd95e" />
+## Activity Diagrams cho CRUD 
+
+### Create
+- Nhập thông tin người dùng
+- Tạo đối tượng `NguoiDung`
+- Thêm vào danh sách
+- In thông báo thành công
+
+### Read
+- Duyệt danh sách người dùng
+- In thông tin từng người
+
+### Update
+- Nhập mã người dùng cần sửa
+- Nếu tìm thấy: nhập thông tin mới và cập nhật
+- Nếu không: in lỗi
+
+### Delete
+- Nhập mã người dùng cần xoá
+- Nếu tìm thấy: xoá khỏi danh sách
+- Nếu không: in lỗi
+
+---
 
 .........
 II. Bài hát (Anh Quân):
