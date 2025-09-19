@@ -10,6 +10,7 @@ public class ThemBaiHat  {
         if (ds.getSoLuongBaiHat() < ds.getDsBaiHat().length) {
             ds.getDsBaiHat()[ds.getSoLuongBaiHat()] = baiHat;
             ds.setSoLuongBaiHat(ds.getSoLuongBaiHat() + 1);
+            System.err.println("Thêm bài hát "+baiHat.getTenBaiHat()+" thành công!");
         } else {
             System.out.println("Danh sách bài hát đã đầy, không thể thêm bài hát mới.");
         }
