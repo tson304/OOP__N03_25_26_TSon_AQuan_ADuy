@@ -1,6 +1,11 @@
 Xây dựng ứng dụng quản lý nhạc.
 
-ĐỐI TƯỢNG: THƯ VIỆN NHẠC
+ĐỐI TƯỢNG: 
+    + THƯ VIỆN NHẠC
+    + NGƯỜI DÙNG
+    + BÀI HÁT
+
+-----TRẦN ĐỨC THÁI SƠN (ĐỐI TƯỢNG: THƯ VIỆN NHẠC)-----
 
 Cụ thể:
 
@@ -15,6 +20,10 @@ Cụ thể:
     + Thêm, sửa, xóa bài hát.
 
     + Liệt kê danh sách bài hát.
+
+- Sơ đồ Class Diagram:
+
+![Class Diagram](./classDiagram.png)
 
 
 - Sơ đồ thuật toán (activity diagram):

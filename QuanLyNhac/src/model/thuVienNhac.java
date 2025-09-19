@@ -1,6 +1,6 @@
 import java.util.*;
 
-public abstract class DanhSach {
+public abstract class thuVienNhac {
     public List<String> danhSach = new ArrayList<>();
 
     public List<String> layDanhSachPhanTu() {
@@ -21,5 +21,5 @@ public abstract class DanhSach {
     }
 }
 
-class DanhSachNguoiDung extends DanhSach {}
-class DanhSachBaiHat extends DanhSach {}
+class DanhSachNguoiDung extends thuVienNhac {}
+class DanhSachBaiHat extends thuVienNhac {}
