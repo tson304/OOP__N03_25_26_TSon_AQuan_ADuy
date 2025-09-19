@@ -18,5 +18,7 @@ public class TestArithmetic {
             System.err.println(n4.eval());
             System.err.println(n5.eval());
             System.err.println(n6.eval());
-    }}
+          
+    }
+}
         

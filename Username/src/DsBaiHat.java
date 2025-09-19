@@ -34,6 +34,6 @@ public class DsBaiHat {
             if (ds[id].getId() == id) {
                 return ds[id];
         }}
-        return null; // Hoặc ném ngoại lệ nếu cần
+        return null; 
 }
 }
