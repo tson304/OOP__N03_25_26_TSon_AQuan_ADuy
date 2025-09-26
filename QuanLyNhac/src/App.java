@@ -1,3 +1,5 @@
+import Practice6.TEST.TestSequence;
+
 public class App {
     public static void main(String[] args) throws Exception {
         // Test User
@@ -12,8 +14,10 @@ public class App {
         //testRecursion.Recursion();
 
         // Test thư viện nhạc (Trần Đức Thái Sơn - 23017229)
-        thuVienNhacController test = new thuVienNhacController();
-        test.dsNguoiDung();
-        test.danhSachBaiHat();
+        // thuVienNhacController test = new thuVienNhacController();
+        // test.dsNguoiDung();
+        // test.danhSachBaiHat();
+
+        TestSequence.test();
     }
 }

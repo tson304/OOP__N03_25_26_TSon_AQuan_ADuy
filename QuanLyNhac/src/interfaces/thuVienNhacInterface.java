@@ -1,7 +1,11 @@
 package interfaces;
+import java.util.*;
 
-public class thuVienNhacInterface {
-    public void themBaiHat(String tenBaiHat){};
-    public void xoaBaiHat(String tenBaiHat){};
-    public void layDanhSachBaiHat(){};
+public interface thuVienNhacInterface {
+    public void themPhanTu();
+    public void xoaPhanTu();
+    public List<String> layDanhSachBaiHat();
+    public void suaPhanTu();
 }
+    
+    
