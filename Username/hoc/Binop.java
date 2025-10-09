@@ -1,4 +1,4 @@
-package Username.src;
+package Username.hoc;
 
 public class Binop extends Node {
     protected Node lChild, rChild;

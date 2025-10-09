@@ -1,6 +1,6 @@
 package Username.test;
 
-import Username.src.Time;
+import Username.hoc.Time;
 
 public class testTime {
     public static void main(String[] args) {

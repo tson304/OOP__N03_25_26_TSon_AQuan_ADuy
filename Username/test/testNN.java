@@ -1,7 +1,7 @@
 package Username.test;
 
-import Username.src.NNCollection;
-import Username.src.NameNumber;
+import Username.hoc.NNCollection;
+import Username.hoc.NameNumber;
 
 public class testNN {
     public static void main(String[] args) {

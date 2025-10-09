@@ -1,7 +1,7 @@
 
 package Username.test;
-import Username.src.Identity;
-import Username.src.User;
+import Username.hoc.Identity;
+import Username.hoc.User;
 
 public class testUser{
     public static void main(String[] args){

@@ -1,8 +1,8 @@
 package Username.test;
 
-import Username.src.Identity;
-import Username.src.ListOfUser;
-import Username.src.User;
+import Username.hoc.Identity;
+import Username.hoc.ListOfUser;
+import Username.hoc.User;
 class testListUser {
 
     public static void main(String[] args) {

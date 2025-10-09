@@ -1,4 +1,4 @@
-package Username.src;
+package Username.hoc;
 
 public class NNCollection {
     private NameNumber[] nnArray = new NameNumber[100]; // mảng tĩnh chứa tối đa 100 NameNumber

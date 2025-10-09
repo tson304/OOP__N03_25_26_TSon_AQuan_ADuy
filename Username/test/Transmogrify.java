@@ -1,6 +1,6 @@
 package Username.test;
 
-import Username.src.Stage;
+import Username.hoc.Stage;
 
 public class Transmogrify {
  public static void main(String[] args){

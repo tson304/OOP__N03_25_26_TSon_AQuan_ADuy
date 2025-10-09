@@ -1,7 +1,7 @@
 package Username.test;
 
-import Username.src.Const;
-import Username.src.Plus;
+import Username.hoc.Const;
+import Username.hoc.Plus;
 
 public class TestArithmetic {
     // evaluate 1.1 + 2.2 + 3.3

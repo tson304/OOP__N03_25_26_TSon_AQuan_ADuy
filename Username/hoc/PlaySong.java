@@ -1,4 +1,4 @@
-package Username.src;
+package Username.hoc;
 
 public interface PlaySong {
     void play();
