@@ -1,5 +1,6 @@
 * {
-background-color: #1b1c1d;
+    background-color: #1b1c1d;
+    font-family: 'Google Sans', Arial, sans-serif;
 }
 
 /* 1. Thanh Menu (Sidebar) - Đã sửa */
@@ -7,7 +8,6 @@ background-color: #1b1c1d;
     height: 100%;
     /* Thu gọn: Độ rộng ban đầu */
     width: 75px;
-
     position: fixed;
     z-index: 10;
     top: 0;
@@ -46,13 +46,16 @@ background-color: #1b1c1d;
 /* 5. Ẩn văn bản link khi thu gọn */
 .sidebar a {
     background-color: #282a2c;
-    padding: 0 8px;
+    padding: 10px;
     height: 50px;
     text-decoration: none;
     font-size: 18px;
     color: #a2a9b0;
+
     display: flex;
-    justify-content:center;
+    justify-content: center;
+    align-items: center;
+
     white-space: nowrap; /* Ngăn chữ bị ngắt dòng */
     opacity: 0; /* ẨN chữ ban đầu */
     transition: opacity 0.2s ease 0.3s; /* Chữ hiện sau khi sidebar mở 0.3s */
