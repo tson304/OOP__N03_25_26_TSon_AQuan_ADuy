@@ -1,0 +1,76 @@
+* {
+background-color: #1b1c1d;
+}
+
+/* 1. Thanh Menu (Sidebar) - Đã sửa */
+.sidebar {
+    height: 100%;
+    /* Thu gọn: Độ rộng ban đầu */
+    width: 75px;
+
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0; /* LUÔN HIỂN THỊ: Giữ sidebar ở mép trái */
+    background-color: #282a2c;
+
+    /* Cho phép ẩn/hiện văn bản thừa */
+    overflow-x: hidden;
+    padding-top: 20px;
+
+    /* Chuyển động mượt mà cho việc mở rộng */
+    transition: width 0.5s ease;
+}
+
+/* 2. HIỆN MENU khi di chuột vào (HOVER) */
+.sidebar:hover {
+    width: 300px; /* Mở rộng: Độ rộng khi hover */
+}
+
+/* 3. Ảnh hưởng của Menu đến Nội dung Chính */
+.main-content {
+    /* Đảm bảo nội dung chính bắt đầu sau thanh sidebar thu gọn */
+    margin-left: 80px;
+    padding: 20px;
+    text-align: center;
+    /* Dịch chuyển mượt mà khi sidebar mở rộng */
+    transition: margin-left 0.5s ease;
+    color: white;
+}
+
+/* 4. Dịch chuyển nội dung khi sidebar mở rộng */
+.sidebar:hover ~ .main-content {
+    margin-left: 250px;
+}
+
+/* 5. Ẩn văn bản link khi thu gọn */
+.sidebar a {
+    background-color: #282a2c;
+    padding: 0 8px;
+    height: 50px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #a2a9b0;
+    display: flex;
+    justify-content:center;
+    white-space: nowrap; /* Ngăn chữ bị ngắt dòng */
+    opacity: 0; /* ẨN chữ ban đầu */
+    transition: opacity 0.2s ease 0.3s; /* Chữ hiện sau khi sidebar mở 0.3s */
+    border-radius: 100px;
+}
+
+.sidebar a:hover {
+    /* Thay đổi màu nền để tạo hiệu ứng "sáng hộp" */
+    background-color: #323537;
+
+}
+
+/* 6. Hiện văn bản link khi HOVER */
+.sidebar:hover a {
+    opacity: 1; /* Hiện chữ */
+}
+
+/* Loại bỏ các phần tử không cần thiết */
+.menu-toggle, .close-btn, .sidebar.active {
+    display: none; /* Không cần nút toggle, không cần class 'active' */
+}
