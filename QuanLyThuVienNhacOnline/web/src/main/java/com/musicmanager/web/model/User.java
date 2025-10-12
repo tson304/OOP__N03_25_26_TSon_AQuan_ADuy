@@ -7,12 +7,11 @@ public class User {
     private Long id;
     private String name;
     private String password;
-    private Set<Playlist> playlists = new HashSet<>();
 
     // Constructor mặc định:
     public User(){}
 
-    public User(String id, String password) {
+    public User(String name, String password) {
         this.name = name;
         this.password = password;
     }
@@ -43,14 +42,5 @@ public class User {
 
     public void setPassword(String password){
         this.password = password;
-    }
-
-    // User Playlists
-    public Set<Playlist> getPlaylists(){
-        return playlists;
-    }
-
-    public void setPlaylists(Set<Playlist> playlists){
-        this.playlists = playlists;
     }
 }

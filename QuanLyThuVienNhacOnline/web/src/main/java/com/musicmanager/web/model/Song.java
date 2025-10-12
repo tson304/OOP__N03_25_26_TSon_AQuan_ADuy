@@ -12,7 +12,6 @@ public class Song {
     private Time duration;
     private Artist artist;
     private Genre genre;
-    private Set<Playlist> playlists = new HashSet<>();
 
     // Construtor mặc định:
     public Song(){}
@@ -79,14 +78,5 @@ public class Song {
 
     public void setGenre(Genre genre){
         this.genre = genre;
-    }
-
-    // Song Playlist
-    public Set<Playlist> getPlaylists(){
-        return playlists;
-    }
-
-    public void setPlaylists(Set<Playlist> playlists){
-        this.playlists = playlists;
     }
 }

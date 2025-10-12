@@ -1,5 +1,7 @@
 CREATE DATABASE music;
+
 USE music;
+
 CREATE TABLE users(
 	user_id BIGINT AUTO_INCREMENT,
     user_name varchar(255) UNIQUE NOT NULL,
@@ -15,7 +17,7 @@ CREATE TABLE artists(
 );
 
 CREATE TABLE genres(
-	genre_id BIGINT AUTO_INCREMENT,
+    genre_id BIGINT AUTO_INCREMENT,
     genre_name varchar(255) UNIQUE NOT NULL,
     PRIMARY KEY(genre_id)
 );
@@ -33,20 +35,5 @@ CREATE TABLE songs(
     FOREIGN KEY(genre_id) REFERENCES genres(genre_id)
 ); 
 
-CREATE TABLE playlists(
-	playlist_id BIGINT AUTO_INCREMENT,
-    playlist_name varchar(255) NOT NULL,
-    user_id BIGINT,
-    PRIMARY KEY(playlist_id),
-    FOREIGN KEY(user_id) REFERENCES users(user_id)
-);
-
-CREATE TABLE playlistSongs(
-	playlist_id BIGINT,
-    song_id BIGINT,
-    PRIMARY KEY(playlist_id, song_id),
-    FOREIGN KEY(playlist_id) REFERENCES playlists(playlist_id),
-    FOREIGN KEY(song_id) REFERENCES songs(song_id)
-);
 
 
