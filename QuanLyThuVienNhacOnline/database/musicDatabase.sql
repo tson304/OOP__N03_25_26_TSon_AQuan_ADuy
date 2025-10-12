@@ -5,6 +5,7 @@ USE music;
 CREATE TABLE users(
 	user_id BIGINT AUTO_INCREMENT,
     user_name varchar(255) UNIQUE NOT NULL,
+    user_email varchar(255) UNIQUE NOT NULL,
     user_password varchar(255)NOT NULL,
     PRIMARY KEY(user_id)
 );
