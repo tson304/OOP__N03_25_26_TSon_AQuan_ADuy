@@ -28,7 +28,7 @@ CREATE TABLE songs(
     artist_id BIGINT,
     genre_id BIGINT,
     song_year_release INT,
-    song_audio_filePath VARCHAR(255),
+    song_audio_file_path VARCHAR(255),
     song_duration TIME,
     PRIMARY KEY(song_id),
     FOREIGN KEY(artist_id) REFERENCES artists(artist_id),

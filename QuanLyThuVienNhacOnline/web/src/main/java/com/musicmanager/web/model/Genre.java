@@ -1,11 +1,22 @@
 package com.musicmanager.web.model;
 
+import jakarta.persistence.*;
 import java.util.*;
 
+@Entity
+@Table(name = "genres")
 public class Genre {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     // Thuộc tính
+    @Column(name = "genre_id")
     private Long id;
+
+    @Column(name = "genre_name")
     private String name;
+
+    @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Song> songs = new HashSet<>();
 
     // Construtor mặc định:

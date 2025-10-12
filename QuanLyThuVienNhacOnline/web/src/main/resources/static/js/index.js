@@ -8,13 +8,10 @@ async function loadContent(url) {
         }
         const html = await response.text();
 
+        // Parse HTML để lấy phần thân
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
-
-
-        const newContent = doc.body.innerHTML;
-
-        mainContent.innerHTML = newContent;
+        mainContent.innerHTML = doc.body.innerHTML;
 
     } catch (error) {
         console.error("Không thể tải nội dung:", error);
@@ -22,20 +19,18 @@ async function loadContent(url) {
     }
 }
 
-
 document.addEventListener('DOMContentLoaded', () => {
     const sidebarLinks = document.querySelectorAll('.sidebar a');
 
     sidebarLinks.forEach(link => {
         link.addEventListener('click', (event) => {
-
             event.preventDefault();
-
             const url = link.getAttribute('href');
-
             if (url && url !== "#") {
                 loadContent(url);
             }
         });
     });
+
+    loadContent("home.html");
 });

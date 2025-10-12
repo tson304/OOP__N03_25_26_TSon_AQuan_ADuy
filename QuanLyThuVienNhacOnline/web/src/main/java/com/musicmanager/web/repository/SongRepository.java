@@ -1,10 +1,7 @@
 package com.musicmanager.web.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import com.musicmanager.web.model.Song;
-import org.springframework.stereotype.Repository;
 
-import java.util.*;
-
-@Repository
-public interface SongRepository {
+public interface SongRepository extends JpaRepository<Song, Long> {
 }
