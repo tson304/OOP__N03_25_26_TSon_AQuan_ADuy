@@ -1,0 +1,63 @@
+<div class="container-fluid py-4">
+    <h2 class="pb-2 mb-4">Quản Lý Nghệ Sĩ <i class="bi bi-person-badge"></i></h2>
+
+    <div class="d-flex gap-3 mb-4">
+        <button class="btn btn-success shadow-sm" data-bs-toggle="modal" data-bs-target="#addArtistModal">Thêm</button>
+        <input type="text" placeholder="Tìm kiếm..." class="form-control bg-transparent" style="width: 300px;">
+    </div>
+
+    <div class="card bg-secondary-subtle border-0">
+        <div class="card-body p-0">
+            <table class="table mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Tên Nghệ Sĩ</th>
+                        <th scope="col">Quốc Gia</th>
+                        <th scope="col">Số Bài Hát</th>
+                        <th scope="col">Tùy chỉnh</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>01</td>
+                        <td>Sơn Tùng MTP</td>
+                        <td>Việt Nam</td>
+                        <td>1</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning me-2">Sửa</button>
+                            <button class="btn btn-sm btn-danger">Xóa</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addArtistModal" tabindex="-1" aria-labelledby="addArtistModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0">
+                <div class="modal-body d-flex justify-content-center align-items-center">
+                    <div class="card" style="width: 500px; background-color: #323537; border-width:4px;">
+                        <div class="card-body">
+                            <h5 class="card-title text-center mb-4">Thêm Nghệ Sĩ</h5>
+                            <form>
+                                <div class="mb-3">
+                                    <label class="form-label">Tên Nghệ Sĩ</label>
+                                    <input type="text" class="form-control bg-transparent" placeholder="Nhập tên...">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Quốc gia</label>
+                                    <input type="text" class="form-control bg-transparent" placeholder="Nhập tên quốc gia...">
+                                <div class="d-flex justify-content-end mt-3"    >
+                                    <button type="button" class="btn btn-danger me-2" data-bs-dismiss="modal">Hủy</button>
+                                    <button type="submit" class="btn btn-success">Lưu</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

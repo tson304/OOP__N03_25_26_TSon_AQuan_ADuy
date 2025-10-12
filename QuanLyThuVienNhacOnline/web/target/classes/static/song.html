@@ -1,0 +1,86 @@
+<div class="container-fluid py-4">
+    <h2 class="pb-2 mb-4">Quản Lý Bài Hát <i class="bi bi-music-note-list"></i></h2>
+
+    <div class="d-flex gap-3 mb-4">
+        <button class="btn btn-success shadow-sm" data-bs-toggle="modal" data-bs-target="#addSongModal">Thêm</button>
+        <input type="text" placeholder="Tìm kiếm..." class="form-control bg-transparent" style="width: 300px;">
+        <select class="form-select w-auto">
+            <option selected>Thể Loại</option>
+            <option value="pop">Pop</option>
+            <option value="jazz">Jazz</option>
+            <option value="rock">Rock</option>
+            <option value="ballad">Ballad</option>
+        </select>
+    </div>
+
+    <div class="card bg-secondary-subtle border-0">
+        <div class="card-body p-0">
+            <table class="table mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Tên Bài Hát</th>
+                        <th scope="col">Nghệ Sĩ</th>
+                        <th scope="col">Năm phát hành</th>
+                        <th scope="col">Thời Lượng</th>
+                        <th scope="col">Đường dẫn</th>
+                        <th scope="col">Tùy chỉnh</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <td>01</td>
+                    <td>Đừng làm trái tim anh đau</td>
+                    <td>Sơn Tùng MTP</td>
+                    <td>2024</td>
+                    <td>3:20</td>
+                    <td><a class="song-url" href="https://www.youtube.com/watch?v=abPmZCZZrFA&list=RDabPmZCZZrFA&start_radio=1" target="_blank"><i class="bi bi-youtube" style="font-size: 20px;"></i></a></td>
+                    <td>
+                        <button class="btn btn-sm btn-warning me-2">Sửa</button>
+                        <button class="btn btn-sm btn-danger">Xóa</button>
+                    </td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addSongModal" tabindex="-1" aria-labelledby="addSongModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0">
+                <div class="modal-body d-flex justify-content-center align-items-center">
+                    <div class="card" style="width: 500px; background-color: #323537; border-width:4px;">
+                        <div class="card-body">
+                            <h5 class="card-title text-center mb-4">Thêm Bài Hát</h5>
+                            <form>
+                                <div class="mb-3">
+                                    <label class="form-label">Tên Bài Hát</label>
+                                    <input type="text" class="form-control bg-transparent" placeholder="Nhập tên...">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Tên Nghệ Sĩ</label>
+                                    <input type="text" class="form-control bg-transparent" placeholder="Nhập tên...">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Năm phát hành</label>
+                                    <input type="number" class="form-control bg-transparent" placeholder="Nhập năm...">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Thời lượng</label>
+                                    <input type="text" class="form-control bg-transparent" placeholder="Nhập thời lượng...">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Đường dẫn</label>
+                                    <input type="url" class="form-control bg-transparent" placeholder="Nhập đường dẫn...">
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <button type="button" class="btn btn-danger me-2" data-bs-dismiss="modal">Hủy</button>
+                                    <button type="submit" class="btn btn-success">Lưu</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
