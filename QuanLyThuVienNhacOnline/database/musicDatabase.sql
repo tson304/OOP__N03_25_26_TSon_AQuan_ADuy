@@ -33,7 +33,4 @@ CREATE TABLE songs(
     PRIMARY KEY(song_id),
     FOREIGN KEY(artist_id) REFERENCES artists(artist_id),
     FOREIGN KEY(genre_id) REFERENCES genres(genre_id)
-); 
-
-
-
+);
