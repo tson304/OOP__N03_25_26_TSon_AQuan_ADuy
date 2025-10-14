@@ -1,6 +1,6 @@
-package com.musicmanager.web.repositories;
+package com.musicmanager.web.repository;
 
-import com.musicmanager.web.models.User;
+import com.musicmanager.web.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.musicmanager.web.models;
+package com.musicmanager.web.model;
 
 import jakarta.persistence.*;
 import java.util.*;

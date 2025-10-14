@@ -1,33 +1,15 @@
-package com.musicmanager.web.models;
+package com.musicmanager.web.model;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    // Thuộc tính:
-    @Column(name = "user_id")
     private Long id;
-
-    @Column(name = "user_name", nullable = false, unique = true)
     private String name;
-
-    @Column(name = "user_email", nullable = false, unique = true)
     private String email;
-
-    @Column(name = "user_password", nullable = false)
     private String password;
-
-    // Constructor mặc định:
-    public User(){}
-
-    public User(String name, String password) {
-        this.name = name;
-        this.password = password;
-    }
 
     // GETTER và SETTER với mỗi thuộc tính:
     // User ID
