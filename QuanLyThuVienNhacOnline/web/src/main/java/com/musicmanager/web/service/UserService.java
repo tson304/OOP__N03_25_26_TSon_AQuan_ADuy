@@ -36,17 +36,17 @@ public class UserService
         return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-    public User updateUser(UserUpdateRequest request, String id)
+    public User updateUser(String id, UserUpdateRequest request)
     {
         User user = getUser(id);
 
-        if (request.getEmail() == null)
-        {
-            user.setPassword(request.getPassword());
-        }
-        if(request.getPassword() == null)
+        if (request.getEmail() != null)
         {
             user.setEmail(request.getEmail());
+        }
+        if(request.getPassword() != null)
+        {
+            user.setPassword(request.getPassword());
         }
 
         return userRepository.save(user);

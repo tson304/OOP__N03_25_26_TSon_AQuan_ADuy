@@ -8,13 +8,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
-public class ArtistService {
+public class ArtistService
+{
     @Autowired
     private ArtistRepository artistRepository;
 
-    public Artist createArtist(ArtistRequest request) {
+    public Artist createArtist(ArtistRequest request)
+    {
         Artist artist = new Artist();
 
         artist.setName(request.getName());
@@ -23,27 +24,34 @@ public class ArtistService {
         return artistRepository.save(artist);
     }
 
-    public List<Artist> getArtists() {
+    public List<Artist> getArtists()
+    {
         return artistRepository.findAll();
     }
 
-    public Artist getArtist(String id) {
-        return artistRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+    public Artist getArtist(String id)
+    {
+        return artistRepository.findById(id).orElseThrow(() -> new RuntimeException("Artists not found"));
     }
 
-    public Artist updateArtist(String id, ArtistRequest request) {
+    public Artist updateArtist(String id, ArtistRequest request)
+    {
         Artist artist = getArtist(id);
 
-        artist.setName(request.getName());
-        artist.setCountry(request.getCountry());
+        if (request.getName() != null)
+        {
+            artist.setName(request.getName());
+        }
+        if (request.getCountry() != null)
+        {
+            artist.setCountry(request.getCountry());
+        }
 
         return  artistRepository.save(artist);
     }
 
-    public void deleteArtist(String id) {
+    public void deleteArtist(String id)
+    {
         artistRepository.deleteById(id);
     }
-
-
-
 }

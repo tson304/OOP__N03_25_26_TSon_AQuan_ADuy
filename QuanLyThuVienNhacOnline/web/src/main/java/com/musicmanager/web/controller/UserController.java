@@ -29,7 +29,7 @@ public class UserController
     }
 
     @GetMapping("/{id}")
-    User getUser(@PathVariable("id") String id)
+    User getUser(@PathVariable String id)
     {
         return userService.getUser(id);
     }
@@ -37,7 +37,7 @@ public class UserController
     @PutMapping("/{id}")
     User updateUser(@PathVariable String id, @RequestBody UserUpdateRequest request)
     {
-        return userService.updateUser(request, id);
+        return userService.updateUser(id, request);
     }
 
     @DeleteMapping("/{id}")

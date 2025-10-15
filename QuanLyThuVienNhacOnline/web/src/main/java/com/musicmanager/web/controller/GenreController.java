@@ -10,27 +10,38 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/genres")
-public class GenreController {
+public class GenreController
+{
     @Autowired
     private GenreService genreService;
 
     @PostMapping
-    Genre createGenre(GenreRequest request) {
+    Genre createGenre(@RequestBody GenreRequest request)
+    {
         return genreService.createGenre(request);
     }
 
     @GetMapping
-    List<Genre> getGenres() {
+    List<Genre> getGenres()
+    {
         return genreService.getGenres();
     }
 
     @GetMapping("{id}")
-    Genre getGenre(@PathVariable String id) {
+    Genre getGenre(@PathVariable String id)
+    {
         return genreService.getGenre(id);
     }
 
+    @PutMapping("{id}")
+    Genre updateGenre(@PathVariable String id, @RequestBody GenreRequest request)
+    {
+        return genreService.updateGenre(id, request);
+    }
+
     @DeleteMapping("{id}")
-    String deleteGenre(@PathVariable String id) {
+    String deleteGenre(@PathVariable String id)
+    {
         genreService.deleteGenre(id);
         return "Genre has been deleted";
     }
