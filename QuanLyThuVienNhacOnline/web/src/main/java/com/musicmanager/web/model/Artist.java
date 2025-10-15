@@ -11,7 +11,7 @@ public class Artist{
     private String id;
     private String name;
     private String country;
-    @OneToMany()
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
     private Set<Song> songs = new HashSet<>();
 
     public Artist() {

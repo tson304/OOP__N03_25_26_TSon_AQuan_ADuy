@@ -10,9 +10,10 @@ public class Song {
     // Thuộc tính:
     private String id;
     private String name;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     private Artist artist;
-    @ManyToOne(cascade = CascadeType.ALL)
+
+    @ManyToOne()
     private Genre genre;
     private int releaseYear;
     private String audioFilePath;

@@ -9,5 +9,4 @@ import java.util.Optional;
 import java.util.Set;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, String> {
-}
+public interface UserRepository extends JpaRepository<User, String> {}

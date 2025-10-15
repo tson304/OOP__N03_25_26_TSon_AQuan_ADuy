@@ -10,11 +10,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserService {
+public class UserService
+{
     @Autowired
     private UserRepository userRepository;
 
-    public User createUser(UserCreateRequest request) {
+    public User createUser(UserCreateRequest request)
+    {
         User user = new User();
 
         user.setName(request.getName());
@@ -24,24 +26,34 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public List<User> getUsers() {
+    public List<User> getUsers()
+    {
         return userRepository.findAll();
     }
 
-    public User getUser(String id) {
+    public User getUser(String id)
+    {
         return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-    public User updateUser(UserUpdateRequest request, String id) {
+    public User updateUser(UserUpdateRequest request, String id)
+    {
         User user = getUser(id);
 
-        user.setEmail(request.getEmail());
-        user.setPassword(request.getPassword());
+        if (request.getEmail() == null)
+        {
+            user.setPassword(request.getPassword());
+        }
+        if(request.getPassword() == null)
+        {
+            user.setEmail(request.getEmail());
+        }
 
         return userRepository.save(user);
     }
 
-    public void deleteUser(String id) {
+    public void deleteUser(String id)
+    {
         userRepository.deleteById(id);
     }
 }
