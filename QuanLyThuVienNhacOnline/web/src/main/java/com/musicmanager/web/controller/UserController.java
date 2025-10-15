@@ -1,6 +1,7 @@
 package com.musicmanager.web.controller;
 
 import com.musicmanager.web.dto.request.UserCreateRequest;
+import com.musicmanager.web.dto.request.UserUpdateRequest;
 import com.musicmanager.web.model.User;
 import com.musicmanager.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,19 @@ public class UserController {
         return userService.getUsers();
     }
 
-    @GetMapping("/{usersId}")
-    User getUser(@PathVariable("usersId") Long userId) {
-        return userService.getUser(userId);
+    @GetMapping("/{id}")
+    User getUser(@PathVariable("id") String id) {
+        return userService.getUser(id);
+    }
+
+    @PutMapping("/{id}")
+    User updateUser(@PathVariable String id, @RequestBody UserUpdateRequest request) {
+        return userService.updateUser(request, id);
+    }
+
+    @DeleteMapping("/{id}")
+    String deleteUser(@PathVariable("id") String id) {
+        userService.deleteUser(id);
+        return "User has been deleted";
     }
 }

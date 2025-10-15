@@ -5,19 +5,20 @@ import jakarta.persistence.*;
 @Entity
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    // Thuộc tính
+    private String id;
     private String name;
     private String email;
     private String password;
 
     // GETTER và SETTER với mỗi thuộc tính:
     // User ID
-    public Long getId(){
+    public String getId(){
         return id;
     }
 
-    public void setId(Long id){
+    public void setId(String id){
         this.id = id;
     }
 

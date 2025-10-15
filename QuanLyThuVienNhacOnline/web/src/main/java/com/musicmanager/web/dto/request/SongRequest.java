@@ -1,40 +1,19 @@
-package com.musicmanager.web.model;
+package com.musicmanager.web.dto.request;
 
+import com.musicmanager.web.model.Artist;
+import com.musicmanager.web.model.Genre;
 import jakarta.persistence.*;
 import java.sql.Time;
 
-@Entity
-public class Song {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    // Thuộc tính:
-    private String id;
+public class SongRequest {
     private String name;
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Artist artist;
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Genre genre;
-    private int releaseYear;
+    private Integer releaseYear;
     private String audioFilePath;
     private Time duration;
-
-    public Song() {
-    }
-
-    public Song(Artist artist, Genre genre) {
-        this.artist = artist;
-        this.genre = genre;
-    }
-
-    // GETTER và SETTER với mỗi thuộc tính:
-    // Song ID
-    public String getId(){
-        return id;
-    }
-
-    public void setId(String id){
-        this.id = id;
-    }
+    @ManyToOne
+    private Artist artist;
+    @ManyToOne
+    private Genre genre;
 
     // Song Name
     public String getName(){

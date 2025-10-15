@@ -1,23 +1,15 @@
-package com.musicmanager.web.model;
+package com.musicmanager.web.dto.request;
 
+import com.musicmanager.web.model.Song;
 import jakarta.persistence.*;
 import java.util.*;
 
-@Entity
-public class Genre {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    // Thuộc tính
+public class GenreRequest {
     private String id;
     private String name;
     @OneToMany
     private Set<Song> songs = new HashSet<>();
 
-    public Genre() {
-    }
-
-    //GETTER và SETTER với mỗi thuộc tính:
-    // Genre ID
     public String getId(){
         return id;
     }
@@ -26,11 +18,6 @@ public class Genre {
         this.id = id;
     }
 
-    public Genre(String name) {
-        this.name = name;
-    }
-
-    // Genre Name
     public String getName(){
         return name;
     }
@@ -39,7 +26,6 @@ public class Genre {
         this.name = name;
     }
 
-    // Genre Songs
     public Set<Song> getSongs(){
         return songs;
     }

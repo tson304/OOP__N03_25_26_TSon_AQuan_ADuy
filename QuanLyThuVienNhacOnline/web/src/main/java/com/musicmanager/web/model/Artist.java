@@ -4,33 +4,30 @@ import jakarta.persistence.*;
 import java.util.*;
 
 @Entity
-@Table(name = "artists")
 public class Artist{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     // Thuộc tính:
-    @Column(name = "artist_id")
-    private Long id;
-
-    @Column(name = "artist_name")
+    private String id;
     private String name;
-
-    @Column(name = "artist_country")
     private String country;
-
-    @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany()
     private Set<Song> songs = new HashSet<>();
 
-    // Constructor mặc định:
-    public Artist(){}
+    public Artist() {
+    }
+
+    public Artist(String name) {
+        this.name = name;
+    }
 
     // GETTER và SETTER của các thuộc tính:
     // Artist ID
-    public Long getId(){
+    public String getId(){
         return id;
     }
 
-    public void setId(Long id){
+    public void setId(String id){
         this.id = id;
     }
 
