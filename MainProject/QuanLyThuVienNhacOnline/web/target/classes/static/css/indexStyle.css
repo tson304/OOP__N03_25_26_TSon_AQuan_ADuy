@@ -49,10 +49,6 @@ i {
     background-color: #323537;
 }
 
-.sidebar a:hover i {
-    background-color: #323537;
-}
-
 .menu-indicator {
     height: 60px;
     display: flex;
@@ -60,7 +56,15 @@ i {
     align-items: center;
     background-color: inherit;
     color: #818181;
-    transition: 0.2s;
+}
+
+.sidebar:hover .menu-indicator {
+    opacity: 0;
+    transition: 0.1;
+}
+
+.sidebar a:hover i {
+    background-color: #323537;
 }
 
 .sidebar:hover a {
