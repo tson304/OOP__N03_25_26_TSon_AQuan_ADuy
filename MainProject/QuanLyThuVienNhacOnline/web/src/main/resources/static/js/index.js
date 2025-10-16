@@ -32,5 +32,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    loadContent("home.html");
+    loadContent("home");
 });
