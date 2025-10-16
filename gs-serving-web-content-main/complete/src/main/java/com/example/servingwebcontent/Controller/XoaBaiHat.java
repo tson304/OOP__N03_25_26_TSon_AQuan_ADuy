@@ -1,4 +1,4 @@
-package Username.src;
+package com.example.servingwebcontent.Controller;
 public class XoaBaiHat {
     private DsBaiHat ds;
 
