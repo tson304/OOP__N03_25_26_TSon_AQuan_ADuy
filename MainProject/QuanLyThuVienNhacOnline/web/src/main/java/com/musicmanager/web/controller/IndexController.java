@@ -10,6 +10,11 @@ public class IndexController {
         return "index";
     }
 
+    @GetMapping("/home")
+    public String homePage() {
+        return "home";
+    }
+
     @GetMapping("/users")
     public String userPage() {
         return "users";
@@ -27,5 +32,4 @@ public class IndexController {
     public String genrePage() {
         return "genres";
     }
-
 }
