@@ -1,0 +1,65 @@
+/* 1. Thanh Menu (Sidebar) */
+.sidebar {
+    height: 100%; /* Chiếm toàn bộ chiều cao */
+    width: 250px; /* Chiều rộng menu */
+    position: fixed; /* Cố định vị trí */
+    z-index: 10; /* Đặt lên trên nội dung khác */
+    top: 0;
+    left: -250px; /* Vị trí BAN ĐẦU: ẨN hoàn toàn ra ngoài màn hình */
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s; /* Tạo hiệu ứng chuyển động mượt mà */
+}
+
+.sidebar a {
+    padding: 15px 8px 15px 32px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    color: #f1f1f1;
+    background-color: #575757;
+}
+
+/* 2. Trạng thái HIỆN của Menu */
+.sidebar.active {
+    left: 0; /* Đưa menu vào vị trí hiển thị */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* 3. Nút Menu Ba Gạch */
+.menu-toggle {
+    font-size: 30px;
+    cursor: pointer;
+    background-color: transparent;
+    color: #333;
+    padding: 10px 15px;
+    border: none;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 20;
+}
+
+/* 4. Nội dung Chính và Nút Đóng */
+.main-content {
+    transition: margin-left 0.5s; /* Đảm bảo nội dung chính chuyển động đồng bộ */
+    padding: 20px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
