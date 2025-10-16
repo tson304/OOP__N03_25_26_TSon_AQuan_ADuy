@@ -1,7 +1,7 @@
 package com.musicmanager.web.service;
 
 import com.musicmanager.web.dto.request.ArtistRequest;
-import com.musicmanager.web.model.Artist;
+import com.musicmanager.web.entity.Artist;
 import com.musicmanager.web.repository.ArtistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

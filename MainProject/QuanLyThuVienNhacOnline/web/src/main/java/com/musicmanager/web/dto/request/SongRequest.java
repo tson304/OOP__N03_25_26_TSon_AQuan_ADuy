@@ -1,8 +1,5 @@
 package com.musicmanager.web.dto.request;
 
-import com.musicmanager.web.model.Artist;
-import com.musicmanager.web.model.Genre;
-import jakarta.persistence.*;
 import java.sql.Time;
 
 public class SongRequest

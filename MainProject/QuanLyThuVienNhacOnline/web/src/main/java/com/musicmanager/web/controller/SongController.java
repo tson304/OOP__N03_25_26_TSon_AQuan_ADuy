@@ -1,7 +1,7 @@
 package com.musicmanager.web.controller;
 
 import com.musicmanager.web.dto.request.SongRequest;
-import com.musicmanager.web.model.Song;
+import com.musicmanager.web.entity.Song;
 import com.musicmanager.web.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

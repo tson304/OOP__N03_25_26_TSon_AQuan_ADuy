@@ -1,7 +1,7 @@
 package com.musicmanager.web.controller;
 
 import com.musicmanager.web.dto.request.GenreRequest;
-import com.musicmanager.web.model.Genre;
+import com.musicmanager.web.entity.Genre;
 import com.musicmanager.web.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

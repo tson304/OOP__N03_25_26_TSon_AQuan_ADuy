@@ -1,7 +1,7 @@
 package com.musicmanager.web.controller;
 
 import com.musicmanager.web.dto.request.ArtistRequest;
-import com.musicmanager.web.model.Artist;
+import com.musicmanager.web.entity.Artist;
 import com.musicmanager.web.service.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -45,5 +45,4 @@ public class ArtistController
         artistService.deleteArtist(id);
         return "Artist has been deleted";
     }
-
 }

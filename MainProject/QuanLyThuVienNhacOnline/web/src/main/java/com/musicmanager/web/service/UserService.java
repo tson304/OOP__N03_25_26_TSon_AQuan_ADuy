@@ -2,7 +2,7 @@ package com.musicmanager.web.service;
 
 import com.musicmanager.web.dto.request.UserCreateRequest;
 import com.musicmanager.web.dto.request.UserUpdateRequest;
-import com.musicmanager.web.model.User;
+import com.musicmanager.web.entity.User;
 import com.musicmanager.web.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
