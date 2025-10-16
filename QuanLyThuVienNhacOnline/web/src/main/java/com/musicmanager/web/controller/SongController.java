@@ -10,32 +10,38 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/songs")
-public class SongController {
+public class SongController
+{
     @Autowired
     private SongService songService;
 
     @PostMapping
-    Song createSong(@RequestBody SongRequest request) {
+    Song createSong(@RequestBody SongRequest request)
+    {
         return songService.createSong(request);
     }
 
     @GetMapping
-    List<Song> getSongs() {
+    List<Song> getSongs()
+    {
         return songService.getSongs();
     }
 
     @GetMapping("{id}")
-    Song getSong(@PathVariable String id){
+    Song getSong(@PathVariable String id)
+    {
         return songService.getSong(id);
     }
 
     @PutMapping("{id}")
-    Song updateSong(@PathVariable String id, SongRequest request) {
+    Song updateSong(@PathVariable String id, @RequestBody SongRequest request)
+    {
         return songService.updateSong(id, request);
     }
 
     @DeleteMapping("{id}")
-    String deleteSong(@PathVariable String id) {
+    String deleteSong(@PathVariable String id)
+    {
         songService.deleteSong(id);
         return "Song has been deleted";
     }

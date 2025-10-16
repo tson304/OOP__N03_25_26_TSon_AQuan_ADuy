@@ -5,67 +5,72 @@ import com.musicmanager.web.model.Genre;
 import jakarta.persistence.*;
 import java.sql.Time;
 
-public class SongRequest {
+public class SongRequest
+{
     private String name;
+    private String artistId;
+    private String genreId;
     private Integer releaseYear;
     private String audioFilePath;
     private Time duration;
-    @ManyToOne
-    private Artist artist;
-    @ManyToOne
-    private Genre genre;
 
-    // Song Name
-    public String getName(){
+    public String getName()
+    {
         return name;
     }
 
-    public void setName(String name){
+    public void setName(String name)
+    {
         this.name = name;
     }
 
-    // Song Release Year
-    public Integer getReleaseYear(){
+    public String getArtistId()
+    {
+        return artistId;
+    }
+
+    public void setArtistId(String artistId)
+    {
+        this.artistId = artistId;
+    }
+
+    public String getGenreId()
+    {
+        return genreId;
+    }
+
+    public void setGenreId(String genreId)
+    {
+        this.genreId = genreId;
+    }
+
+    public Integer getReleaseYear()
+    {
         return releaseYear;
     }
 
-    public void setReleaseYear(Integer releaseYear){
+    public void setReleaseYear(Integer releaseYear)
+    {
         this.releaseYear = releaseYear;
     }
 
-    // Song Audio File Path
-    public String getAudioFilePath(){
+    public String getAudioFilePath()
+    {
         return audioFilePath;
     }
 
-    public void setAudioFilePath(String audioFilePath){
+    public void setAudioFilePath(String audioFilePath)
+    {
         this.audioFilePath = audioFilePath;
     }
 
-    // Song Duration
-    public Time getDuration(){
+    public Time getDuration()
+    {
         return duration;
     }
 
-    public void setDuration(Time duration){
+    public void setDuration(Time duration)
+    {
         this.duration = duration;
-    }
-
-    // Song of Artist
-    public Artist getArtist(){
-        return artist;
-    }
-
-    public void setArtist(Artist artist){
-        this.artist = artist;
-    }
-
-    // Song Genre
-    public Genre getGenre(){
-        return genre;
-    }
-
-    public void setGenre(Genre genre){
-        this.genre = genre;
     }
 }
