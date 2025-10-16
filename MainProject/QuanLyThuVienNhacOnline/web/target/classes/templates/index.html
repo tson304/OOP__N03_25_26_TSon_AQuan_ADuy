@@ -1,118 +1,118 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Music</title>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Quản lý thư viện nhạc online</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel="stylesheet" href="/static/css/indexStyle.css" >
+        <link rel="icon" href="/static/img/logo.svg" type="image/x-icon">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    </head>
 
-    <link rel="stylesheet" href="/static/css/indexStyle.css" >
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/">Trang chủ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/users">Quản lý người dùng</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/songs">Quản lý bài hát</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/genres">Quản lý thể loại nhạc</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/artists">Quản lý nghệ sĩ</a>
+                            </li>
+                        </ul>
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Tìm kiếm</button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </header>
 
-    <link rel="icon" href="/static/img/logo.svg" type="image/x-icon">
-</head>
-<body>
+        <main>
+            <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                </div>
 
-    <header>
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Quản lý thư viện nhạc</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
+                        <div class="container">
+                            <div class="carousel-caption text-start">
+                                <h1>Chào mừng đến với trình quản lý nhạc</h1>
+                                <p>Bạn có thể quản lý người dùng, nghệ sĩ, bài hát và thể loại nhạc tại đây.</p>
+                                <p><a class="btn btn-lg btn-primary" href="/songs">Tìm kiếm bài hát</a></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#666"/></svg>
+                        <div class="container">
+                            <div class="carousel-caption">
+                                <h1>Quản lý nguời dùng</h1>
+                                <p>Bạn có thể thêm, sửa, xóa người dùng</p>
+                                <p><a class="btn btn-lg btn-primary" href="/users">Quản lý người dùng</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Quay lại</span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/users">Quản lý người dùng</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/songs">Quản lý bài hát</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/genres">Quản lý thể loại nhạc</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/artists">Quản lý nghệ sĩ</a>
-                        </li>
-                    </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Tìm kiếm</button>
-                    </form>
-                </div>
-            </div>
-        </nav>
-    </header>
 
-    <main>
-
-        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Tiếp theo</span>
+                </button>
             </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
-                    <div class="container">
-                        <div class="carousel-caption text-start">
-                            <h1>Chào mừng đến với trình quản lý nhạc</h1>
-                            <p>Bạn có thể .</p>
-                            <p><a class="btn btn-lg btn-primary" href="/songs">Browse Songs</a></p>
-                        </div>
+
+            <div class="container marketing">
+                <div class="row">
+                    <div class="col-lg-4 text-center">
+                        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Users</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                        <h2 class="fw-normal">Quản lý người dùng</h2>
+                        <p>Xem, thêm, sửa hoặc xóa nguời dùng khỏi hệ thống</p>
+                        <p><a class="btn btn-secondary" href="/users">Chi tiết &raquo;</a></p>
                     </div>
-                </div>
-                <div class="carousel-item">
-                    <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#666"/></svg>
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <h1>Manage Users.</h1>
-                            <p>Easily add, edit, and remove user accounts.</p>
-                            <p><a class="btn btn-lg btn-primary" href="/users">Manage Users</a></p>
-                        </div>
+
+                    <div class="col-lg-4 text-center">
+                        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Songs</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                        <h2 class="fw-normal">Quản lý bài hát</h2>
+                        <p>Tìm kiếm từ thư viện nhạc, cập nhật thông tin hay thêm bài hát mới</p>
+                        <p><a class="btn btn-secondary" href="/songs">Chi tiết &raquo;</a></p>
+                    </div>
+
+                    <div class="col-lg-4 text-center">
+                        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Artists</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                        <h2 class="fw-normal">Quản lý nghệ sĩ</h2>
+                        <p>Cùng khám phá những nghệ sĩ mới</p>
+                        <p><a class="btn btn-secondary" href="/artists">Chi tiết &raquo;</a></p>
                     </div>
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
+        </main>
 
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-        <div class="container marketing">
-            <div class="row">
-                <div class="col-lg-4 text-center">
-                    <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Users</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-                    <h2 class="fw-normal">Manage Users</h2>
-                    <p>View, add, edit, or delete users from the system.</p>
-                    <p><a class="btn btn-secondary" href="/users">View details &raquo;</a></p>
-                </div>
-                <div class="col-lg-4 text-center">
-                    <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Songs</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-                    <h2 class="fw-normal">Manage Songs</h2>
-                    <p>Browse the entire song library, update details, or add new tracks.</p>
-                    <p><a class="btn btn-secondary" href="/songs">View details &raquo;</a></p>
-                </div>
-                <div class="col-lg-4 text-center">
-                    <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Artists</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-                    <h2 class="fw-normal">Manage Artists</h2>
-                    <p>Keep track of artists and their discographies.</p>
-                    <p><a class="btn btn-secondary" href="/artists">View details &raquo;</a></p>
-                </div>
-            </div>
-        </div>
-
-    </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
-</body>
+    </body>
 </html>
