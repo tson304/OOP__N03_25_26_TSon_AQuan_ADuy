@@ -32,8 +32,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <!--Du lieu-->
+                            <tr th:each="artist : ${artists}">
+                                <td th:text="${artist.id}"></td>
+                                <td th:text="${artist.name}"></td>
+                                <td th:text="${artist.country}">Canada</td>
+                                <td th:text="${artist.numberOfSong}">50</td>
+                                <td>
+                                    <button class="btn btn-sm btn-info text-light me-2">Edit</button>
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
