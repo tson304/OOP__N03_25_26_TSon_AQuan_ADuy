@@ -74,7 +74,7 @@ i
 
 .sidebar a:hover i
 {
-    background-color: #323537;
+    background-color: inherit;
 }
 
 .main-content
