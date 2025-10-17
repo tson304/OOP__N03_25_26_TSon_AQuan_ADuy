@@ -12,12 +12,6 @@ public class HomeController
         return "home";
     }
 
-    @GetMapping("/home")
-    public String homePage()
-    {
-        return "home";
-    }
-
     @GetMapping("/users")
     public String userPage()
     {
