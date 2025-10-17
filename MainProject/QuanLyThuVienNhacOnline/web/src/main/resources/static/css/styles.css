@@ -1,0 +1,187 @@
+*
+{
+    background-color: #1b1c1d;
+    font-family: sans-serif;
+}
+
+.sidebar
+{
+    height: 100%;
+    width: 75px;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    background-color: #282a2c;
+
+
+    overflow-x: hidden;
+    padding-top: 20px;
+    transition: width 0.2s ease;
+}
+
+.sidebar:hover
+{
+    width: 250px;
+}
+
+.sidebar a
+{
+    padding: 10px;
+    padding-left: 15px;
+    height: 50px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #a2a9b0;
+    background-color: #282a2c;
+
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.1s ease 0.1s;
+    border-radius: 100px;
+    margin: 5px 10px;
+}
+
+.sidebar a:hover
+{
+    background-color: #323537;
+}
+
+.sidebar:hover a
+{
+    opacity: 1;
+}
+
+.menu-indicator
+{
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: inherit;
+    color: #818181;
+}
+
+.sidebar:hover .menu-indicator
+{
+    opacity: 0;
+    transition: 0.1;
+}
+
+i
+{
+    background-color: inherit;
+}
+
+.sidebar a:hover i
+{
+    background-color: #323537;
+}
+
+.main-content
+{
+    padding-left: 20px;
+    padding-right: 20px;
+    transition: margin-left 0.2s ease;
+    color: #a2a9b0;
+    margin-left: 75px;
+}
+
+.sidebar:hover ~ .main-content
+{
+    margin-left: 250px;
+}
+
+.table thead th
+{
+  background-color: #323537;
+  color: white;
+  border-color: #323537;
+}
+
+.table tbody tr td
+{
+  background-color: #282a2c;
+  color: white;
+  border-color: #323537;
+}
+
+.form-control
+{
+    border-color: #323537;
+    color: #a2a9b0;
+}
+
+.form-control::placeholder
+{
+    color: #a2a9b0;
+    opacity: 0.5;
+}
+
+.form-control:focus
+{
+    color: #a2a9b0;
+    box-shadow: none;
+    border-color: #323537;
+}
+
+.form-select
+{
+    background-color: #1b1c1d;
+    color: #a2a9b0;
+    border-color: #323537;
+}
+
+.form-select:focus
+{
+    background-color: #1b1c1d;
+    color: #a2a9b0;
+    box-shadow: none;
+    border-color: #323537;
+}
+
+.btn
+{
+    border-radius: 100px;
+}
+
+.btn-danger
+{
+    background-color: #F20D0D;
+    color: #1b1c1d !important;
+    border: none;
+}
+
+.btn-danger:hover
+{
+    background-color: #F20D0D;
+}
+
+.btn-warning
+{
+    background-color: #FFF52E;
+    color: #1b1c1d;
+    border: none;
+}
+
+.btn-warning:hover
+{
+    background-color: #FFF52E;
+}
+
+.btn-success
+{
+    background-color: #53AC53;
+    color: #1b1c1d !important;
+    border-radius: 100px;
+}
+
+.btn-success:hover
+{
+    background-color: #53AC53;
+}
+
+.card-body
+{
+    color: #a2a9b0;
+}

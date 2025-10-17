@@ -1,16 +1,22 @@
-const apiUrl = "http://localhost:8080/api/artists";
+const apiUrl = "/api/artists"; // API backend
 
+// DOM elements
+const tableBody = document.getElementById("artistTableBody");
+const addArtistForm = document.getElementById("addArtistForm");
+const artistNameInput = document.getElementById("artistName");
+const artistCountryInput = document.getElementById("artistCountry");
+
+// 🚀 Hàm load danh sách nghệ sĩ
 async function loadArtists() {
     try {
         const response = await fetch(apiUrl);
         const artists = await response.json();
 
-        console.log("Artists loaded:", artists);
+        // Xóa dữ liệu cũ
+        tableBody.innerHTML = "";
 
-        const tbody = document.querySelector("tbody");
-        tbody.innerHTML = "";
-
-        artists.forEach(artist => {
+        // Duyệt danh sách
+        artists.forEach((artist, index) => {
             const row = document.createElement("tr");
             row.innerHTML = `
                 <td>${artist.id}</td>
@@ -18,54 +24,77 @@ async function loadArtists() {
                 <td>${artist.country}</td>
                 <td>${artist.songs ? artist.songs.length : 0}</td>
                 <td>
-                    <button class="btn btn-warning btn-sm" onclick="editArtist('${artist.id}')">Edit</button>
-                    <button class="btn btn-danger btn-sm" onclick="deleteArtist('${artist.id}')">Delete</button>
-                </td>`;
-            tbody.appendChild(row);
+                    <button class="btn btn-sm btn-danger" onclick="deleteArtist('${artist.id}')">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </td>
+            `;
+            tableBody.appendChild(row);
         });
     } catch (error) {
-        console.error("Error loading artists:", error);
+        console.error("Lỗi khi load danh sách nghệ sĩ:", error);
     }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("DOM ready");
-    loadArtists();
+// ➕ Thêm nghệ sĩ mới
+addArtistForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-    const form = document.querySelector("#addArtistModal form");
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault();
+    const name = artistNameInput.value.trim();
+    const country = artistCountryInput.value.trim();
 
-        const name = form.querySelector("input[placeholder='Name...']").value.trim();
-        const country = form.querySelector("input[placeholder='Country...']").value.trim();
+    if (!name || !country) {
+        alert("Vui lòng nhập đầy đủ thông tin!");
+        return;
+    }
 
-        if (!name || !country) {
-            alert("Please fill in all fields");
-            return;
-        }
+    const newArtist = { name, country };
 
-        const newArtist = { name, country };
-        console.log("Creating artist:", newArtist);
-
-        await fetch(apiUrl, {
+    try {
+        const response = await fetch(apiUrl, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(newArtist)
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newArtist),
         });
 
-        const modal = bootstrap.Modal.getInstance(document.getElementById("addArtistModal"));
-        modal.hide();
+        if (response.ok) {
+            alert("Thêm nghệ sĩ thành công!");
+            addArtistForm.reset();
 
-        form.reset();
-        loadArtists();
-    });
+            // Đóng modal (nếu dùng Bootstrap)
+            const modal = bootstrap.Modal.getInstance(document.getElementById("addArtistModal"));
+            modal.hide();
+
+            loadArtists(); // Reload danh sách
+        } else {
+            alert("Lỗi khi thêm nghệ sĩ!");
+        }
+    } catch (error) {
+        console.error("Lỗi:", error);
+    }
 });
 
-// Hàm xóa
+// ❌ Xóa nghệ sĩ
 async function deleteArtist(id) {
-    if (confirm("Are you sure you want to delete this artist?")) {
-        await fetch(`${apiUrl}/${id}`, { method: "DELETE" });
-        loadArtists();
+    if (!confirm("Bạn có chắc muốn xóa nghệ sĩ này?")) return;
+
+    try {
+        const response = await fetch(`${apiUrl}/${id}`, {
+            method: "DELETE",
+        });
+
+        if (response.ok) {
+            alert("Đã xóa nghệ sĩ!");
+            loadArtists();
+        } else {
+            alert("Không thể xóa nghệ sĩ!");
+        }
+    } catch (error) {
+        console.error("Lỗi khi xóa:", error);
     }
 }
 
+// Khi tải trang xong => load danh sách
+document.addEventListener("DOMContentLoaded", loadArtists);
