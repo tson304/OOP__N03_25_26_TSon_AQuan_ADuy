@@ -20,7 +20,7 @@ async function loadSongs()
         tableBody.innerHTML = "";
 
         if (songs.length === 0) {
-            tableBody.innerHTML = `<tr><td colspan="5" class="text-center">Không có bài hát nào</td></tr>`;
+            tableBody.innerHTML = `<tr><td colspan="8" class="text-center">Không có bài hát nào</td></tr>`;
             return;
         }
 
