@@ -51,7 +51,7 @@ async function loadSongs()
     catch (error)
     {
         console.error("Lỗi khi tải dữ liệu:", error);
-        tableBody.innerHTML = `<tr><td colspan="5" class="text-center text-danger">Lỗi khi tải dữ liệu!</td></tr>`;
+        tableBody.innerHTML = `<tr><td colspan="8" class="text-center text-danger">Lỗi khi tải dữ liệu!</td></tr>`;
     }
 }
 
