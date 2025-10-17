@@ -17,6 +17,7 @@ async function loadGenres()
         }
 
         const genres = await response.json();
+        tableBody.innerHTML = "";
 
         if (genres.length === 0) {
             tableBody.innerHTML = `<tr><td colspan="5" class="text-center">Không có thể loại nhạc nào</td></tr>`;

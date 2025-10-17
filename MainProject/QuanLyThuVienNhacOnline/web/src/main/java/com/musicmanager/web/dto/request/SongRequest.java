@@ -4,21 +4,21 @@ import java.sql.Time;
 
 public class SongRequest
 {
-    private String name;
+    private String title;
     private String artistId;
     private String genreId;
     private Integer releaseYear;
     private String audioFilePath;
     private Time duration;
 
-    public String getName()
+    public String getTitle()
     {
-        return name;
+        return title;
     }
 
-    public void setName(String name)
+    public void setTitle(String title)
     {
-        this.name = name;
+        this.title = title;
     }
 
     public String getArtistId()

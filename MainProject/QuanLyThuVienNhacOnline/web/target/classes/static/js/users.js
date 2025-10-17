@@ -17,6 +17,7 @@ async function loadUsers()
         }
 
         const users = await response.json();
+        tableBody.innerHTML = "";
 
         if (users.length === 0)
         {

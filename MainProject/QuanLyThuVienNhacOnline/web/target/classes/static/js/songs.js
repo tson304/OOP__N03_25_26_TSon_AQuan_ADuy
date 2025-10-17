@@ -17,6 +17,7 @@ async function loadSongs()
         }
 
         const songs = await response.json();
+        tableBody.innerHTML = "";
 
         if (songs.length === 0) {
             tableBody.innerHTML = `<tr><td colspan="5" class="text-center">Không có bài hát nào</td></tr>`;

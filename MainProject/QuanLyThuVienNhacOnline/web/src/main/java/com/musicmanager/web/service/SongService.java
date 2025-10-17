@@ -26,7 +26,7 @@ public class SongService
         Genre genre = genreService.getGenre(request.getGenreId());
         Song song = new Song();
 
-        song.setName(request.getName());
+        song.setTitle(request.getTitle());
         song.setArtist(artist);
         song.setGenre(genre);
         song.setReleaseYear(request.getReleaseYear());
@@ -50,9 +50,9 @@ public class SongService
     {
         Song song = getSong(id);
 
-        if (request.getName() != null)
+        if (request.getTitle() != null)
         {
-            song.setName(request.getName());
+            song.setTitle(request.getTitle());
         }
         if (request.getArtistId() != null)
         {

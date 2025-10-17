@@ -10,7 +10,7 @@ public class Song
     @GeneratedValue(strategy = GenerationType.UUID)
 
     private String id;
-    private String name;
+    private String title;
     @ManyToOne()
     private Artist artist;
     @ManyToOne()
@@ -37,14 +37,14 @@ public class Song
         this.id = id;
     }
 
-    public String getName()
+    public String getTitle()
     {
-        return name;
+        return title;
     }
 
-    public void setName(String name)
+    public void setTitle(String title)
     {
-        this.name = name;
+        this.title = title;
     }
 
     public Artist getArtist()

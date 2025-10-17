@@ -18,6 +18,7 @@ async function loadArtists()
         }
 
         const artists = await response.json();
+        tableBody.innerHTML = "";
 
         if (artists.length === 0)
         {
