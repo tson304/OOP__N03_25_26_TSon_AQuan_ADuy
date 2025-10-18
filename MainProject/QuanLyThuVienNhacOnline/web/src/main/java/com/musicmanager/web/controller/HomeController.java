@@ -11,28 +11,4 @@ public class HomeController
     {
         return "home";
     }
-
-    @GetMapping("/users")
-    public String userPage()
-    {
-        return "users";
-    }
-
-    @GetMapping("/artists")
-    public String artistPage()
-    {
-        return "artists";
-    }
-
-    @GetMapping("/songs")
-    public String songPage()
-    {
-        return "songs";
-    }
-
-    @GetMapping("/genres")
-    public String genrePage()
-    {
-        return "genres";
-    }
 }
