@@ -35,15 +35,26 @@
                         <table class="table mb-0">
                             <thead>
                                 <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Artist Name</th>
-                                    <th scope="col">Country</th>
-                                    <th scope="col">Number Of Song</th>
-                                    <th scope="col">Option</th>
+                                    <th>ID</th>
+                                    <th>Artist Name</th>
+                                    <th>Country</th>
+                                    <th>Gender</th>
+                                    <th>Informations</th>
+                                    <th>Options</th>
                                 </tr>
                             </thead>
-                            <tbody id="artistTable">
-                                <!--Du lieu-->
+                            <tbody>
+                                <tr th:each="artist: ${artists}">
+                                    <td th:text="${artist.id}"></td>
+                                    <td th:text="${artist.name}"></td>
+                                    <td th:text="${artist.country}"></td>
+                                    <td th:text="${artist.gender}"></td>
+                                    <td><a th:href="${artist.informations}" target="_blank"><i class="bi bi-info-circle-fill info-icon"></i></a></td>
+                                    <td>
+                                        <a th:href="@{'/artists/update/' + ${artist.id}}" class="btn btn-sm btn-warning me-2" data-bs-toggle="modal" data-bs-target="#editArtistModal"><i class="bi bi-pen-fill"></i></a>
+                                        <a th:href="@{'/artists/delete/' + ${artist.id}}" class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"></i></a>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -51,6 +62,7 @@
             </div>
         </div>
 
+        <!--FORM THÊM NGHỆ SĨ-->
         <div class="modal fade" id="addArtistModal" tabindex="-1" aria-labelledby="addArtistLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content bg-dark text-light border-0 rounded-4 shadow-lg">
@@ -62,20 +74,25 @@
                     </div>
 
                     <div class="modal-body">
-                        <form id="addArtistForm">
+                        <form th:action="@{/artists/create}" th:object="${artistRequest}" method="post" id="addArtistForm">
                             <div class="mb-3">
                                 <label for="artistName" class="form-label">Artist Name</label>
-                                <input type="text" class="form-control bg-transparent" id="artistName" placeholder="Enter Atist Name..." required>
+                                <input type="text" th:field="*{name}" class="form-control bg-transparent" id="artistName" placeholder="Enter Atist Name..." required>
                             </div>
 
                             <div class="mb-3">
                                 <label for="artistCountry" class="form-label">Country</label>
-                                <input type="text" class="form-control bg-transparent" id="artistCountry" placeholder="Enter country..." required>
+                                <input type="text" th:field="*{country}" class="form-control bg-transparent" id="artistCountry" placeholder="Enter Country..." required>
                             </div>
 
                             <div class="mb-3">
-                                <label for="numSongs" class="form-label">Number of Songs</label>
-                                <input type="number" class="form-control bg-transparent" id="numSongs" min="0" placeholder="Enter number of songs...">
+                                <label for="artistGender" class="form-label">Gender</label>
+                                <input type="text" th:field="*{gender}" class="form-control bg-transparent" id="artistGender" placeholder="Enter Gender..." required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="artistInformations" class="form-label">Informations</label>
+                                <input type="url" th:field="*{informations}" class="form-control bg-transparent" id="artistInformations" placeholder="Enter informations..." required>
                             </div>
                         </form>
                     </div>
@@ -83,6 +100,39 @@
                     <div class="modal-footer border-secondary">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
                         <button type="submit" form="addArtistForm" class="btn btn-success">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--FORM SỬA THÔNG TIN NGHỆ SĨ-->
+        <div class="modal fade" id="editArtistModal" tabindex="-1" aria-labelledby="editArtistLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content bg-dark text-light border-0 rounded-4 shadow-lg">
+                    <div class="modal-header border-secondary">
+                        <h5 class="modal-title" id="editArtistLabel">
+                            <i class="me-2 text-success"></i> Edit Artist
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form th:action="@{/artists/edit}" th:object="${artistRequest}" method="post" id="editArtistForm">
+                            <div class="mb-3">
+                                <label for="newArtistName" class="form-label">Artist Name</label>
+                                <input type="text" th:field="*{name}" class="form-control bg-transparent" id="newArtistName" placeholder="Enter New Atist Name..." required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="newArtistCountry" class="form-label">Country</label>
+                                <input type="text" th:field="*{country}" class="form-control bg-transparent" id="newArtistCountry" placeholder="Enter New Country..." required>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer border-secondary">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" form="editArtistForm" class="btn btn-success">Save</button>
                     </div>
                 </div>
             </div>

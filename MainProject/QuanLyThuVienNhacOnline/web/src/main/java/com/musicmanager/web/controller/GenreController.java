@@ -1,48 +1,45 @@
 package com.musicmanager.web.controller;
 
 import com.musicmanager.web.dto.request.GenreRequest;
-import com.musicmanager.web.entity.Genre;
 import com.musicmanager.web.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-@RestController
-@RequestMapping("/api/genres")
+@Controller
+@RequestMapping("/genres")
 public class GenreController
 {
     @Autowired
     private GenreService genreService;
 
-    @PostMapping
-    Genre createGenre(@RequestBody GenreRequest request)
-    {
-        return genreService.createGenre(request);
-    }
-
     @GetMapping
-    List<Genre> getGenres()
+    public String readGenres(Model model)
     {
-        return genreService.getGenres();
+        model.addAttribute("genres", genreService.getGenres());
+        model.addAttribute("genreRequest", new GenreRequest());
+        return "genres";
     }
 
-    @GetMapping("{id}")
-    Genre getGenre(@PathVariable String id)
+    @PostMapping("/create")
+    public String createGenre(@ModelAttribute("genreRequest") GenreRequest request)
     {
-        return genreService.getGenre(id);
+        genreService.createGenre(request);
+        return "redirect:/genres";
     }
 
-    @PutMapping("{id}")
-    Genre updateGenre(@PathVariable String id, @RequestBody GenreRequest request)
+    @PostMapping("/update/{id}")
+    public String updateGenre(@PathVariable String id, @ModelAttribute GenreRequest request)
     {
-        return genreService.updateGenre(id, request);
+        genreService.updateGenre(id, request);
+        return "redirect:/genres";
     }
 
-    @DeleteMapping("{id}")
-    String deleteGenre(@PathVariable String id)
+    @GetMapping("/delete/{id}")
+    public String deleteGenre(@PathVariable String id)
     {
         genreService.deleteGenre(id);
-        return "Genre has been deleted";
+        return "redirect:/genres";
     }
 }

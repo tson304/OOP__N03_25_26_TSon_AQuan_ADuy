@@ -35,13 +35,20 @@
                         <table class="table mb-0">
                             <thead>
                                 <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Genre Name</th>
-                                    <th scope="col">Option</th>
+                                    <th>ID</th>
+                                    <th>Genre Name</th>
+                                    <th>Options</th>
                                 </tr>
                             </thead>
-                            <tbody id="genreTable">
-                            <!--Du lieu-->
+                            <tbody>
+                                <tr th:each="genre: ${genres}">
+                                    <td th:text="${genre.id}"></td>
+                                    <td th:text="${genre.name}"></td>
+                                    <td>
+                                        <a th:href="@{'/genres/update/' + ${genre.id}}" class="btn btn-sm btn-warning me-2" data-bs-toggle="modal" data-bs-target="#editGenreModal"><i class="bi bi-pen-fill"></i></a>
+                                        <a th:href="@{'/genres/delete/' + ${genre.id}}" class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"></i></a>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -49,6 +56,7 @@
             </div>
         </div>
 
+        <!--FORM THÊM THỂ LOẠI NHẠC-->
         <div class="modal fade" id="addGenreModal" tabindex="-1" aria-labelledby="addGenreLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content bg-dark text-light border-0 rounded-4 shadow-lg">
@@ -60,10 +68,10 @@
                     </div>
 
                     <div class="modal-body">
-                        <form id="addGenreForm">
+                        <form th:action="@{/genres/create}" th:object="${genreRequest}" method="post" id="addGenreForm">
                             <div class="mb-3">
                                 <label for="genreName" class="form-label">Genre Name</label>
-                                <input type="text" class="form-control bg-transparent" id="genreName" placeholder="Enter genre name..." required>
+                                <input type="text" th:field="*{name}" class="form-control bg-transparent" id="genreName" placeholder="Enter genre name..." required>
                             </div>
                         </form>
                     </div>
@@ -71,6 +79,34 @@
                     <div class="modal-footer border-secondary">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
                         <button type="submit" form="addGenreForm" class="btn btn-success">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--FORM SỬA THÔNG TIN THỂ LOẠI NHẠC-->
+        <div class="modal fade" id="editGenreModal" tabindex="-1" aria-labelledby="editGenreLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content bg-dark text-light border-0 rounded-4 shadow-lg">
+                    <div class="modal-header border-secondary">
+                        <h5 class="modal-title" id="editGenreLabel">
+                            <i class="me-2 text-success"></i> Edit Genre
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form th:action="@{/genres/update}" th:object="${genreRequest}" method="post" id="editGenreForm">
+                            <div class="mb-3">
+                                <label for="newGenreName" class="form-label">Genre Name</label>
+                                <input type="text" th:field="*{name}" class="form-control bg-transparent" id="newGenreName" placeholder="Enter New Genre Name..." required>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer border-secondary">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" form="editGenreForm" class="btn btn-success">Save</button>
                     </div>
                 </div>
             </div>

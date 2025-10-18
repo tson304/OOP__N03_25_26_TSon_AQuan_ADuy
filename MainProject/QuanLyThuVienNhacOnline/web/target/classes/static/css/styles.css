@@ -120,6 +120,7 @@ body
 .form-control:focus,
 .form-select:focus
 {
+    color: #a2a9b0;
     box-shadow: none;
     border-color: #323537;
 }
@@ -154,6 +155,15 @@ body
 .btn-success:hover
 {
     opacity: 0.9;
+}
+
+.info-icon {
+    color: #0dcaf0;
+    font-size: 1.2rem;
+    transition: 0.2s;
+}
+.info-icon:hover {
+    color: #0a58ca;
 }
 
 .modal-content {

@@ -1,48 +1,45 @@
 package com.musicmanager.web.controller;
 
 import com.musicmanager.web.dto.request.ArtistRequest;
-import com.musicmanager.web.entity.Artist;
 import com.musicmanager.web.service.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-@RestController
-@RequestMapping("/api/artists")
+@Controller
+@RequestMapping("/artists")
 public class ArtistController
 {
     @Autowired
     private ArtistService artistService;
 
-    @PostMapping
-    Artist createArtist(@RequestBody ArtistRequest request)
-    {
-        return artistService.createArtist(request);
-    }
-
     @GetMapping
-    List<Artist> getArtists()
+    public String readArtists(Model model)
     {
-        return artistService.getArtists();
+        model.addAttribute("artists", artistService.getArtists());
+        model.addAttribute("artistRequest", new ArtistRequest());
+        return "artists";
     }
 
-    @GetMapping("/{id}")
-    Artist getArtist(@PathVariable String id)
+    @PostMapping("/create")
+    public String createArtist(@ModelAttribute("artistRequest") ArtistRequest request)
     {
-        return artistService.getArtist(id);
+        artistService.createArtist(request);
+        return "redirect:/artists";
     }
 
-    @PutMapping("/{id}")
-    Artist updateArtist(@PathVariable String id, @RequestBody ArtistRequest request)
+    @PostMapping("/update/{id}")
+    public String updateArtist(@PathVariable String id, @ModelAttribute ArtistRequest request)
     {
-        return artistService.updateArtist(id, request);
+        artistService.updateArtist(id, request);
+        return "redirect:/artists";
     }
 
-    @DeleteMapping("/{id}")
-    String deleteArtist(@PathVariable String id)
+    @GetMapping("/delete/{id}")
+    public String deleteArtist(@PathVariable String id)
     {
         artistService.deleteArtist(id);
-        return "Artist has been deleted";
+        return "redirect:/artists";
     }
 }

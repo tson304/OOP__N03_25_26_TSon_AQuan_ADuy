@@ -14,27 +14,33 @@ public class ArtistService
     @Autowired
     private ArtistRepository artistRepository;
 
-    public Artist createArtist(ArtistRequest request)
+    // TẠO NGHỆ SĨ MỚI
+    public void createArtist(ArtistRequest request)
     {
         Artist artist = new Artist();
 
         artist.setName(request.getName());
         artist.setCountry(request.getCountry());
+        artist.setGender(request.getGender());
+        artist.setInformations(request.getInformations());
 
-        return artistRepository.save(artist);
+        artistRepository.save(artist);
     }
 
+    // LẤY RA DANH SÁCH NGHỆ SĨ
     public List<Artist> getArtists()
     {
         return artistRepository.findAll();
     }
 
+    // LẤY THÔNG TIN NGHỆ SĨ THEO ID
     public Artist getArtist(String id)
     {
         return artistRepository.findById(id).orElseThrow(() -> new RuntimeException("Artists not found"));
     }
 
-    public Artist updateArtist(String id, ArtistRequest request)
+    // SỬA ĐỔI THÔNG TIN NGHỆ SĨ
+    public void updateArtist(String id, ArtistRequest request)
     {
         Artist artist = getArtist(id);
 
@@ -46,10 +52,19 @@ public class ArtistService
         {
             artist.setCountry(request.getCountry());
         }
+        if (request.getGender() != null)
+        {
+            artist.setGender(request.getGender());
+        }
+        if (request.getInformations() != null)
+        {
+            artist.setInformations(request.getInformations());
+        }
 
-        return  artistRepository.save(artist);
+        artistRepository.save(artist);
     }
 
+    // XÓA NGHỆ SĨ
     public void deleteArtist(String id)
     {
         artistRepository.deleteById(id);

@@ -7,15 +7,19 @@ import java.util.*;
 @Table(name = "artists")
 public class Artist
 {
+    // THUỘC TÍNH
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
 
     private String id;
     private String name;
     private String country;
+    private String gender;
+    private String informations;
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Song> songs = new HashSet<>();
 
+    // GETTER VÀ SETTER
     public String getId()
     {
         return id;
@@ -46,6 +50,25 @@ public class Artist
         this.country = country;
     }
 
+    public String getGender()
+    {
+        return gender;
+    }
+
+    public void setGender(String gender)
+    {
+        this.gender = gender;
+    }
+
+    public String getInformations()
+    {
+        return informations;
+    }
+
+    public void setInformations(String informations) {
+        this.informations = informations;
+    }
+
     public Set<Song> getSongs()
     {
         return songs;
@@ -55,4 +78,5 @@ public class Artist
     {
         this.songs = songs;
     }
+
 }
