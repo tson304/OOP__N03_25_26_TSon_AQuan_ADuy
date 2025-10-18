@@ -13,15 +13,12 @@
 
     <body>
         <div class="side-bar">
-            <div class="menu-indicator">
-                <i class="bi bi-list fs-3"></i>
-            </div>
-
-            <a th:href="@{/}" class="d-flex align-items-center"><i class="bi bi-house-door me-3 fs-5"></i>Home</a>
-            <a th:href="@{users}" class="d-flex align-items-center"><i class="bi bi-people me-3 fs-5"></i>User</a>
-            <a th:href="@{artists}" class="d-flex align-items-center"><i class="bi bi-person-badge me-3 fs-5"></i>Artist</a>
-            <a th:href="@{songs}" class="d-flex align-items-center"><i class="bi bi-music-note-list me-3 fs-5"></i>Song</a>
-            <a th:href="@{genres}" class="d-flex align-items-center"><i class="bi bi-music-note-beamed me-3 fs-5"></i>Genre</a>
+            <a href="#" class="menu-indicator d-flex align-items-center"><i class="bi bi-list me-3 fs-5"></i></a>
+            <a th:href="@{/}" class="d-flex align-items-center"><i class="bi bi-house-door me-3 fs-5"></i><span>Home</span></a>
+            <a th:href="@{/users}" class="d-flex align-items-center"><i class="bi bi-people me-3 fs-5"></i><span>User</span></a>
+            <a th:href="@{/artists}" class="d-flex align-items-center"><i class="bi bi-person-badge me-3 fs-5"></i><span>Artist</span></a>
+            <a th:href="@{/songs}" class="d-flex align-items-center"><i class="bi bi-music-note-list me-3 fs-5"></i><span>Song</span></a>
+            <a th:href="@{/genres}" class="d-flex align-items-center"><i class="bi bi-music-note-beamed me-3 fs-5"></i><span>Genre</span></a>
         </div>
 
         <div class="main-content">
@@ -29,7 +26,7 @@
                 <h2 class="pb-2 mb-4">Artist <i class="bi bi-person-badge"></i></h2>
 
                 <div class="d-flex gap-3 mb-4">
-                    <button class="btn btn-success shadow-sm">Add</button>
+                    <button class="btn btn-success shadow-sm" data-bs-toggle="modal" data-bs-target="#addArtistModal">Add</button>
                     <input type="text" placeholder="Search..." class="form-control bg-transparent" style="width: 300px;">
                 </div>
 
@@ -52,10 +49,46 @@
                     </div>
                 </div>
             </div>
-
-            <button type="submit">Save</button>
         </div>
 
+        <div class="modal fade" id="addArtistModal" tabindex="-1" aria-labelledby="addArtistLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content bg-dark text-light border-0 rounded-4 shadow-lg">
+                    <div class="modal-header border-secondary">
+                        <h5 class="modal-title" id="addArtistLabel">
+                            <i class="me-2 text-success"></i> Add New Artist
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form id="addArtistForm">
+                            <div class="mb-3">
+                                <label for="artistName" class="form-label">Artist Name</label>
+                                <input type="text" class="form-control bg-transparent" id="artistName" placeholder="Enter artist name" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="artistCountry" class="form-label">Country</label>
+                                <input type="text" class="form-control bg-transparent" id="artistCountry" placeholder="Enter country" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="numSongs" class="form-label">Number of Songs</label>
+                                <input type="number" class="form-control bg-transparent" id="numSongs" min="0" placeholder="Enter number of songs">
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer border-secondary">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" form="addArtistForm" class="btn btn-success">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script th:src="@{/js/artists.js}"></script>
 
     </body>
