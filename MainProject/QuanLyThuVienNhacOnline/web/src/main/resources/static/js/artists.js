@@ -55,12 +55,14 @@ async function loadArtists()
 }
 
 // Thêm dữ liệu
-function createArtist() {
-    alert("Chức năng thêm đang được phát triển!");
+async function createArtist()
+{
+    alert("Chức năng đang được phát triển!");
 }
 
 // Sửa dữ liệu
-function updateArtist(id) {
+async function updateArtist(id)
+{
     alert("Chức năng chỉnh sửa đang được phát triển!");
 }
 
@@ -73,7 +75,8 @@ async function deleteArtist(id) {
 
     try
     {
-        const response = await fetch(`/api/artists/${id}`, { method: "DELETE" });
+        const response = await fetch("/api/artists/${id}", { method: "DELETE" });
+
         if (response.ok)
         {
             alert("Xóa thành công!");
@@ -86,7 +89,7 @@ async function deleteArtist(id) {
     }
     catch (error)
     {
-        console.error("Lỗi khi xóa:", error);
+        console.error("Lỗi khi xóa: ", error);
         alert("Không thể xóa nghệ sĩ!");
     }
 }
