@@ -1,6 +1,6 @@
 package com.musicmanager.web.controller;
 
-import com.musicmanager.web.dto.request.GenreRequest;
+import com.musicmanager.web.entity.Genre;
 import com.musicmanager.web.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,25 +18,25 @@ public class GenreController
     public String readGenres(Model model)
     {
         model.addAttribute("genres", genreService.getGenres());
-        model.addAttribute("genreRequest", new GenreRequest());
+        model.addAttribute("genreRequest", new Genre());
         return "genres";
     }
 
     @PostMapping("/create")
-    public String createGenre(@ModelAttribute("genreRequest") GenreRequest request)
+    public String createGenre(@ModelAttribute("genreRequest") Genre request)
     {
         genreService.createGenre(request);
         return "redirect:/genres";
     }
 
     @PostMapping("/update/{id}")
-    public String updateGenre(@PathVariable String id, @ModelAttribute GenreRequest request)
+    public String updateGenre(@PathVariable String id, @ModelAttribute("genreRequest") Genre request)
     {
         genreService.updateGenre(id, request);
         return "redirect:/genres";
     }
 
-    @GetMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public String deleteGenre(@PathVariable String id)
     {
         genreService.deleteGenre(id);

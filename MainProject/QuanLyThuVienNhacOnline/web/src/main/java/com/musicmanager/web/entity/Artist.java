@@ -1,7 +1,6 @@
 package com.musicmanager.web.entity;
 
 import jakarta.persistence.*;
-import java.util.*;
 
 @Entity
 @Table(name = "artists")
@@ -9,15 +8,11 @@ public class Artist
 {
     // THUỘC TÍNH
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-
     private String id;
     private String name;
     private String country;
     private String gender;
     private String informations;
-    @OneToMany(cascade = CascadeType.ALL)
-    private Set<Song> songs = new HashSet<>();
 
     // GETTER VÀ SETTER
     public String getId()
@@ -65,18 +60,8 @@ public class Artist
         return informations;
     }
 
-    public void setInformations(String informations) {
+    public void setInformations(String informations)
+    {
         this.informations = informations;
     }
-
-    public Set<Song> getSongs()
-    {
-        return songs;
-    }
-
-    public void setSongs(Set<Song> songs)
-    {
-        this.songs = songs;
-    }
-
 }

@@ -1,6 +1,5 @@
 package com.musicmanager.web.service;
 
-import com.musicmanager.web.dto.request.GenreRequest;
 import com.musicmanager.web.entity.Genre;
 import com.musicmanager.web.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,36 +13,49 @@ public class GenreService
     @Autowired
     private GenreRepository genreRepository;
 
-    public Genre createGenre(GenreRequest request)
+    // TẠO THỂ LOẠI NHẠC MỚI
+    public void createGenre(Genre request)
     {
         Genre genre = new Genre();
-
+        String id = generateID();
+        genre.setId(id);
         genre.setName(request.getName());
 
-        return genreRepository.save(genre);
+        genreRepository.save(genre);
     }
 
+    // LẤY RA DANH SÁCH THỂ LOẠI NHẠC
     public List<Genre> getGenres()
     {
         return genreRepository.findAll();
     }
 
+    // LẤY RA DANH SÁCH THỂ LOẠI NHẠC THEO ID
     public Genre getGenre(String id)
     {
-        return genreRepository.findById(id).orElseThrow(() -> new RuntimeException("Genre not found"));
+        return genreRepository.findById(id).orElse(null);
     }
 
-    public Genre updateGenre(String id, GenreRequest request)
+    // SỬA THỂ LOẠI NHẠC
+    public void updateGenre(String id, Genre request)
     {
         Genre genre = getGenre(id);
 
         genre.setName(request.getName());
 
-        return genreRepository.save(genre);
+        genreRepository.save(genre);
     }
 
+    // XÓA THỂ LOẠI NHẠC
     public void deleteGenre(String id)
     {
         genreRepository.deleteById(id);
+    }
+
+    // TẠO ID
+    private String generateID()
+    {
+        long number = genreRepository.count();
+        return "g" + (number + 1);
     }
 }

@@ -1,6 +1,5 @@
 package com.musicmanager.web.service;
 
-import com.musicmanager.web.dto.request.ArtistRequest;
 import com.musicmanager.web.entity.Artist;
 import com.musicmanager.web.repository.ArtistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +14,11 @@ public class ArtistService
     private ArtistRepository artistRepository;
 
     // TẠO NGHỆ SĨ MỚI
-    public void createArtist(ArtistRequest request)
+    public void createArtist(Artist request)
     {
         Artist artist = new Artist();
-
+        String id = generateID();
+        artist.setId(id);
         artist.setName(request.getName());
         artist.setCountry(request.getCountry());
         artist.setGender(request.getGender());
@@ -36,30 +36,18 @@ public class ArtistService
     // LẤY THÔNG TIN NGHỆ SĨ THEO ID
     public Artist getArtist(String id)
     {
-        return artistRepository.findById(id).orElseThrow(() -> new RuntimeException("Artists not found"));
+        return artistRepository.findById(id).orElse(null);
     }
 
     // SỬA ĐỔI THÔNG TIN NGHỆ SĨ
-    public void updateArtist(String id, ArtistRequest request)
+    public void updateArtist(String id, Artist request)
     {
         Artist artist = getArtist(id);
 
-        if (request.getName() != null)
-        {
-            artist.setName(request.getName());
-        }
-        if (request.getCountry() != null)
-        {
-            artist.setCountry(request.getCountry());
-        }
-        if (request.getGender() != null)
-        {
-            artist.setGender(request.getGender());
-        }
-        if (request.getInformations() != null)
-        {
-            artist.setInformations(request.getInformations());
-        }
+        artist.setName(request.getName());
+        artist.setCountry(request.getCountry());
+        artist.setGender(request.getGender());
+        artist.setInformations(request.getInformations());
 
         artistRepository.save(artist);
     }
@@ -68,5 +56,12 @@ public class ArtistService
     public void deleteArtist(String id)
     {
         artistRepository.deleteById(id);
+    }
+
+    // TẠO ID
+    private String generateID()
+    {
+        long number = artistRepository.count();
+        return "a" + (number + 1);
     }
 }
