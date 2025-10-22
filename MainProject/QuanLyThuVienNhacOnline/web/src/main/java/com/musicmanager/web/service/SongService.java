@@ -20,7 +20,7 @@ public class SongService
     @Autowired
     private GenreService genreService;
 
-    public Song createSong(SongRequest request)
+    public Song createSong(SongRequest request)// tao bai hat moi//
     {
         Artist artist = artistService.getArtist(request.getArtistId());
         Genre genre = genreService.getGenre(request.getGenreId());
@@ -36,17 +36,19 @@ public class SongService
         return songRepository.save(song);
     }
 
-    public List<Song> getSongs()
+    public List<Song> getSongs()// lay bài hát theo yêu cầu//
     {
-        return songRepository.findAll();
+        return songRepository.findAll().stream()
+                .filter(song -> id == null || id.isBlank() || song.getId().equals(id))
+                .filter(song -> title == null || title.isBlank() || song.getTitle().toLowerCase().contains(title.toLowerCase()))
+                .filter(song -> artist == null || artist.isBlank() || song.getArtist().getName().toLowerCase().contains(artist.toLowerCase()))
+                .filter(song -> genre == null || genre.isBlank() || song.getGenre().getName().toLowerCase().contains(genre.toLowerCase()))
+                .filter(song -> releaseYear == null || song.getReleaseYear().equals(releaseYear))
+                .colect(Collectors.toList());
     }
 
-    public Song getSong(String id)
-    {
-        return songRepository.findById(id).orElseThrow(() -> new RuntimeException("Song not found"));
-    }
-
-    public Song updateSong(String id, SongRequest request)
+    
+    public Song updateSong(String id, SongRequest request)// cap nhat thong tin bai hat theo id//
     {
         Song song = getSong(id);
 
@@ -80,7 +82,7 @@ public class SongService
         return songRepository.save(song);
     }
 
-    public void deleteSong(String id)
+    public void deleteSong(String id)// xoa bai hat theo id //
     {
         songRepository.deleteById(id);
     }

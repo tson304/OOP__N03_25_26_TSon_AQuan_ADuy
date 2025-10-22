@@ -26,6 +26,11 @@ public class SongController
     {
         return songService.getSongs();
     }
+    @GetMapping("/search")
+    List<Song> searchSongsByTitle(@RequestParam String title)
+    {
+        return songService.searchSongsByTitle(title);
+    }
 
     @GetMapping("{id}")
     Song getSong(@PathVariable String id)
@@ -43,6 +48,7 @@ public class SongController
     String deleteSong(@PathVariable String id)
     {
         songService.deleteSong(id);
-        return "Song has been deleted";
+        return "Đã xóa bài hát với id: " + id;
     }
+    
 }
