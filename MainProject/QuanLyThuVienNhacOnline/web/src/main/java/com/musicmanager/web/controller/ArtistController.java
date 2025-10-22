@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/artists")
 public class ArtistController
@@ -42,4 +44,14 @@ public class ArtistController
         artistService.deleteArtist(id);
         return "redirect:/artists";
     }
+
+    @GetMapping("/search")
+    public String searchArtists(@RequestParam("name") String name, Model model) {
+        List<Artist> artists = artistService.searchArtist(name);
+        model.addAttribute("artists", artists);
+        model.addAttribute("searchQuery", name);
+        model.addAttribute("artistRequest", new Artist());
+        return "artists";
+    }
+
 }

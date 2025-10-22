@@ -17,8 +17,7 @@ public class GenreService
     public void createGenre(Genre request)
     {
         Genre genre = new Genre();
-        String id = generateID();
-        genre.setId(id);
+
         genre.setName(request.getName());
 
         genreRepository.save(genre);
@@ -36,26 +35,26 @@ public class GenreService
         return genreRepository.findById(id).orElse(null);
     }
 
+    // TÌM THỂ LOẠI NHẠC THEO TÊN
+    public List<Genre> searchGenres(String name)
+    {
+        return genreRepository.findByName(name);
+    }
     // SỬA THỂ LOẠI NHẠC
     public void updateGenre(String id, Genre request)
     {
         Genre genre = getGenre(id);
 
-        genre.setName(request.getName());
-
-        genreRepository.save(genre);
+        if (genre != null)
+        {
+            genre.setName(request.getName());
+            genreRepository.save(genre);
+        }
     }
 
     // XÓA THỂ LOẠI NHẠC
     public void deleteGenre(String id)
     {
         genreRepository.deleteById(id);
-    }
-
-    // TẠO ID
-    private String generateID()
-    {
-        long number = genreRepository.count();
-        return "g" + (number + 1);
     }
 }

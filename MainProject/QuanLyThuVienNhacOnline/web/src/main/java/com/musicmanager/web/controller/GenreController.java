@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/genres")
 public class GenreController
@@ -41,5 +43,14 @@ public class GenreController
     {
         genreService.deleteGenre(id);
         return "redirect:/genres";
+    }
+
+    @GetMapping("/search")
+    public String searchGenres(@RequestParam("name") String name, Model model) {
+        List<Genre> genres = genreService.searchGenres(name);
+        model.addAttribute("genres", genres);
+        model.addAttribute("searchQuery", name);
+        model.addAttribute("genreRequest", new Genre());
+        return "genres";
     }
 }

@@ -17,8 +17,6 @@ public class ArtistService
     public void createArtist(Artist request)
     {
         Artist artist = new Artist();
-        String id = generateID();
-        artist.setId(id);
         artist.setName(request.getName());
         artist.setCountry(request.getCountry());
         artist.setGender(request.getGender());
@@ -39,29 +37,31 @@ public class ArtistService
         return artistRepository.findById(id).orElse(null);
     }
 
+    // TÌM NGHỆ SĨ THEO TÊN
+    public List<Artist> searchArtist(String name)
+    {
+        return artistRepository.findByName(name);
+    }
+
     // SỬA ĐỔI THÔNG TIN NGHỆ SĨ
     public void updateArtist(String id, Artist request)
     {
         Artist artist = getArtist(id);
 
-        artist.setName(request.getName());
-        artist.setCountry(request.getCountry());
-        artist.setGender(request.getGender());
-        artist.setInformations(request.getInformations());
+        if (artist != null)
+        {
+            artist.setName(request.getName());
+            artist.setCountry(request.getCountry());
+            artist.setGender(request.getGender());
+            artist.setInformations(request.getInformations());
 
-        artistRepository.save(artist);
+            artistRepository.save(artist);
+        }
     }
 
     // XÓA NGHỆ SĨ
     public void deleteArtist(String id)
     {
         artistRepository.deleteById(id);
-    }
-
-    // TẠO ID
-    private String generateID()
-    {
-        long number = artistRepository.count();
-        return "a" + (number + 1);
     }
 }
