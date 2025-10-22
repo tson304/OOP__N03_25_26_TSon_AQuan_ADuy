@@ -20,7 +20,7 @@ public class SongService
     @Autowired
     private GenreService genreService;
 
-    public Song createSong(SongRequest request)
+    public Song createSong(SongRequest request)// tao bai hat moi//
     {
         Artist artist = artistService.getArtist(request.getArtistId());
         Genre genre = genreService.getGenre(request.getGenreId());
@@ -36,17 +36,21 @@ public class SongService
         return songRepository.save(song);
     }
 
-    public List<Song> getSongs()
+    public List<Song> getSongs()// lay tat ca bai hat //
     {
         return songRepository.findAll();
     }
 
-    public Song getSong(String id)
+    public Song getSong(String id)// lay bai hat theo id //
     {
         return songRepository.findById(id).orElseThrow(() -> new RuntimeException("Song not found"));
     }
+    public List<Song> searchSongsByTitle(String title)// tim kiem bai hat theo ten //
+    {
+        return songRepository.findByTitleContainingIgnoreCase(title);
+    }
 
-    public Song updateSong(String id, SongRequest request)
+    public Song updateSong(String id, SongRequest request)// cap nhat thong tin bai hat theo id//
     {
         Song song = getSong(id);
 
@@ -80,7 +84,7 @@ public class SongService
         return songRepository.save(song);
     }
 
-    public void deleteSong(String id)
+    public void deleteSong(String id)// xoa bai hat theo id //
     {
         songRepository.deleteById(id);
     }
