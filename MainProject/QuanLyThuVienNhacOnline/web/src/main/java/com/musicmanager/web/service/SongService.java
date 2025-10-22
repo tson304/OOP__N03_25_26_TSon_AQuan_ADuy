@@ -36,20 +36,18 @@ public class SongService
         return songRepository.save(song);
     }
 
-    public List<Song> getSongs()// lay tat ca bai hat //
+    public List<Song> getSongs()// lay bài hát theo yêu cầu//
     {
-        return songRepository.findAll();
+        return songRepository.findAll().stream()
+                .filter(song -> id == null || id.isBlank() || song.getId().equals(id))
+                .filter(song -> title == null || title.isBlank() || song.getTitle().toLowerCase().contains(title.toLowerCase()))
+                .filter(song -> artist == null || artist.isBlank() || song.getArtist().getName().toLowerCase().contains(artist.toLowerCase()))
+                .filter(song -> genre == null || genre.isBlank() || song.getGenre().getName().toLowerCase().contains(genre.toLowerCase()))
+                .filter(song -> releaseYear == null || song.getReleaseYear().equals(releaseYear))
+                .colect(Collectors.toList());
     }
 
-    public Song getSong(String id)// lay bai hat theo id //
-    {
-        return songRepository.findById(id).orElseThrow(() -> new RuntimeException("Song not found"));
-    }
-    public List<Song> searchSongsByTitle(String title)// tim kiem bai hat theo ten //
-    {
-        return songRepository.findByTitleContainingIgnoreCase(title);
-    }
-
+    
     public Song updateSong(String id, SongRequest request)// cap nhat thong tin bai hat theo id//
     {
         Song song = getSong(id);
