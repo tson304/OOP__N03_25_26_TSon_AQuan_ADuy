@@ -28,10 +28,14 @@
                 <div class="d-flex align-items-center gap-3 mb-4">
                     <button class="btn btn-success shadow-sm" data-bs-toggle="modal" data-bs-target="#addGenreModal"><i class="bi bi-plus-lg"></i> Add</button>
 
-                    <form th:action="@{/genres/search}" method="get" class="d-flex align-items-center gap-2">
-                        <input type="text" name="name" th:value="${searchQuery}" placeholder="Search..." class="form-control bg-transparent" style="width: 300px;" required>
-                        <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
+                    <form th:action="@{/genres/search}" method="get" class="search-bar position-relative">
+                        <input type="text" class="form-control pe-5 bg-transparent border-secondary text-light"
+                               th:value="${searchQuery}" name="name" placeholder="Search...">
+                        <i class="bi bi-search position-absolute top-50 end-0 translate-middle-y me-3 text-secondary"></i>
                     </form>
+
+                    <p th:text="'Number of Genres: ' + ${numberOfGenres}" class="mb-0 fw-semibold text-light"></p>
+
                 </div>
 
                 <div class="card bg-secondary-subtle border-0">

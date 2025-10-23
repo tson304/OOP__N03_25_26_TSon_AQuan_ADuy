@@ -1,7 +1,6 @@
 package com.musicmanager.web.entity;
 
 import jakarta.persistence.*;
-import java.util.*;
 
 @Entity
 @Table(name = "genres")

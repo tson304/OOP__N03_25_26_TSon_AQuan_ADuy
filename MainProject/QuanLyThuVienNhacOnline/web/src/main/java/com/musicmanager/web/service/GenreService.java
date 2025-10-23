@@ -13,26 +13,10 @@ public class GenreService
     @Autowired
     private GenreRepository genreRepository;
 
-    // TẠO THỂ LOẠI NHẠC MỚI
-    public void createGenre(Genre request)
-    {
-        Genre genre = new Genre();
-
-        genre.setName(request.getName());
-
-        genreRepository.save(genre);
-    }
-
     // LẤY RA DANH SÁCH THỂ LOẠI NHẠC
     public List<Genre> getGenres()
     {
         return genreRepository.findAll();
-    }
-
-    // LẤY RA DANH SÁCH THỂ LOẠI NHẠC THEO ID
-    public Genre getGenre(String id)
-    {
-        return genreRepository.findById(id).orElse(null);
     }
 
     // TÌM THỂ LOẠI NHẠC THEO TÊN
@@ -40,6 +24,20 @@ public class GenreService
     {
         return genreRepository.findByName(name);
     }
+
+    // TẠO THỂ LOẠI NHẠC MỚI
+    public void createGenre(Genre request)
+    {
+        if (searchGenres(request.getName()).isEmpty())
+        {
+            Genre genre = new Genre();
+
+            genre.setName(request.getName());
+
+            genreRepository.save(genre);
+        }
+    }
+
     // SỬA THỂ LOẠI NHẠC
     public void updateGenre(String id, Genre request)
     {
@@ -55,6 +53,24 @@ public class GenreService
     // XÓA THỂ LOẠI NHẠC
     public void deleteGenre(String id)
     {
-        genreRepository.deleteById(id);
+        Genre genre = getGenre(id);
+
+        if (genre != null)
+        {
+            genreRepository.deleteById(id);
+        }
+    }
+
+
+    // LẤY RA DANH SÁCH THỂ LOẠI NHẠC THEO ID
+    public Genre getGenre(String id)
+    {
+        return genreRepository.findById(id).orElse(null);
+    }
+
+    // SỐ LƯỢNG THỂ LOẠI NHẠC CÓ TRONG DATABASE
+    public Long numberOfGenres()
+    {
+        return genreRepository.count();
     }
 }

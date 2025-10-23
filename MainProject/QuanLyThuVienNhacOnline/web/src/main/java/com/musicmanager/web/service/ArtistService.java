@@ -13,34 +13,32 @@ public class ArtistService
     @Autowired
     private ArtistRepository artistRepository;
 
-    // TẠO NGHỆ SĨ MỚI
-    public void createArtist(Artist request)
-    {
-        Artist artist = new Artist();
-        artist.setName(request.getName());
-        artist.setCountry(request.getCountry());
-        artist.setGender(request.getGender());
-        artist.setInformations(request.getInformations());
-
-        artistRepository.save(artist);
-    }
-
     // LẤY RA DANH SÁCH NGHỆ SĨ
     public List<Artist> getArtists()
     {
         return artistRepository.findAll();
     }
 
-    // LẤY THÔNG TIN NGHỆ SĨ THEO ID
-    public Artist getArtist(String id)
-    {
-        return artistRepository.findById(id).orElse(null);
-    }
-
     // TÌM NGHỆ SĨ THEO TÊN
     public List<Artist> searchArtist(String name)
     {
         return artistRepository.findByName(name);
+    }
+
+    // TẠO NGHỆ SĨ MỚI
+    public void createArtist(Artist request)
+    {
+        if (searchArtist(request.getName()).isEmpty())
+        {
+            Artist artist = new Artist();
+
+            artist.setName(request.getName());
+            artist.setCountry(request.getCountry());
+            artist.setGender(request.getGender());
+            artist.setInformations(request.getInformations());
+
+            artistRepository.save(artist);
+        }
     }
 
     // SỬA ĐỔI THÔNG TIN NGHỆ SĨ
@@ -62,6 +60,23 @@ public class ArtistService
     // XÓA NGHỆ SĨ
     public void deleteArtist(String id)
     {
-        artistRepository.deleteById(id);
+        Artist artist = getArtist(id);
+
+        if (artist != null)
+        {
+            artistRepository.deleteById(id);
+        }
+    }
+
+    // LẤY ID CỦA NGHỆ SĨ
+    public Artist getArtist(String id)
+    {
+        return artistRepository.findById(id).orElse(null);
+    }
+
+    // Số lượng nghệ sĩ có trong DATABASE
+    public Long numberOfArtists()
+    {
+        return artistRepository.count();
     }
 }

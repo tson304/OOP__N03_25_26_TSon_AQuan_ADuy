@@ -21,15 +21,30 @@ public class ArtistController
     {
         model.addAttribute("artists", artistService.getArtists());
         model.addAttribute("artistRequest", new Artist());
+        model.addAttribute("numberOfArtists", artistService.numberOfArtists());
+
         return "artists";
     }
 
     @GetMapping("/search")
-    public String searchArtists(@RequestParam("name") String name, Model model) {
-        List<Artist> artists = artistService.searchArtist(name);
+    public String searchArtists(@RequestParam("name") String name, Model model)
+    {
+        List<Artist> artists;
+
+        if (name == null || name.trim().isEmpty())
+        {
+            artists = artistService.getArtists();
+        }
+        else
+        {
+            artists = artistService.searchArtist(name);
+        }
+
         model.addAttribute("artists", artists);
         model.addAttribute("searchQuery", name);
         model.addAttribute("artistRequest", new Artist());
+        model.addAttribute("numberOfArtists", artistService.numberOfArtists());
+
         return "artists";
     }
 

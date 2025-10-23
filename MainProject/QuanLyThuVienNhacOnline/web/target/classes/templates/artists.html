@@ -28,10 +28,14 @@
                 <div class="d-flex align-items-center gap-3 mb-4">
                     <button class="btn btn-success shadow-sm" data-bs-toggle="modal" data-bs-target="#addArtistModal"><i class="bi bi-plus-lg"></i> Add</button>
 
-                    <form th:action="@{/artists/search}" method="get" class="d-flex align-items-center gap-2">
-                        <input type="text" class="form-control bg-transparent" th:value="${searchQuery}" name="name" placeholder="Search..."  style="width: 300px;" required>
-                        <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
+                    <form th:action="@{/artists/search}" method="get" class="search-bar position-relative">
+                        <input type="text" class="form-control pe-5 bg-transparent border-secondary text-light"
+                               th:value="${searchQuery}" name="name" placeholder="Search...">
+                        <i class="bi bi-search position-absolute top-50 end-0 translate-middle-y me-3 text-secondary"></i>
                     </form>
+
+                    <p th:text="'Number of Artists: ' + ${numberOfArtists}" class="mb-0 fw-semibold text-light"></p>
+
                 </div>
 
                 <div class="card bg-secondary-subtle border-0">
@@ -83,10 +87,11 @@
                                                             <input type="text" th:field="*{country}" class="form-control bg-transparent" id="newArtistCountry" placeholder="Artist Country...">
                                                         </div>
 
-                                                        <div class="mb-3">
-                                                            <label for="newArtistGender" class="form-label">New Gender</label>
-                                                            <input type="text" th:field="*{gender}" class="form-control bg-transparent" id="newArtistGender" placeholder="Artist Gender...">
-                                                        </div>
+                                                        <select th:field="*{gender}" class="form-select bg-transparent">
+                                                            <option value="Male">Male</option>
+                                                            <option value="Female">Female</option>
+                                                        </select>
+
 
                                                         <div class="mb-3">
                                                             <label for="newArtistInformations" class="form-label">New Informations</label>
@@ -160,10 +165,10 @@
                                 <input type="text" th:field="*{country}" class="form-control bg-transparent" id="artistCountry" placeholder="Enter Country..." required>
                             </div>
 
-                            <div class="mb-3">
-                                <label for="artistGender" class="form-label">Gender</label>
-                                <input type="text" th:field="*{gender}" class="form-control bg-transparent" id="artistGender" placeholder="Enter Gender..." required>
-                            </div>
+                            <select th:field="*{gender}" class="form-select bg-transparent">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
 
                             <div class="mb-3">
                                 <label for="artistInformations" class="form-label">Informations</label>
