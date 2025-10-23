@@ -1,117 +1,119 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Song Management</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Song Management</title>
 
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-        <link rel="icon" th:href="@{/img/logo/song-logo.svg}" type="image/svg+xml">
-        <link rel="stylesheet" th:href="@{/css/styles.css}">
-    </head>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body class="bg-light">
 
-    <body>
-        <div class="side-bar">
-            <a href="#" class="menu-indicator d-flex align-items-center"><i class="bi bi-list me-3 fs-5"></i></a>
-            <a th:href="@{/}" class="d-flex align-items-center"><i class="bi bi-house-door me-3 fs-5"></i><span>Home</span></a>
-            <a th:href="@{/users}" class="d-flex align-items-center"><i class="bi bi-people me-3 fs-5"></i><span>User</span></a>
-            <a th:href="@{/artists}" class="d-flex align-items-center"><i class="bi bi-person-badge me-3 fs-5"></i><span>Artist</span></a>
-            <a th:href="@{/songs}" class="d-flex align-items-center"><i class="bi bi-music-note-list me-3 fs-5"></i><span>Song</span></a>
-            <a th:href="@{/genres}" class="d-flex align-items-center"><i class="bi bi-music-note-beamed me-3 fs-5"></i><span>Genre</span></a>
+<div class="container py-4">
+    <h2 class="mb-4">Song Management <i class="bi bi-music-note-list"></i></h2>
+
+    <!-- Nút thêm và ô tìm kiếm -->
+    <div class="d-flex gap-3 mb-3">
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addSongModal">
+            <i class="bi bi-plus-circle"></i> Add Song
+        </button>
+        <input type="text" id="searchInput" class="form-control" placeholder="Search by title...">
+    </div>
+
+    <!-- Bảng danh sách bài hát -->
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <table class="table table-striped mb-0">
+                <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Artist</th>
+                    <th>Genre</th>
+                    <th>Release Year</th>
+                    <th>Duration</th>
+                    <th>File Path</th>
+                    <th>Options</th>
+                </tr>
+                </thead>
+                <tbody id="songTable">
+                <!-- Nếu render server-side -->
+                <tr th:each="song : ${songs}">
+                    <td th:text="${song.id}"></td>
+                    <td th:text="${song.title}"></td>
+                    <td th:text="${song.artist != null ? song.artist.name : 'N/A'}"></td>
+                    <td th:text="${song.genre != null ? song.genre.name : 'N/A'}"></td>
+                    <td th:text="${song.releaseYear}"></td>
+                    <td th:text="${song.duration}"></td>
+                    <td th:text="${song.audioFilePath}"></td>
+                    <td>
+                        <button class="btn btn-sm btn-warning edit-btn" th:attr="data-id=${song.id}">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger delete-btn" th:attr="data-id=${song.id}">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
+    </div>
+</div>
 
-        <div class="main-content">
-            <div class="container-fluid py-4">
-                <h2 class="pb-2 mb-4">Song <i class="bi bi-music-note-list"></i></h2>
-
-                <div class="d-flex gap-3 mb-4">
-                    <button class="btn btn-success shadow-sm" data-bs-toggle="modal" data-bs-target="#addSongModal">Add</button>
-                    <input type="text" placeholder="Search..." class="form-control bg-transparent" style="width: 300px;">
-                    <select class="form-select w-auto">
-                        <option selected>Genre</option>
-                        <!--Dữ liệu-->
-                    </select>
-                </div>
-
-                <div class="card bg-secondary-subtle border-0">
-                    <div class="card-body p-0">
-                        <table class="table mb-0">
-                            <thead>
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Artist</th>
-                                    <th scope="cold">Genre</th>
-                                    <th scope="col">Release Year</th>
-                                    <th scope="col">Duration</th>
-                                    <th scope="col">File Path</th>
-                                    <th scope="col">Option</th>
-                                </tr>
-                            </thead>
-                            <tbody id="songTable">
-                                    <!--Du lieu-->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+<!-- Modal thêm bài hát -->
+<div class="modal fade" id="addSongModal" tabindex="-1" aria-labelledby="addSongLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="addSongLabel">Add New Song</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
-        </div>
-
-        <div class="modal fade" id="addSongModal" tabindex="-1" aria-labelledby="addSongLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content bg-dark text-light border-0 rounded-4 shadow-lg">
-                    <div class="modal-header border-secondary">
-                        <h5 class="modal-title" id="addSongLabel">
-                            <i class="me-2 text-success"></i> Add New Song
-                        </h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            <form id="addSongForm">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Song Title</label>
+                        <input type="text" class="form-control" id="title" name="title" required>
                     </div>
-
-                    <div class="modal-body">
-                        <form id="addSongForm">
-                            <div class="mb-3">
-                                <label for="songTitle" class="form-label">Song Title</label>
-                                <input type="text" class="form-control bg-transparent" id="songTitle" placeholder="Enter Song Title..." required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="songArtist" class="form-label">Artist</label>
-                                <input type="text" class="form-control bg-transparent" id="songArtist" placeholder="Enter Artist..." required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="songGenre" class="form-label">Genre</label>
-                                <input type="text" class="form-control bg-transparent" id="songGenre" placeholder="Enter Genre...">
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="songReleaseYear" class="form-label">Release Year</label>
-                                <input type="number" class="form-control bg-transparent" id="songReleaseYear" placeholder="Enter ReleaseYear...">
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="songAudioFilePath" class="form-label">Audio File Path</label>
-                                <input type="url" class="form-control bg-transparent" id="songAudioFilePath" placeholder="Enter AudioFilePath...">
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="songDuration" class="form-label">Duration</label>
-                                <input type="text" class="form-control bg-transparent" id="songDuration" pattern="^([0-9]{2}):([0-5][0-9]):([0-5][0-9])$" placeholder="Enter Duration...">
-                            </div>
-                        </form>
+                    <div class="mb-3">
+                        <label for="artist" class="form-label">Artist</label>
+                        <input type="text" class="form-control" id="artist" name="artist">
                     </div>
-
-                    <div class="modal-footer border-secondary">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" form="addSongForm" class="btn btn-success">Save</button>
+                    <div class="mb-3">
+                        <label for="genre" class="form-label">Genre</label>
+                        <input type="text" class="form-control" id="genre" name="genre">
+                    </div>
+                    <div class="mb-3">
+                        <label for="releaseYear" class="form-label">Release Year</label>
+                        <input type="number" class="form-control" id="releaseYear" name="releaseYear">
+                    </div>
+                    <div class="mb-3">
+                        <label for="audioFilePath" class="form-label">Audio File Path</label>
+                        <input type="text" class="form-control" id="audioFilePath" name="audioFilePath">
+                    </div>
+                    <div class="mb-3">
+                        <label for="duration" class="form-label">Duration (HH:MM:SS)</label>
+                        <input type="text" class="form-control" id="duration" name="duration"
+                               pattern="^([0-9]{2}):([0-5][0-9]):([0-5][0-9])$">
                     </div>
                 </div>
-            </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success">Save</button>
+                </div>
+            </form>
         </div>
+    </div>
+</div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-        <script th:src="@{/js/songs.js}"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- JS riêng để gọi API -->
+<script th:src="@{/js/songs.js}"></script>
 
-    </body>
+</body>
 </html>
