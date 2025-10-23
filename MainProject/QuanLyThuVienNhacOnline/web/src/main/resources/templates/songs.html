@@ -14,9 +14,9 @@
 <body class="bg-light">
 
 <div class="container py-4">
-    <h2 class="mb-4">Song Management <i class="bi bi-music-note-list"></i></h2>
+    <h2 class="mb-4 text-center">🎵 Song Management</h2>
 
-    <!-- Nút thêm và ô tìm kiếm -->
+    <!-- Thanh công cụ -->
     <div class="d-flex gap-3 mb-3">
         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addSongModal">
             <i class="bi bi-plus-circle"></i> Add Song
@@ -28,77 +28,61 @@
     <div class="card shadow-sm">
         <div class="card-body p-0">
             <table class="table table-striped mb-0">
-                <thead class="table-dark">
+                <thead class="table-dark text-center">
                 <tr>
                     <th>ID</th>
                     <th>Title</th>
                     <th>Artist</th>
                     <th>Genre</th>
-                    <th>Release Year</th>
+                    <th>Year</th>
                     <th>Duration</th>
                     <th>File Path</th>
-                    <th>Options</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
-                <tbody id="songTable">
-                <!-- Nếu render server-side -->
-                <tr th:each="song : ${songs}">
-                    <td th:text="${song.id}"></td>
-                    <td th:text="${song.title}"></td>
-                    <td th:text="${song.artist != null ? song.artist.name : 'N/A'}"></td>
-                    <td th:text="${song.genre != null ? song.genre.name : 'N/A'}"></td>
-                    <td th:text="${song.releaseYear}"></td>
-                    <td th:text="${song.duration}"></td>
-                    <td th:text="${song.audioFilePath}"></td>
-                    <td>
-                        <button class="btn btn-sm btn-warning edit-btn" th:attr="data-id=${song.id}">
-                            <i class="bi bi-pencil"></i>
-                        </button>
-                        <button class="btn btn-sm btn-danger delete-btn" th:attr="data-id=${song.id}">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </td>
-                </tr>
+                <tbody id="songTable" class="text-center">
+                <!-- dữ liệu sẽ được load bằng JS -->
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 
-<!-- Modal thêm bài hát -->
+<!-- Modal thêm / sửa bài hát -->
 <div class="modal fade" id="addSongModal" tabindex="-1" aria-labelledby="addSongLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 shadow-lg">
             <div class="modal-header bg-dark text-white">
-                <h5 class="modal-title" id="addSongLabel">Add New Song</h5>
+                <h5 class="modal-title" id="addSongLabel">Add / Edit Song</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
-            <form id="addSongForm">
+            <form id="songForm">
                 <div class="modal-body">
+                    <input type="hidden" id="songId">
+
                     <div class="mb-3">
                         <label for="title" class="form-label">Song Title</label>
-                        <input type="text" class="form-control" id="title" name="title" required>
+                        <input type="text" class="form-control" id="title" required>
                     </div>
                     <div class="mb-3">
                         <label for="artist" class="form-label">Artist</label>
-                        <input type="text" class="form-control" id="artist" name="artist">
+                        <input type="text" class="form-control" id="artist" required>
                     </div>
                     <div class="mb-3">
                         <label for="genre" class="form-label">Genre</label>
-                        <input type="text" class="form-control" id="genre" name="genre">
+                        <input type="text" class="form-control" id="genre" required>
                     </div>
                     <div class="mb-3">
                         <label for="releaseYear" class="form-label">Release Year</label>
-                        <input type="number" class="form-control" id="releaseYear" name="releaseYear">
+                        <input type="number" class="form-control" id="releaseYear" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="duration" class="form-label">Duration (seconds)</label>
+                        <input type="number" class="form-control" id="duration">
                     </div>
                     <div class="mb-3">
                         <label for="audioFilePath" class="form-label">Audio File Path</label>
-                        <input type="text" class="form-control" id="audioFilePath" name="audioFilePath">
-                    </div>
-                    <div class="mb-3">
-                        <label for="duration" class="form-label">Duration (HH:MM:SS)</label>
-                        <input type="text" class="form-control" id="duration" name="duration"
-                               pattern="^([0-9]{2}):([0-5][0-9]):([0-5][0-9])$">
+                        <input type="text" class="form-control" id="audioFilePath">
                     </div>
                 </div>
                 <div class="modal-footer border-0">
@@ -112,8 +96,102 @@
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- JS riêng để gọi API -->
-<script th:src="@{/js/songs.js}"></script>
+
+<!-- Script gọi API -->
+<script>
+const API_URL = '/api/songs';
+const songTable = document.getElementById('songTable');
+const searchInput = document.getElementById('searchInput');
+const songForm = document.getElementById('songForm');
+const modal = new bootstrap.Modal(document.getElementById('addSongModal'));
+
+async function loadSongs(keyword = '') {
+    let url = keyword ? `${API_URL}/search?title=${keyword}` : API_URL;
+    const res = await fetch(url);
+    const songs = await res.json();
+
+    songTable.innerHTML = songs.map(song => `
+        <tr>
+            <td>${song.id}</td>
+            <td>${song.title}</td>
+            <td>${song.artist}</td>
+            <td>${song.genre}</td>
+            <td>${song.releaseYear ?? ''}</td>
+            <td>${song.duration ?? ''}</td>
+            <td>${song.audioFilePath ?? ''}</td>
+            <td>
+                <button class="btn btn-sm btn-warning" onclick="editSong('${song.id}')">
+                    <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-sm btn-danger" onclick="deleteSong('${song.id}')">
+                    <i class="bi bi-trash"></i>
+                </button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+// Thêm hoặc cập nhật
+songForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const id = document.getElementById('songId').value;
+    const song = {
+        title: document.getElementById('title').value,
+        artist: document.getElementById('artist').value,
+        genre: document.getElementById('genre').value,
+        releaseYear: document.getElementById('releaseYear').value,
+        duration: document.getElementById('duration').value,
+        audioFilePath: document.getElementById('audioFilePath').value
+    };
+
+    const method = id ? 'PUT' : 'POST';
+    const url = id ? `${API_URL}/${id}` : API_URL;
+
+    await fetch(url, {
+        method,
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(song)
+    });
+
+    modal.hide();
+    songForm.reset();
+    loadSongs();
+});
+
+// Xóa
+async function deleteSong(id) {
+    if (confirm('Bạn có chắc chắn muốn xóa bài hát này không?')) {
+        await fetch(`${API_URL}/${id}`, {method: 'DELETE'});
+        loadSongs();
+    }
+}
+
+// Chỉnh sửa
+async function editSong(id) {
+    const res = await fetch(`${API_URL}/${id}`);
+    const song = await res.json();
+
+    document.getElementById('songId').value = song.id;
+    document.getElementById('title').value = song.title;
+    document.getElementById('artist').value = song.artist;
+    document.getElementById('genre').value = song.genre;
+    document.getElementById('releaseYear').value = song.releaseYear;
+    document.getElementById('duration').value = song.duration ?? '';
+    document.getElementById('audioFilePath').value = song.audioFilePath ?? '';
+
+    modal.show();
+}
+
+// Tìm kiếm theo tiêu đề
+searchInput.addEventListener('input', (e) => {
+    const keyword = e.target.value.trim();
+    loadSongs(keyword);
+});
+
+// Load dữ liệu ban đầu
+loadSongs();
+</script>
 
 </body>
 </html>
