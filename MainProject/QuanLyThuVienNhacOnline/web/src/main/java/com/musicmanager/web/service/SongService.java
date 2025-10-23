@@ -1,12 +1,12 @@
 package com.musicmanager.web.service;
 
-import com.musicmanager.web.dto.request.SongRequest;
 import com.musicmanager.web.entity.Artist;
 import com.musicmanager.web.entity.Genre;
 import com.musicmanager.web.entity.Song;
 import com.musicmanager.web.repository.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.stream.Collectors;
 
 import java.util.List;
 
@@ -20,23 +20,13 @@ public class SongService
     @Autowired
     private GenreService genreService;
 
-    public Song createSong(SongRequest request)// tao bai hat moi//
+  public Song createSong(Song song)// tao mot bai hat//
     {
-        Artist artist = artistService.getArtist(request.getArtistId());
-        Genre genre = genreService.getGenre(request.getGenreId());
-        Song song = new Song();
+        return songRepository.save(song);   
+}
 
-        song.setTitle(request.getTitle());
-        song.setArtist(artist);
-        song.setGenre(genre);
-        song.setReleaseYear(request.getReleaseYear());
-        song.setAudioFilePath(request.getAudioFilePath());
-        song.setDuration(request.getDuration());
 
-        return songRepository.save(song);
-    }
-
-    public List<Song> getSongs()// lay bài hát theo yêu cầu//
+    public List<Song> getSongs(String id,String title,String artist,String genre,Integer releaseYear)// lay bài hát theo yêu cầu//
     {
         return songRepository.findAll().stream()
                 .filter(song -> id == null || id.isBlank() || song.getId().equals(id))
@@ -44,11 +34,11 @@ public class SongService
                 .filter(song -> artist == null || artist.isBlank() || song.getArtist().getName().toLowerCase().contains(artist.toLowerCase()))
                 .filter(song -> genre == null || genre.isBlank() || song.getGenre().getName().toLowerCase().contains(genre.toLowerCase()))
                 .filter(song -> releaseYear == null || song.getReleaseYear().equals(releaseYear))
-                .colect(Collectors.toList());
+                .collect(Collectors.toList());
     }
 
     
-    public Song updateSong(String id, SongRequest request)// cap nhat thong tin bai hat theo id//
+    public Song updateSong(String id, Song request)// cap nhat thong tin bai hat theo id//
     {
         Song song = getSong(id);
 
@@ -56,15 +46,11 @@ public class SongService
         {
             song.setTitle(request.getTitle());
         }
-        if (request.getArtistId() != null)
-        {
-            Artist artist = artistService.getArtist(request.getArtistId());
-            song.setArtist(artist);
+       if (request.getArtist() != null) {
+            song.setArtist(request.getArtist());
         }
-        if (request.getGenreId() != null)
-        {
-            Genre genre = genreService.getGenre(request.getGenreId());
-            song.setGenre(genre);
+        if (request.getGenre() != null) {
+           song.setGenre(request.getGenre());
         }
         if (request.getReleaseYear() != null)
         {
@@ -86,4 +72,10 @@ public class SongService
     {
         songRepository.deleteById(id);
     }
+    public Song getSong(String id) {
+    return songRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Không tìm thấy bài hát với id: " + id));
+}
+
+
 }
