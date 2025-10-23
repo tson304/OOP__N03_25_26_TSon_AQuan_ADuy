@@ -1,6 +1,5 @@
 package com.musicmanager.web.controller;
 
-import com.musicmanager.web.dto.request.SongRequest;
 import com.musicmanager.web.entity.Song;
 import com.musicmanager.web.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,45 +9,49 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/songs")
-public class SongController
-{
+public class SongController {
+
     @Autowired
     private SongService songService;
 
+    // Tạo mới bài hát
     @PostMapping
-    Song createSong(@RequestBody SongRequest request)
-    {
-        return songService.createSong(request);
+    public Song createSong(@RequestBody Song song) {
+        return songService.createSong(song);
     }
 
-    @GetMapping
-    List<Song> getSongs()
-    {
-        return songService.getSongs();
-    }
-    @GetMapping("/search")
-    List<Song> searchSongsByTitle(@RequestParam String title)
-    {
-        return songService.searchSongsByTitle(title);
-    }
-
+    // Lấy bài hát theo id
     @GetMapping("{id}")
-    Song getSong(@PathVariable String id)
-    {
+    public Song getSong(@PathVariable String id) {
         return songService.getSong(id);
     }
 
-    @PutMapping("{id}")
-    Song updateSong(@PathVariable String id, @RequestBody SongRequest request)
-    {
-        return songService.updateSong(id, request);
+    // Lấy tất cả bài hát
+    @GetMapping
+    public List<Song> getSongs() {
+        return songService.getSongs(null, null, null, null, null);
     }
 
+    // Tìm kiếm bài hát theo điều kiện
+    @GetMapping("/search")
+    public List<Song> searchSongs(@RequestParam(required = false) String id,
+                                  @RequestParam(required = false) String title,
+                                  @RequestParam(required = false) String artist,
+                                  @RequestParam(required = false) String genre,
+                                  @RequestParam(required = false) Integer releaseYear) {
+        return songService.getSongs(id, title, artist, genre, releaseYear);
+    }
+
+    // Cập nhật bài hát theo id
+    @PutMapping("{id}")
+    public Song updateSong(@PathVariable String id, @RequestBody Song song) {
+        return songService.updateSong(id, song);
+    }
+
+    // Xóa bài hát theo id
     @DeleteMapping("{id}")
-    String deleteSong(@PathVariable String id)
-    {
+    public String deleteSong(@PathVariable String id) {
         songService.deleteSong(id);
         return "Đã xóa bài hát với id: " + id;
     }
-    
 }
