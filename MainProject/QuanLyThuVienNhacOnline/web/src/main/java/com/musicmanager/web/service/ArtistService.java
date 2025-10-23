@@ -22,7 +22,7 @@ public class ArtistService
     // TÌM NGHỆ SĨ THEO TÊN
     public List<Artist> searchArtist(String name)
     {
-        return artistRepository.findByName(name);
+        return artistRepository.findByNameContainingIgnoreCase(name);
     }
 
     // TẠO NGHỆ SĨ MỚI

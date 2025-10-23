@@ -189,3 +189,23 @@ body
     font-weight: 600;
 }
 
+.search-bar {
+    width: 300px;
+}
+
+.search-bar .form-control {
+    background-color: transparent;
+    color: #fff;
+    border-radius: 8px;
+    padding-left: 10px;
+    height: 38px;
+}
+
+.search-bar .form-control::placeholder {
+    color: #bbb;
+}
+
+.search-bar .bi-search {
+    pointer-events: none;
+    font-size: 1.1rem;
+}

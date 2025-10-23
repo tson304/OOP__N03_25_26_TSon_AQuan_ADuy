@@ -76,26 +76,26 @@
                                                 </div>
 
                                                 <div class="modal-body">
-                                                    <form th:action="@{'/artists/update/' + ${artist.id}}" th:object="${artistRequest}" method="post" th:id="'editArtistForm_' + ${artist.id}">
+                                                    <form th:action="@{'/artists/update/' + ${artist.id}}" method="post" th:id="'editArtistForm_' + ${artist.id}">
                                                         <div class="mb-3">
                                                             <label for="newArtistName" class="form-label">New Artist Name</label>
-                                                            <input type="text" th:field="*{name}" class="form-control bg-transparent" id="newArtistName" placeholder="Artist Name...">
+                                                            <input type="text" name="name" th:value="${artist.name}" class="form-control bg-transparent" id="newArtistName" placeholder="Artist Name...">
                                                         </div>
 
                                                         <div class="mb-3">
                                                             <label for="newArtistCountry" class="form-label">New Country</label>
-                                                            <input type="text" th:field="*{country}" class="form-control bg-transparent" id="newArtistCountry" placeholder="Artist Country...">
+                                                            <input type="text" name="country" th:value="${artist.country}" class="form-control bg-transparent" id="newArtistCountry" placeholder="Artist Country...">
                                                         </div>
 
-                                                        <select th:field="*{gender}" class="form-select bg-transparent">
-                                                            <option value="Male">Male</option>
-                                                            <option value="Female">Female</option>
+                                                        <select name="gender" class="form-select bg-transparent">
+                                                            <option value="Male" th:selected="${artist.gender == 'Male'}">Male</option>
+                                                            <option value="Female" th:selected="${artist.gender == 'Female'}">Female</option>
                                                         </select>
 
 
                                                         <div class="mb-3">
                                                             <label for="newArtistInformations" class="form-label">New Informations</label>
-                                                            <input type="url" th:field="*{informations}" class="form-control bg-transparent" id="newArtistInformations" placeholder="Artist Informations...">
+                                                            <input type="url" name="informations" th:value="${artist.informations}" class="form-control bg-transparent" id="newArtistInformations" placeholder="Artist Informations...">
                                                         </div>
                                                     </form>
                                                 </div>

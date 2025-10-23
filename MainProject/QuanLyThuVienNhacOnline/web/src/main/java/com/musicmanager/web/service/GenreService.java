@@ -22,7 +22,7 @@ public class GenreService
     // TÌM THỂ LOẠI NHẠC THEO TÊN
     public List<Genre> searchGenres(String name)
     {
-        return genreRepository.findByName(name);
+        return genreRepository.findByNameContainingIgnoreCase(name);
     }
 
     // TẠO THỂ LOẠI NHẠC MỚI

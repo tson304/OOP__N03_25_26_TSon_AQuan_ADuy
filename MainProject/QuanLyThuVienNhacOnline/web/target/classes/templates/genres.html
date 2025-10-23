@@ -69,10 +69,10 @@
                                                 </div>
 
                                                 <div class="modal-body">
-                                                    <form th:action="@{'/genres/update/' + ${genre.id}}" th:object="${genreRequest}" method="post" th:id="'editGenreForm_' + ${genre.id}">
+                                                    <form th:action="@{'/genres/update/' + ${genre.id}}" method="post" th:id="'editGenreForm_' + ${genre.id}">
                                                         <div class="mb-3">
                                                             <label for="newGenreName" class="form-label">New Genre Name</label>
-                                                            <input type="text" th:field="*{name}" class="form-control bg-transparent" id="newGenreName" placeholder="Genre Name...">
+                                                            <input type="text" name="name" th:value="${genre.name}" class="form-control bg-transparent" id="newGenreName" placeholder="Genre Name...">
                                                         </div>
                                                     </form>
                                                 </div>
