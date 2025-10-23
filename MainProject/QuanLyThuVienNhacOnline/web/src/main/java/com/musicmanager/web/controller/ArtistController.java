@@ -17,9 +17,18 @@ public class ArtistController
     private ArtistService artistService;
 
     @GetMapping
-    public String readArtists(Model model)
+    public String getArtists(Model model)
     {
         model.addAttribute("artists", artistService.getArtists());
+        model.addAttribute("artistRequest", new Artist());
+        return "artists";
+    }
+
+    @GetMapping("/search")
+    public String searchArtists(@RequestParam("name") String name, Model model) {
+        List<Artist> artists = artistService.searchArtist(name);
+        model.addAttribute("artists", artists);
+        model.addAttribute("searchQuery", name);
         model.addAttribute("artistRequest", new Artist());
         return "artists";
     }
@@ -44,14 +53,4 @@ public class ArtistController
         artistService.deleteArtist(id);
         return "redirect:/artists";
     }
-
-    @GetMapping("/search")
-    public String searchArtists(@RequestParam("name") String name, Model model) {
-        List<Artist> artists = artistService.searchArtist(name);
-        model.addAttribute("artists", artists);
-        model.addAttribute("searchQuery", name);
-        model.addAttribute("artistRequest", new Artist());
-        return "artists";
-    }
-
 }

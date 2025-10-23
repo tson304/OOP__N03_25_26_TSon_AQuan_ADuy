@@ -17,9 +17,18 @@ public class GenreController
     private GenreService genreService;
 
     @GetMapping
-    public String readGenres(Model model)
+    public String getGenres(Model model)
     {
         model.addAttribute("genres", genreService.getGenres());
+        model.addAttribute("genreRequest", new Genre());
+        return "genres";
+    }
+
+    @GetMapping("/search")
+    public String searchGenres(@RequestParam("name") String name, Model model) {
+        List<Genre> genres = genreService.searchGenres(name);
+        model.addAttribute("genres", genres);
+        model.addAttribute("searchQuery", name);
         model.addAttribute("genreRequest", new Genre());
         return "genres";
     }
@@ -43,14 +52,5 @@ public class GenreController
     {
         genreService.deleteGenre(id);
         return "redirect:/genres";
-    }
-
-    @GetMapping("/search")
-    public String searchGenres(@RequestParam("name") String name, Model model) {
-        List<Genre> genres = genreService.searchGenres(name);
-        model.addAttribute("genres", genres);
-        model.addAttribute("searchQuery", name);
-        model.addAttribute("genreRequest", new Genre());
-        return "genres";
     }
 }
