@@ -26,7 +26,7 @@
                 <h2 class="pb-2 mb-4">Artist <i class="bi bi-person-badge"></i></h2>
 
                 <div class="d-flex align-items-center gap-3 mb-4">
-                    <button class="btn btn-success shadow-sm" data-bs-toggle="modal" data-bs-target="#addArtistModal"><i class="bi bi-plus-lg"></i> Add</button>
+                    <button class="btn btn-success shadow-sm" data-bs-toggle="modal" data-bs-target="#addArtistModal">Add</button>
 
                     <form th:action="@{/artists/search}" method="get" class="search-bar position-relative">
                         <input type="text" class="form-control pe-5 bg-transparent border-secondary text-light"
@@ -34,7 +34,7 @@
                         <i class="bi bi-search position-absolute top-50 end-0 translate-middle-y me-3 text-secondary"></i>
                     </form>
 
-                    <p th:text="'Number of Artists: ' + ${numberOfArtists}" class="mb-0 fw-semibold text-light"></p>
+                    <p th:text="'Number of Artists: ' + ${numberOfArtists}" class="mb-0 fw-semibold text-light" style="color: #a2a9b0;"></p>
 
                 </div>
 
