@@ -1,81 +1,70 @@
 package com.musicmanager.web.service;
 
-import com.musicmanager.web.entity.Artist;
-import com.musicmanager.web.entity.Genre;
 import com.musicmanager.web.entity.Song;
 import com.musicmanager.web.repository.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import java.util.stream.Collectors;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-public class SongService
-{
+public class SongService {
+
     @Autowired
     private SongRepository songRepository;
-    @Autowired
-    private ArtistService artistService;
-    @Autowired
-    private GenreService genreService;
 
-  public Song createSong(Song song)// tao mot bai hat//
-    {
-        return songRepository.save(song);   
-}
-
-
-    public List<Song> getSongs(String id,String title,String artist,String genre,Integer releaseYear)// lay bài hát theo yêu cầu//
-    {
-        return songRepository.findAll().stream()
-                .filter(song -> id == null || id.isBlank() || song.getId().equals(id))
-                .filter(song -> title == null || title.isBlank() || song.getTitle().toLowerCase().contains(title.toLowerCase()))
-                .filter(song -> artist == null || artist.isBlank() || song.getArtist().getName().toLowerCase().contains(artist.toLowerCase()))
-                .filter(song -> genre == null || genre.isBlank() || song.getGenre().getName().toLowerCase().contains(genre.toLowerCase()))
-                .filter(song -> releaseYear == null || song.getReleaseYear().equals(releaseYear))
-                .collect(Collectors.toList());
+    // CREATE
+    public Song createSong(Song song) {
+        if (song.getTitle() == null || song.getTitle().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tiêu đề không được để trống");
+        }
+        return songRepository.save(song);
     }
 
-    
-    public Song updateSong(String id, Song request)// cap nhat thong tin bai hat theo id//
-    {
+    // READ - lấy tất cả
+    public List<Song> getAllSongs() {
+        return songRepository.findAll();
+    }
+
+    // READ - lấy 1 bài hát theo id
+    public Song getSong(String id) {
+        return songRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Không tìm thấy bài hát với id: " + id));
+    }
+
+    // UPDATE
+    public Song updateSong(String id, Song request) {
         Song song = getSong(id);
 
-        if (request.getTitle() != null)
-        {
-            song.setTitle(request.getTitle());
-        }
-       if (request.getArtist() != null) {
-            song.setArtist(request.getArtist());
-        }
-        if (request.getGenre() != null) {
-           song.setGenre(request.getGenre());
-        }
-        if (request.getReleaseYear() != null)
-        {
-            song.setReleaseYear(request.getReleaseYear());
-        }
-        if (request.getAudioFilePath() != null)
-        {
-            song.setAudioFilePath(request.getAudioFilePath());
-        }
-        if (request.getDuration() != null)
-        {
-            song.setDuration(request.getDuration());
-        }
+        if (request.getTitle() != null) song.setTitle(request.getTitle());
+        if (request.getArtist() != null) song.setArtist(request.getArtist());
+        if (request.getGenre() != null) song.setGenre(request.getGenre());
+        if (request.getReleaseYear() != null) song.setReleaseYear(request.getReleaseYear());
+        if (request.getAudioFilePath() != null) song.setAudioFilePath(request.getAudioFilePath());
+        if (request.getDuration() != null) song.setDuration(request.getDuration());
 
         return songRepository.save(song);
     }
 
-    public void deleteSong(String id)// xoa bai hat theo id //
-    {
+    // DELETE
+    public void deleteSong(String id) {
+        if (!songRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Không tìm thấy bài hát với id: " + id);
+        }
         songRepository.deleteById(id);
     }
-    public Song getSong(String id) {
-    return songRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Không tìm thấy bài hát với id: " + id));
-}
 
+    // SEARCH - tìm theo tiêu chí
+    public List<Song> searchSongs(String title, String artist, String genre) {
+        List<Song> songs = songRepository.findAll();
 
+        return songs.stream()
+                .filter(s -> title == null || s.getTitle().toLowerCase().contains(title.toLowerCase()))
+                .filter(s -> artist == null || s.getArtist().toLowerCase().contains(artist.toLowerCase()))
+                .filter(s -> genre == null || s.getGenre().toLowerCase().contains(genre.toLowerCase()))
+                .collect(Collectors.toList());
+    }
 }
