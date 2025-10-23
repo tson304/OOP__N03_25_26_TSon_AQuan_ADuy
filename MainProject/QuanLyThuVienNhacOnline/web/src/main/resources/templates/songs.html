@@ -1,79 +1,210 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Song Management</title>
-
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>Song Manager</title>
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background-color: #121212;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #fff;
+            text-align: center;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .add-btn {
+            background: #2ecc71;
+            border: none;
+            padding: 10px 18px;
+            color: white;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .search-box {
+            display: flex;
+            align-items: center;
+        }
+        .search-box input {
+            padding: 8px 12px;
+            border-radius: 30px;
+            border: none;
+            outline: none;
+            width: 250px;
+            margin-right: 10px;
+        }
+        .search-box button {
+            background: #2ecc71;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #333;
+            text-align: left;
+        }
+        th {
+            background-color: #2a2a2a;
+            color: #ccc;
+        }
+        tr:hover {
+            background-color: #2e2e2e;
+        }
+        .btn {
+            border: none;
+            padding: 8px 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: white;
+        }
+        .btn-info {
+            background-color: #00bcd4;
+        }
+        .btn-edit {
+            background-color: #f1c40f;
+        }
+        .btn-delete {
+            background-color: #e74c3c;
+        }
+        form {
+            background: #1c1c1c;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        form label {
+            display: block;
+            margin-top: 10px;
+        }
+        form input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 6px;
+            border-radius: 5px;
+            border: 1px solid #333;
+            background-color: #2a2a2a;
+            color: white;
+        }
+        form button {
+            background-color: #2ecc71;
+            border: none;
+            margin-top: 15px;
+            padding: 10px 16px;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
 </head>
-<body class="bg-light">
+<body>
+<h1>🎵 Song Manager</h1>
 
-<div class="container py-4">
-    <h2 class="mb-4 text-center">🎵 Song Management</h2>
-
-    <!-- Ô tìm kiếm -->
-    <form th:action="@{/songs}" method="get" class="d-flex mb-3">
-        <input type="text" name="keyword" th:value="${keyword}" class="form-control me-2" placeholder="Search by title...">
-        <button class="btn btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>
+<div class="top-bar">
+    <form th:action="@{/songs}" method="get" class="search-box">
+        <input type="text" name="keyword" placeholder="Search by title..." th:value="${keyword}">
+        <button type="submit">Search</button>
     </form>
+    <a href="#addForm" class="add-btn">Add</a>
+</div>
 
-    <!-- Form thêm bài hát -->
-    <div class="card shadow-sm mb-4">
-        <div class="card-header bg-dark text-white">Add New Song</div>
-        <div class="card-body">
-            <form th:action="@{/songs/add}" th:object="${newSong}" method="post" class="row g-3">
-                <div class="col-md-4">
-                    <input type="text" th:field="*{title}" class="form-control" placeholder="Title" required>
-                </div>
-                <div class="col-md-3">
-                    <input type="text" th:field="*{artist}" class="form-control" placeholder="Artist" required>
-                </div>
-                <div class="col-md-2">
-                    <input type="text" th:field="*{genre}" class="form-control" placeholder="Genre" required>
-                </div>
-                <div class="col-md-2">
-                    <input type="number" th:field="*{releaseYear}" class="form-control" placeholder="Year" required>
-                </div>
-                <div class="col-md-1 text-end">
-                    <button class="btn btn-success w-100"><i class="bi bi-plus-lg"></i></button>
-                </div>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Artist</th>
+        <th>Genre</th>
+        <th>Year</th>
+        <th>Duration</th>
+        <th>Options</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="song : ${songs}">
+        <td th:text="${song.id}"></td>
+        <td th:text="${song.title}"></td>
+        <td th:text="${song.artist}"></td>
+        <td th:text="${song.genre}"></td>
+        <td th:text="${song.releaseYear}"></td>
+        <td th:text="${song.duration}"></td>
+        <td>
+            <form th:action="@{'/songs/delete/' + ${song.id}}" method="get" style="display:inline;">
+                <button class="btn btn-delete" type="submit" onclick="return confirm('Xóa bài hát này?')">🗑</button>
             </form>
-        </div>
-    </div>
+            <a th:href="@{'#edit-' + ${song.id}}" class="btn btn-edit">✏</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
-    <!-- Bảng danh sách -->
-    <div class="card shadow-sm">
-        <div class="card-body p-0">
-            <table class="table table-hover mb-0 align-middle">
-                <thead class="table-dark">
-                <tr>
-                    <th>Title</th>
-                    <th>Artist</th>
-                    <th>Genre</th>
-                    <th>Year</th>
-                    <th>Options</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="song : ${songs}">
-                    <td th:text="${song.title}"></td>
-                    <td th:text="${song.artist}"></td>
-                    <td th:text="${song.genre}"></td>
-                    <td th:text="${song.releaseYear}"></td>
-                    <td>
-                        <form th:action="@{|/songs/delete/${song.id}|}" method="get" style="display:inline">
-                            <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
-                        </form>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+<!-- Form thêm bài hát -->
+<form id="addForm" th:action="@{/songs/add}" method="post" th:object="${newSong}">
+    <h3>➕ Add Song</h3>
+    <label>Title</label>
+    <input type="text" th:field="*{title}" required>
+
+    <label>Artist</label>
+    <input type="text" th:field="*{artist}">
+
+    <label>Genre</label>
+    <input type="text" th:field="*{genre}">
+
+    <label>Release Year</label>
+    <input type="number" th:field="*{releaseYear}">
+
+    <label>Duration</label>
+    <input type="text" th:field="*{duration}">
+
+    <label>Audio File Path</label>
+    <input type="text" th:field="*{audioFilePath}">
+
+    <button type="submit">Add Song</button>
+</form>
+
+<!-- Form sửa cho từng bài hát -->
+<div th:each="song : ${songs}">
+    <form th:id="'edit-' + ${song.id}" th:action="@{'/songs/update/' + ${song.id}}" method="post" th:object="${song}">
+        <h3>✏ Edit Song</h3>
+        <label>Title</label>
+        <input type="text" th:field="*{title}" required>
+
+        <label>Artist</label>
+        <input type="text" th:field="*{artist}">
+
+        <label>Genre</label>
+        <input type="text" th:field="*{genre}">
+
+        <label>Release Year</label>
+        <input type="number" th:field="*{releaseYear}">
+
+        <label>Duration</label>
+        <input type="text" th:field="*{duration}">
+
+        <label>Audio File Path</label>
+        <input type="text" th:field="*{audioFilePath}">
+
+        <button type="submit">Update</button>
+    </form>
 </div>
 
 </body>

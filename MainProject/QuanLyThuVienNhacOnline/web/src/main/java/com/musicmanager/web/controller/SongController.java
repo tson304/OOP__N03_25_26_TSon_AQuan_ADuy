@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/songs")
-public class SongViewController {
+public class SongController {
 
     @Autowired
     private SongService songService;
