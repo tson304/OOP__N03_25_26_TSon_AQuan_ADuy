@@ -32,7 +32,8 @@ public class SongService {
     // READ - lấy 1 bài hát theo id
     public Song getSong(String id) {
         return songRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Không tìm thấy bài hát với id: " + id));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, 
+                        "Không tìm thấy bài hát với id: " + id));
     }
 
     // UPDATE
@@ -52,19 +53,34 @@ public class SongService {
     // DELETE
     public void deleteSong(String id) {
         if (!songRepository.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Không tìm thấy bài hát với id: " + id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, 
+                    "Không tìm thấy bài hát với id: " + id);
         }
         songRepository.deleteById(id);
     }
 
-    // SEARCH - tìm theo tiêu chí
+    // SEARCH - tìm theo tiêu chí chi tiết
     public List<Song> searchSongs(String title, String artist, String genre) {
-        List<Song> songs = songRepository.findAll();
+    List<Song> songs = songRepository.findAll();
 
-        return songs.stream()
-                .filter(s -> title == null || s.getTitle().toLowerCase().contains(title.toLowerCase()))
-                .filter(s -> artist == null || s.getArtist().toLowerCase().contains(artist.toLowerCase()))
-                .filter(s -> genre == null || s.getGenre().toLowerCase().contains(genre.toLowerCase()))
+    return songs.stream()
+            .filter(s -> title == null ||
+                    (s.getTitle() != null && s.getTitle().toLowerCase().contains(title.toLowerCase())))
+            .filter(s -> artist == null ||
+                    (s.getArtist() != null && s.getArtist().toLowerCase().contains(artist.toLowerCase())))
+            .filter(s -> genre == null ||
+                    (s.getGenre() != null && s.getGenre().toLowerCase().contains(genre.toLowerCase())))
+            .collect(Collectors.toList());
+}
+
+    // SEARCH - tìm đơn giản theo keyword
+    public List<Song> searchSongs(String keyword) {
+        if (keyword == null || keyword.isBlank()) {
+            return songRepository.findAll();
+        }
+        return songRepository.findAll().stream()
+                .filter(s -> s.getTitle() != null &&
+                        s.getTitle().toLowerCase().contains(keyword.toLowerCase()))
                 .collect(Collectors.toList());
     }
 }
