@@ -1,211 +1,192 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Song Manager</title>
-    <style>
-        body {
-            font-family: "Segoe UI", sans-serif;
-            background-color: #121212;
-            color: #fff;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            color: #fff;
-            text-align: center;
-        }
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        .add-btn {
-            background: #2ecc71;
-            border: none;
-            padding: 10px 18px;
-            color: white;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .search-box {
-            display: flex;
-            align-items: center;
-        }
-        .search-box input {
-            padding: 8px 12px;
-            border-radius: 30px;
-            border: none;
-            outline: none;
-            width: 250px;
-            margin-right: 10px;
-        }
-        .search-box button {
-            background: #2ecc71;
-            border: none;
-            padding: 8px 14px;
-            border-radius: 30px;
-            color: white;
-            cursor: pointer;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #1e1e1e;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        th, td {
-            padding: 12px;
-            border-bottom: 1px solid #333;
-            text-align: left;
-        }
-        th {
-            background-color: #2a2a2a;
-            color: #ccc;
-        }
-        tr:hover {
-            background-color: #2e2e2e;
-        }
-        .btn {
-            border: none;
-            padding: 8px 10px;
-            border-radius: 50%;
-            cursor: pointer;
-            color: white;
-        }
-        .btn-info {
-            background-color: #00bcd4;
-        }
-        .btn-edit {
-            background-color: #f1c40f;
-        }
-        .btn-delete {
-            background-color: #e74c3c;
-        }
-        form {
-            background: #1c1c1c;
-            padding: 20px;
-            border-radius: 8px;
-            max-width: 600px;
-            margin: 20px auto;
-        }
-        form label {
-            display: block;
-            margin-top: 10px;
-        }
-        form input {
-            width: 100%;
-            padding: 8px;
-            margin-top: 6px;
-            border-radius: 5px;
-            border: 1px solid #333;
-            background-color: #2a2a2a;
-            color: white;
-        }
-        form button {
-            background-color: #2ecc71;
-            border: none;
-            margin-top: 15px;
-            padding: 10px 16px;
-            color: white;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Song Management</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="icon" th:href="@{/img/logo/song-logo.svg}" type="image/svg+xml">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
+
 <body>
-<h1>🎵 Song Manager</h1>
-
-<div class="top-bar">
-    <form th:action="@{/songs}" method="get" class="search-box">
-        <input type="text" name="keyword" placeholder="Search by title..." th:value="${keyword}">
-        <button type="submit">Search</button>
-    </form>
-    <a href="#addForm" class="add-btn">Add</a>
+<div class="side-bar">
+    <a href="#" class="menu-indicator d-flex align-items-center"><i class="bi bi-list me-3 fs-5"></i></a>
+    <a th:href="@{/}" class="d-flex align-items-center"><i class="bi bi-house-door me-3 fs-5"></i><span>Home</span></a>
+    <a th:href="@{/users}" class="d-flex align-items-center"><i class="bi bi-people me-3 fs-5"></i><span>User</span></a>
+    <a th:href="@{/artists}" class="d-flex align-items-center"><i class="bi bi-person-badge me-3 fs-5"></i><span>Artist</span></a>
+    <a th:href="@{/songs}" class="d-flex align-items-center"><i class="bi bi-music-note-list me-3 fs-5"></i><span>Song</span></a>
+    <a th:href="@{/genres}" class="d-flex align-items-center"><i class="bi bi-music-note-beamed me-3 fs-5"></i><span>Genre</span></a>
 </div>
 
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Artist</th>
-        <th>Genre</th>
-        <th>Year</th>
-        <th>Duration</th>
-        <th>Options</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="song : ${songs}">
-        <td th:text="${song.id}"></td>
-        <td th:text="${song.title}"></td>
-        <td th:text="${song.artist}"></td>
-        <td th:text="${song.genre}"></td>
-        <td th:text="${song.releaseYear}"></td>
-        <td th:text="${song.duration}"></td>
-        <td>
-            <form th:action="@{'/songs/delete/' + ${song.id}}" method="get" style="display:inline;">
-                <button class="btn btn-delete" type="submit" onclick="return confirm('Xóa bài hát này?')">🗑</button>
+<div class="main-content">
+    <div class="container-fluid py-4">
+        <h2 class="pb-2 mb-4">Songs <i class="bi bi-music-note-list"></i></h2>
+
+        <div class="d-flex align-items-center gap-3 mb-4">
+            <button class="btn btn-success shadow-sm" data-bs-toggle="modal" data-bs-target="#addSongModal">Add</button>
+
+            <form th:action="@{/songs/search}" method="get" class="search-bar position-relative">
+                <input type="text" class="form-control pe-5 bg-transparent border-secondary text-light"
+                       th:value="${searchQuery}" name="keyword" placeholder="Search...">
+                <i class="bi bi-search position-absolute top-50 end-0 translate-middle-y me-3 text-secondary"></i>
             </form>
-            <a th:href="@{'#edit-' + ${song.id}}" class="btn btn-edit">✏</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
 
-<!-- Form thêm bài hát -->
-<form id="addForm" th:action="@{/songs/add}" method="post" th:object="${newSong}">
-    <h3>➕ Add Song</h3>
-    <label>Title</label>
-    <input type="text" th:field="*{title}" required>
+            <p th:text="'Number of Songs: ' + ${numberOfSongs}" class="mb-0 fw-semibold text-light" style="color: #a2a9b0;"></p>
+        </div>
 
-    <label>Artist</label>
-    <input type="text" th:field="*{artist}">
+        <div class="card bg-secondary-subtle border-0">
+            <div class="card-body p-0">
+                <table class="table mb-0">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Artist</th>
+                        <th>Genre</th>
+                        <th>Year</th>
+                        <th>Duration</th>
+                        <th>Options</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="song: ${songs}">
+                        <td th:text="${song.id}"></td>
+                        <td th:text="${song.title}"></td>
+                        <td th:text="${song.artist}"></td>
+                        <td th:text="${song.genre}"></td>
+                        <td th:text="${song.releaseYear}"></td>
+                        <td th:text="${song.duration}"></td>
+                        <td>
+                            <button class="btn btn-sm btn-warning me-2" data-bs-toggle="modal"
+                                    th:attr="data-bs-target='#editSongModal_' + ${song.id}">
+                                <i class="bi bi-pen-fill"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                    th:attr="data-bs-target='#deleteSongModal_' + ${song.id}">
+                                <i class="bi bi-trash-fill"></i>
+                            </button>
+                        </td>
 
-    <label>Genre</label>
-    <input type="text" th:field="*{genre}">
+                        <!-- Modal Edit -->
+                        <div class="modal fade" th:id="'editSongModal_' + ${song.id}" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content bg-dark text-light border-0 rounded-4 shadow-lg">
+                                    <div class="modal-header border-secondary">
+                                        <h5 class="modal-title">Sửa bài hát</h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form th:action="@{'/songs/update/' + ${song.id}}" method="post"
+                                              th:id="'editSongForm_' + ${song.id}">
+                                            <div class="mb-3">
+                                                <label class="form-label">Title</label>
+                                                <input type="text" name="title" th:value="${song.title}" class="form-control bg-transparent">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Artist</label>
+                                                <input type="text" name="artist" th:value="${song.artist}" class="form-control bg-transparent">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Genre</label>
+                                                <input type="text" name="genre" th:value="${song.genre}" class="form-control bg-transparent">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Release Year</label>
+                                                <input type="number" name="releaseYear" th:value="${song.releaseYear}" class="form-control bg-transparent">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Duration</label>
+                                                <input type="text" name="duration" th:value="${song.duration}" class="form-control bg-transparent">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Audio File Path</label>
+                                                <input type="text" name="audioFilePath" th:value="${song.audioFilePath}" class="form-control bg-transparent">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer border-secondary">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-success"
+                                                th:attr="form='editSongForm_' + ${song.id}">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-    <label>Release Year</label>
-    <input type="number" th:field="*{releaseYear}">
-
-    <label>Duration</label>
-    <input type="text" th:field="*{duration}">
-
-    <label>Audio File Path</label>
-    <input type="text" th:field="*{audioFilePath}">
-
-    <button type="submit">Add Song</button>
-</form>
-
-<!-- Form sửa cho từng bài hát -->
-<div th:each="song : ${songs}">
-    <form th:id="'edit-' + ${song.id}" th:action="@{'/songs/update/' + ${song.id}}" method="post" th:object="${song}">
-        <h3>✏ Edit Song</h3>
-        <label>Title</label>
-        <input type="text" th:field="*{title}" required>
-
-        <label>Artist</label>
-        <input type="text" th:field="*{artist}">
-
-        <label>Genre</label>
-        <input type="text" th:field="*{genre}">
-
-        <label>Release Year</label>
-        <input type="number" th:field="*{releaseYear}">
-
-        <label>Duration</label>
-        <input type="text" th:field="*{duration}">
-
-        <label>Audio File Path</label>
-        <input type="text" th:field="*{audioFilePath}">
-
-        <button type="submit">Update</button>
-    </form>
+                        <!-- Modal Delete -->
+                        <div class="modal fade" th:id="'deleteSongModal_' + ${song.id}" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content bg-dark text-light border-0 rounded-4 shadow-lg">
+                                    <div class="modal-header border-secondary">
+                                        <h5 class="modal-title">Confirm Delete</h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Bạn có chắc chắn muốn xóa bài hát này?</p>
+                                    </div>
+                                    <div class="modal-footer border-secondary">
+                                        <form th:action="@{'/songs/delete/' + ${song.id}}" method="post">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
+<!-- Modal Add -->
+<div class="modal fade" id="addSongModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark text-light border-0 rounded-4 shadow-lg">
+            <div class="modal-header border-secondary">
+                <h5 class="modal-title">Add New Song</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/songs/create}" th:object="${songRequest}" method="post" id="addSongForm">
+                    <div class="mb-3">
+                        <label class="form-label">Title</label>
+                        <input type="text" th:field="*{title}" class="form-control bg-transparent">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Artist</label>
+                        <input type="text" th:field="*{artist}" class="form-control bg-transparent">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Genre</label>
+                        <input type="text" th:field="*{genre}" class="form-control bg-transparent">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Release Year</label>
+                        <input type="number" th:field="*{releaseYear}" class="form-control bg-transparent">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Duration</label>
+                        <input type="text" th:field="*{duration}" class="form-control bg-transparent">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Audio File Path</label>
+                        <input type="text" th:field="*{audioFilePath}" class="form-control bg-transparent">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-secondary">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-success" form="addSongForm">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -60,27 +60,26 @@ public class SongService {
     }
 
     // SEARCH - tìm theo tiêu chí chi tiết
-    public List<Song> searchSongs(String title, String artist, String genre) {
-    List<Song> songs = songRepository.findAll();
+    public List<Song> searchSongs(String keyword) {
+    if (keyword == null || keyword.isBlank()) {
+        return songRepository.findAll();
+    }
 
-    return songs.stream()
-            .filter(s -> title == null ||
-                    (s.getTitle() != null && s.getTitle().toLowerCase().contains(title.toLowerCase())))
-            .filter(s -> artist == null ||
-                    (s.getArtist() != null && s.getArtist().toLowerCase().contains(artist.toLowerCase())))
-            .filter(s -> genre == null ||
-                    (s.getGenre() != null && s.getGenre().toLowerCase().contains(genre.toLowerCase())))
+    String lowerKey = keyword.toLowerCase();
+
+    return songRepository.findAll().stream()
+            .filter(s ->
+                    (s.getTitle() != null && s.getTitle().toLowerCase().contains(lowerKey)) ||
+                    (s.getArtist() != null && s.getArtist().toLowerCase().contains(lowerKey)) ||
+                    (s.getGenre() != null && s.getGenre().toLowerCase().contains(lowerKey))
+            )
             .collect(Collectors.toList());
 }
 
-    // SEARCH - tìm đơn giản theo keyword
-    public List<Song> searchSongs(String keyword) {
-        if (keyword == null || keyword.isBlank()) {
-            return songRepository.findAll();
-        }
-        return songRepository.findAll().stream()
-                .filter(s -> s.getTitle() != null &&
-                        s.getTitle().toLowerCase().contains(keyword.toLowerCase()))
-                .collect(Collectors.toList());
+    
+
+    // COUNT - đếm tổng số bài hát
+    public long countSongs() {
+        return songRepository.count();
     }
 }

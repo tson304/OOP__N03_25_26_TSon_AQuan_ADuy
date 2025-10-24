@@ -15,11 +15,11 @@ public class Song {
     private String genre;
     private Integer releaseYear;
     private String audioFilePath;
-    private Integer duration;
+    private String duration;
 
     public Song() {}
 
-    public Song(String title, String artist, String genre, Integer releaseYear, String audioFilePath, Integer duration) {
+    public Song(String title, String artist, String genre, Integer releaseYear, String audioFilePath, String duration) {
         this.title = title;
         this.artist = artist;
         this.genre = genre;
@@ -47,6 +47,6 @@ public class Song {
     public String getAudioFilePath() { return audioFilePath; }
     public void setAudioFilePath(String audioFilePath) { this.audioFilePath = audioFilePath; }
 
-    public Integer getDuration() { return duration; }
-    public void setDuration(Integer duration) { this.duration = duration; }
+    public String getDuration() { return duration; }
+    public void setDuration(String duration) { this.duration = duration; }
 }

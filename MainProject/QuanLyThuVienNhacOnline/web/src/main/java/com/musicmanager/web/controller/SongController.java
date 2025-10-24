@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/songs")
 public class SongController {
@@ -14,33 +16,45 @@ public class SongController {
     @Autowired
     private SongService songService;
 
-    // Trang danh sách
     @GetMapping
-    public String listSongs(Model model, @RequestParam(value = "keyword", required = false) String keyword) {
-        model.addAttribute("songs", songService.searchSongs(keyword));
-        model.addAttribute("keyword", keyword);
-        model.addAttribute("newSong", new Song());
-        return "songs";
-    }
+public String listSongs(Model model) {
+    List<Song> songs = songService.getAllSongs();
+    model.addAttribute("songs", songs);
+    model.addAttribute("numberOfSongs", songs.size());
+    model.addAttribute("songRequest", new Song()); // 
+    return "songs"; // tên file HTML (songs.html)
+}
 
-    // Tạo mới
-    @PostMapping("/add")
-    public String addSong(@ModelAttribute Song song) {
-        songService.createSong(song);
+    // Tìm kiếm bài hát theo ten bai hat
+    @GetMapping("/search")
+public String searchSongs(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
+    List<Song> songs = songService.searchSongs(keyword);
+
+    model.addAttribute("songs", songs);
+    model.addAttribute("searchQuery", keyword);
+    model.addAttribute("numberOfSongs", songs.size());
+    model.addAttribute("songRequest", new Song());
+    return "songs";
+}
+
+    // Tạo mới bài hát
+    @PostMapping("/create")
+    public String createSong(@ModelAttribute("songRequest") Song request) {
+        songService.createSong(request);
         return "redirect:/songs";
     }
 
-    // Xóa
-    @GetMapping("/delete/{id}")
+    // Cập nhật bài hát
+    @PostMapping("/update/{id}")
+    public String updateSong(@PathVariable String id, @ModelAttribute("songRequest") Song request) {
+        songService.updateSong(id, request);
+        return "redirect:/songs";
+    }
+
+    // Xóa bài hát
+    @PostMapping("/delete/{id}")
     public String deleteSong(@PathVariable String id) {
         songService.deleteSong(id);
-        return "redirect:/songs";
-    }
-
-    // Cập nhật
-    @PostMapping("/update/{id}")
-    public String updateSong(@PathVariable String id, @ModelAttribute Song song) {
-        songService.updateSong(id, song);
         return "redirect:/songs";
     }
 }
