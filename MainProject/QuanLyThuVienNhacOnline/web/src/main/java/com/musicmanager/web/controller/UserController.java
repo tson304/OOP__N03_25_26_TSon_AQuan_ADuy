@@ -1,7 +1,5 @@
 package com.musicmanager.web.controller;
 
-import com.musicmanager.web.dto.request.UserCreateRequest;
-import com.musicmanager.web.dto.request.UserUpdateRequest;
 import com.musicmanager.web.entity.User;
 import com.musicmanager.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,7 @@ public class UserController
     private UserService userService;
 
     @PostMapping
-    User createUser(@RequestBody UserCreateRequest request)
+    User createUser(@RequestBody User request)
     {
         return userService.createUser(request);
     }
@@ -35,7 +33,7 @@ public class UserController
     }
 
     @PutMapping("/{id}")
-    User updateUser(@PathVariable String id, @RequestBody UserUpdateRequest request)
+    User updateUser(@PathVariable String id, @RequestBody User request)
     {
         return userService.updateUser(id, request);
     }

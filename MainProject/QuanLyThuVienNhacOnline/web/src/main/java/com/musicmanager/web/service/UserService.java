@@ -1,7 +1,5 @@
 package com.musicmanager.web.service;
 
-import com.musicmanager.web.dto.request.UserCreateRequest;
-import com.musicmanager.web.dto.request.UserUpdateRequest;
 import com.musicmanager.web.entity.User;
 import com.musicmanager.web.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,7 @@ public class UserService
     @Autowired
     private UserRepository userRepository;
 
-    public User createUser(UserCreateRequest request)
+    public User createUser(User request)
     {
         User user = new User();
 
@@ -36,7 +34,7 @@ public class UserService
         return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-    public User updateUser(String id, UserUpdateRequest request)
+    public User updateUser(String id, User request)
     {
         User user = getUser(id);
 
