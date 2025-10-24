@@ -235,8 +235,8 @@ body
 }
 
 .carousel-item img {
-    max-height: 600px;
+    max-height: 700px;
     object-fit: cover;
-    object-position: 50% 25%;
-    width: 70%;
+    object-position: 15% 25%;
+    width: 80%;
 }
