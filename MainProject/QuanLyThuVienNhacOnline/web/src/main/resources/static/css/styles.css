@@ -209,3 +209,34 @@ body
     pointer-events: none;
     font-size: 1.1rem;
 }
+
+.card {
+    background-color: #282a2c;
+    border-color: #323537;
+}
+
+.card .card-title {
+    color: #ffffff;
+}
+
+.card .card-text {
+    color: #a2a9b0;
+}
+
+.card-hover {
+    color: #a2a9b0;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card-hover:hover {
+    color: #a2a9b0;
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4) !important;
+}
+
+.carousel-item img {
+    max-height: 600px;
+    object-fit: cover;
+    object-position: 50% 25%;
+    width: 70%;
+}
