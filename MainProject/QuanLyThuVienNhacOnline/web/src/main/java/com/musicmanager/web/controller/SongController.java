@@ -3,55 +3,58 @@ package com.musicmanager.web.controller;
 import com.musicmanager.web.entity.Song;
 import com.musicmanager.web.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/songs")
+@Controller
+@RequestMapping("/songs")
 public class SongController {
 
     @Autowired
     private SongService songService;
 
-    // Tạo mới bài hát
-    @PostMapping
-    public Song createSong(@RequestBody Song song) {
-        return songService.createSong(song);
-    }
-
-    // Lấy bài hát theo id
-    @GetMapping("{id}")
-    public Song getSong(@PathVariable String id) {
-        return songService.getSong(id);
-    }
-
-    // Lấy tất cả bài hát
     @GetMapping
-    public List<Song> getSongs() {
-        return songService.getSongs(null, null, null, null, null);
-    }
+public String listSongs(Model model) {
+    List<Song> songs = songService.getAllSongs();
+    model.addAttribute("songs", songs);
+    model.addAttribute("numberOfSongs", songs.size());
+    model.addAttribute("songRequest", new Song()); // 
+    return "songs"; // tên file HTML (songs.html)
+}
 
-    // Tìm kiếm bài hát theo điều kiện
+    // Tìm kiếm bài hát theo ten bai hat
     @GetMapping("/search")
-    public List<Song> searchSongs(@RequestParam(required = false) String id,
-                                  @RequestParam(required = false) String title,
-                                  @RequestParam(required = false) String artist,
-                                  @RequestParam(required = false) String genre,
-                                  @RequestParam(required = false) Integer releaseYear) {
-        return songService.getSongs(id, title, artist, genre, releaseYear);
+public String searchSongs(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
+    List<Song> songs = songService.searchSongs(keyword);
+
+    model.addAttribute("songs", songs);
+    model.addAttribute("searchQuery", keyword);
+    model.addAttribute("numberOfSongs", songs.size());
+    model.addAttribute("songRequest", new Song());
+    return "songs";
+}
+
+    // Tạo mới bài hát
+    @PostMapping("/create")
+    public String createSong(@ModelAttribute("songRequest") Song request) {
+        songService.createSong(request);
+        return "redirect:/songs";
     }
 
-    // Cập nhật bài hát theo id
-    @PutMapping("{id}")
-    public Song updateSong(@PathVariable String id, @RequestBody Song song) {
-        return songService.updateSong(id, song);
+    // Cập nhật bài hát
+    @PostMapping("/update/{id}")
+    public String updateSong(@PathVariable String id, @ModelAttribute("songRequest") Song request) {
+        songService.updateSong(id, request);
+        return "redirect:/songs";
     }
 
-    // Xóa bài hát theo id
-    @DeleteMapping("{id}")
+    // Xóa bài hát
+    @PostMapping("/delete/{id}")
     public String deleteSong(@PathVariable String id) {
         songService.deleteSong(id);
-        return "Đã xóa bài hát với id: " + id;
+        return "redirect:/songs";
     }
 }
