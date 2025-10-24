@@ -4,54 +4,39 @@ import com.musicmanager.web.entity.User;
 import com.musicmanager.web.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
-public class UserService
-{
+public class UserService {
+
     @Autowired
     private UserRepository userRepository;
 
-    public User createUser(User request)
-    {
-        User user = new User();
-
-        user.setName(request.getName());
-        user.setPassword(request.getPassword());
-        user.setEmail(request.getEmail());
-
-        return userRepository.save(user);
-    }
-
-    public List<User> getUsers()
-    {
+    public List<User> getUsers() {
         return userRepository.findAll();
     }
 
-    public User getUser(String id)
-    {
-        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+    public void createUser(User user) {
+        userRepository.save(user);
     }
 
-    public User updateUser(String id, User request)
-    {
-        User user = getUser(id);
-
-        if (request.getEmail() != null)
-        {
-            user.setEmail(request.getEmail());
-        }
-        if(request.getPassword() != null)
-        {
-            user.setPassword(request.getPassword());
-        }
-
-        return userRepository.save(user);
+    public void updateUser(String id, User user) {
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        existingUser.setUsername(user.getUsername());
+        existingUser.setEmail(user.getEmail());
+        existingUser.setRole(user.getRole());
+        userRepository.save(existingUser);
     }
 
-    public void deleteUser(String id)
-    {
+    public void deleteUser(String id) {
         userRepository.deleteById(id);
+    }
+
+    public List<User> searchUsers(String keyword) {
+        if (keyword == null || keyword.trim().isEmpty()) {
+            return userRepository.findAll();
+        }
+        return userRepository.findByUsernameContainingIgnoreCaseOrEmailContainingIgnoreCase(keyword, keyword);
     }
 }
