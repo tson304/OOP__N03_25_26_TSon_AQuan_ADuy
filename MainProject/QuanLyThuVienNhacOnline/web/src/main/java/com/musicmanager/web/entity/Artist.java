@@ -2,6 +2,9 @@ package com.musicmanager.web.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "artists")
 public class Artist
@@ -14,6 +17,11 @@ public class Artist
     private String country;
     private String gender;
     private String informations;
+
+    @OneToMany(mappedBy = "artist")
+    private List<Song> songs = new ArrayList<>();
+
+    public Artist() {}
 
     // GETTER VÀ SETTER
     public String getId()
@@ -64,5 +72,15 @@ public class Artist
     public void setInformations(String informations)
     {
         this.informations = informations;
+    }
+
+    public List<Song> getSongs()
+    {
+        return songs;
+    }
+
+    public void setSongs(List<Song> songs)
+    {
+        this.songs = songs;
     }
 }

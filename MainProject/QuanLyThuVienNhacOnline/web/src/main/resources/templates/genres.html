@@ -45,6 +45,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Genre Name</th>
+                                    <th>Genre Informations</th>
                                     <th>Options</th>
                                 </tr>
                             </thead>
@@ -52,6 +53,7 @@
                                 <tr th:each="genre: ${genres}">
                                     <td th:text="${genre.id}"></td>
                                     <td th:text="${genre.name}"></td>
+                                    <td><a th:href="${genre.informations}" target="_blank"><i class="bi bi-info-circle-fill info-icon"></i></a></td>
                                     <td>
                                         <button class="btn btn-sm btn-warning me-2" data-bs-toggle="modal" th:attr="data-bs-target='#editGenreModal_' + ${genre.id}"><i class="bi bi-pen-fill"></i></button>
                                         <button class="btn btn-sm btn-danger" data-bs-toggle="modal" th:attr="data-bs-target='#deleteGenreModal_' + ${genre.id}"><i class="bi bi-trash-fill"></i></button>
@@ -72,7 +74,12 @@
                                                     <form th:action="@{'/genres/update/' + ${genre.id}}" method="post" th:id="'editGenreForm_' + ${genre.id}">
                                                         <div class="mb-3">
                                                             <label for="newGenreName" class="form-label">New Genre Name</label>
-                                                            <input type="text" name="name" th:value="${genre.name}" class="form-control bg-transparent" id="newGenreName" placeholder="Genre Name...">
+                                                            <input type="text" name="name" th:value="${genre.name}" class="form-control bg-transparent" id="newGenreName" placeholder="Enter Name...">
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="newGenreInformations" class="form-label">New Genre Informations</label>
+                                                            <input type="url" name="informations" th:value="${genre.informations}" class="form-control bg-transparent" id="newGenreInformations" placeholder="Enter Informations...">
                                                         </div>
                                                     </form>
                                                 </div>
@@ -98,7 +105,7 @@
                                                 </div>
 
                                                 <div class="modal-body">
-                                                    <p>Bạn có chắc chắn muốn xóa thể loại nhạc?</p>
+                                                    <p th:text="|Are you sure want to delete Genre: ${genre.name}?|"></p>
                                                 </div>
 
                                                 <div class="modal-footer border-secondary">
@@ -133,7 +140,12 @@
                         <form th:action="@{/genres/create}" th:object="${genreRequest}" method="post" id="addGenreForm">
                             <div class="mb-3">
                                 <label for="genreName" class="form-label">Genre Name</label>
-                                <input type="text" th:field="*{name}" class="form-control bg-transparent" id="genreName" placeholder="Enter genre name..." required>
+                                <input type="text" th:field="*{name}" class="form-control bg-transparent" id="genreName" placeholder="Enter Name..." required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="genreInformations" class="form-label">Genre Informations</label>
+                                <input type="url" th:field="*{informations}" class="form-control bg-transparent" id="genreInformations" placeholder="Enter Informations..." required>
                             </div>
                         </form>
                     </div>

@@ -27,21 +27,19 @@ public class GenreController
     }
 
     @GetMapping("/search")
-    public String searchGenres(@RequestParam("name") String name, Model model) {
-        List<Genre> genres;
-
+    public String searchGenres(@RequestParam("name") String name, Model model)
+    {
         if (name == null || name.trim().isEmpty())
         {
-            genres = genreService.getGenres();
+            return "redirect:/genres";
         }
-        else
-        {
-            genres = genreService.searchGenres(name);
-        }
+
+        List<Genre> genres = genreService.searchGenresByName(name);
+
         model.addAttribute("genres", genres);
         model.addAttribute("searchQuery", name);
         model.addAttribute("genreRequest", new Genre());
-        model.addAttribute("numberOfGenres", genreService.numberOfGenres());
+        model.addAttribute("numberOfGenres", genres.size());
         return "genres";
     }
 

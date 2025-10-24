@@ -10,4 +10,6 @@ import java.util.List;
 public interface GenreRepository extends JpaRepository<Genre, String>
 {
     List<Genre> findByNameContainingIgnoreCase(String name);
+
+    Genre findByNameIgnoreCase(String name);
 }

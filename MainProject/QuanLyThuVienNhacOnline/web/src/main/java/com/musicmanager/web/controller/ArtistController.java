@@ -1,6 +1,7 @@
 package com.musicmanager.web.controller;
 
 import com.musicmanager.web.entity.Artist;
+import com.musicmanager.web.entity.Song;
 import com.musicmanager.web.service.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,21 +30,17 @@ public class ArtistController
     @GetMapping("/search")
     public String searchArtists(@RequestParam("name") String name, Model model)
     {
-        List<Artist> artists;
-
         if (name == null || name.trim().isEmpty())
         {
-            artists = artistService.getArtists();
+            return "redirect:/artists";
         }
-        else
-        {
-            artists = artistService.searchArtist(name);
-        }
+
+        List<Artist> artists = artistService.searchArtistsByName(name);
 
         model.addAttribute("artists", artists);
         model.addAttribute("searchQuery", name);
         model.addAttribute("artistRequest", new Artist());
-        model.addAttribute("numberOfArtists", artistService.numberOfArtists());
+        model.addAttribute("numberOfArtists", artists.size());
 
         return "artists";
     }

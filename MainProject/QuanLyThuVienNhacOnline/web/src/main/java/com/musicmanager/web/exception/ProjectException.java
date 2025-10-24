@@ -6,18 +6,12 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
-// Annotation này báo cho Spring biết đây là class xử lý lỗi toàn cục
 @ControllerAdvice
 public class ProjectException {
 
-    // Dùng để ghi log lỗi ra console (thực hành tốt)
+    // Dùng để ghi log lỗi ra console
     private static final Logger logger = LoggerFactory.getLogger(ProjectException.class);
 
-    /**
-     * Xử lý lỗi khi không tìm thấy tài nguyên (404).
-     * Bất cứ khi nào ResourceNotFoundException được ném ra từ bất kỳ Controller nào,
-     * phương thức này sẽ được gọi.
-     */
     @ExceptionHandler(ResourceNotFoundException.class)
     public ModelAndView handleResourceNotFoundException(ResourceNotFoundException ex) {
         ModelAndView modelAndView = new ModelAndView();
@@ -33,10 +27,6 @@ public class ProjectException {
         return modelAndView;
     }
 
-    /**
-     * Xử lý tất cả các lỗi chung khác (500 - Internal Server Error).
-     * Đây là "catch-all" (bắt tất cả).
-     */
     @ExceptionHandler(Exception.class)
     public ModelAndView handleGeneralException(Exception ex) {
         ModelAndView modelAndView = new ModelAndView();
