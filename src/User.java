@@ -1,46 +1,55 @@
-public class User {
-    private String tenNguoiDung;
-    private String ngaySinh;
-    private String gioiTinh;
+package model;
 
-    public User(String tenNguoiDung, String ngaySinh, String gioiTinh) {
-        this.tenNguoiDung = tenNguoiDung;
-        this.ngaySinh = ngaySinh;
-        this.gioiTinh = gioiTinh;
+public class User implements PeopleInterface {
+    private String Full_name;
+    private String Date_of_birth;
+    private String Identity;
+
+    public User(String Full_name, String Date_of_birth, String Identity) {
+        this.Full_name = Full_name;
+        this.Date_of_birth = Date_of_birth;
+        this.Identity = Identity;
     }
 
-    public String getTenNguoiDung() {
-        return tenNguoiDung;
+    public String getFull_name() {
+        return Full_name;
     }
 
-    public void setTenNguoiDung(String tenNguoiDung) {
-        this.tenNguoiDung = tenNguoiDung;
+    public void setFull_name(String Full_name) {
+        this.Full_name = Full_name;
     }
 
-    public String getNgaySinh() {
-        return ngaySinh;
+    public String getDate_of_birth() {
+        return Date_of_birth;
     }
 
-    public void setNgaySinh(String ngaySinh) {
-        this.ngaySinh = ngaySinh;
+    public void setDate_of_birth(String Date_of_birth) {
+        this.Date_of_birth = Date_of_birth;
     }
 
-    public String getGioiTinh() {
-        return gioiTinh;
+    public String getIdentity() {
+        return Identity;
     }
 
-    public void setGioiTinh(String gioiTinh) {
-        this.gioiTinh = gioiTinh;
+    public void setIdentity(String Identity) {
+        this.Identity = Identity;
     }
 
-    public void hienThiThongTin() {
-        System.out.println("Tên người dùng: " + tenNguoiDung);
-        System.out.println("Ngày sinh: " + ngaySinh);
-        System.out.println("Giới tính: " + gioiTinh);
+    @Override
+    public void setInfo(String Identity) {
+        this.Identity = Identity;
+    }
+
+    @Override
+    public String getInfo(String identity) {
+        if (this.Identity.equals(identity)) {
+            return "Tên: " + Full_name + ", Ngày sinh: " + Date_of_birth + ", Mã định danh: " + Identity;
+        }
+        return "Không tìm thấy người dùng với mã: " + identity;
     }
 
     @Override
     public String toString() {
-        return tenNguoiDung + " (" + gioiTinh + ", " + ngaySinh + ")";
+        return Full_name + " (" + Date_of_birth + ", " + Identity + ")";
     }
 }
