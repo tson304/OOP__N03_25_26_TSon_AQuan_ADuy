@@ -1,57 +1,51 @@
-body
-{
-    background-color: #1b1c1d;
+body {
+    background-color: #f8f9fa;
     font-family: sans-serif;
-    color: #a2a9b0;
+    color: #212529;
 }
 
-.side-bar
-{
+.side-bar {
     height: 100%;
     width: 75px;
     position: fixed;
     z-index: 10;
     top: 0;
     left: 0;
-    background-color: #282a2c;
+    background-color: #ffffff;
     overflow-x: hidden;
     padding-top: 20px;
     transition: width 0.2s ease;
+    border-right: 1px solid #dee2e6;
 }
 
-.side-bar:hover
-{
+.side-bar:hover {
     width: 250px;
 }
 
-.side-bar a
-{
+.side-bar a {
     display: flex;
     align-items: center;
     padding: 10px 15px;
     height: 50px;
     text-decoration: none;
     font-size: 16px;
-    color: #a2a9b0;
-    background-color: #282a2c;
+    color: #343a40;
+    background-color: #ffffff;
     white-space: nowrap;
     border-radius: 50px;
     margin: 5px 10px;
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.side-bar a:hover
-{
-    background-color: #323537;
+.side-bar a:hover {
+    background-color: #e9ecef;
 }
 
-.side-bar a i
-{
+.side-bar a i {
     flex-shrink: 0;
 }
 
-.side-bar a span
-{
+.side-bar a span {
     display: inline-block;
     opacity: 0;
     width: 0;
@@ -59,101 +53,87 @@ body
     transition: opacity 0.2s ease, width 0.2s ease;
 }
 
-.side-bar:hover a span
-{
+.side-bar:hover a span {
     opacity: 1;
     width: auto;
     margin-left: 10px;
 }
 
-.menu-indicator
-{
+.menu-indicator {
     pointer-events: none;
     cursor: default;
 }
 
-.menu-indicator:hover
-{
-    background-color: #282a2c !important;
+.menu-indicator:hover {
+    /* Nền không đổi khi hover */
+    background-color: #ffffff !important;
 }
 
-.main-content
-{
+.main-content {
     padding: 20px;
     transition: margin-left 0.2s ease;
     margin-left: 75px;
 }
 
-.side-bar:hover ~ .main-content
-{
+.side-bar:hover~.main-content {
     margin-left: 250px;
 }
 
-.table thead th
-{
-  background-color: #323537;
-  color: white;
-  border-color: #323537;
+.table thead th {
+    background-color: #e9ecef;
+    color: #212529;
+    border-color: #dee2e6;
 }
 
-.table tbody tr td
-{
-  background-color: #282a2c;
-  color: white;
-  border-color: #323537;
+.table tbody tr td {
+    background-color: #ffffff;
+    color: #212529;
+    border-color: #dee2e6;
 }
 
 .form-control,
-.form-select
-{
-    border-color: #323537;
-    background-color: #1b1c1d;
-    color: #a2a9b0;
+.form-select {
+    border-color: #ced4da;
+    background-color: #ffffff;
+    color: #212529;
 }
 
-.form-control::placeholder
-{
-    color: #a2a9b0;
-    opacity: 0.5;
+.form-control::placeholder {
+    color: #6c757d;
+    opacity: 1;
 }
 
 .form-control:focus,
-.form-select:focus
-{
-    color: #a2a9b0;
-    box-shadow: none;
-    border-color: #323537;
+.form-select:focus {
+    color: #212529;
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, .25);
 }
 
-.btn
-{
+.btn {
     border-radius: 100px;
     border: none;
     font-weight: 500;
 }
 
-.btn-danger
-{
-    background-color: #F20D0D;
-    color: #1b1c1d !important;
+.btn-danger {
+    background-color: #dc3545;
+    color: #fff !important;
 }
 
-.btn-warning
-{
-    background-color: #FFF52E;
-    color: #1b1c1d;
+.btn-warning {
+    background-color: #ffc107;
+    color: #000;
 }
 
-.btn-success
-{
-    background-color: #53AC53;
-    color: #1b1c1d !important;
+.btn-success {
+    background-color: #198754;
+    color: #fff !important;
 }
 
 .btn-danger:hover,
 .btn-warning:hover,
-.btn-success:hover
-{
+.btn-success:hover {
     opacity: 0.9;
 }
 
@@ -162,30 +142,32 @@ body
     font-size: 1.2rem;
     transition: 0.2s;
 }
+
 .info-icon:hover {
     color: #0a58ca;
 }
 
 .modal-content {
-    background-color: #1b1c1d !important;
-    color: #a2a9b0;
+    background-color: #ffffff !important;
+    color: #212529;
 }
 
 .modal-content .form-control:focus {
-    color: #a2a9b0;
+    color: #212529;
     box-shadow: none;
 }
 
-.modal-header, .modal-footer {
-    border-color: #323537 !important;
+.modal-header,
+.modal-footer {
+    border-color: #dee2e6 !important;
 }
 
 .modal-content .form-label {
-    color: #a2a9b0;
+    color: #212529;
 }
 
 .modal-title {
-    color: #a2a9b0;
+    color: #212529;
     font-weight: 600;
 }
 
@@ -194,15 +176,16 @@ body
 }
 
 .search-bar .form-control {
-    background-color: transparent;
-    color: #fff;
+    background-color: #ffffff;
+    color: #212529;
     border-radius: 8px;
     padding-left: 10px;
     height: 38px;
+    border: 1px solid #ced4da;
 }
 
 .search-bar .form-control::placeholder {
-    color: #bbb;
+    color: #6c757d;
 }
 
 .search-bar .bi-search {
@@ -211,27 +194,27 @@ body
 }
 
 .card {
-    background-color: #282a2c;
-    border-color: #323537;
+    background-color: #ffffff;
+    border-color: rgba(0, 0, 0, 0.175);
 }
 
 .card .card-title {
-    color: #ffffff;
+    color: #212529;
 }
 
 .card .card-text {
-    color: #a2a9b0;
+    color: #212529;
 }
 
 .card-hover {
-    color: #a2a9b0;
+    color: #212529;
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .card-hover:hover {
-    color: #a2a9b0;
+    color: #212529;
     transform: translateY(-5px);
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4) !important;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
 
 .carousel-item img {

@@ -34,7 +34,7 @@
                         <i class="bi bi-search position-absolute top-50 end-0 translate-middle-y me-3 text-secondary"></i>
                     </form>
 
-                    <p th:text="'Number of Genres: ' + ${numberOfGenres}" class="mb-0 fw-semibold text-light" style="color: #a2a9b0;"></p>
+                    <p th:text="'Number of Genres: ' + ${numberOfGenres}" class="mb-0 fw-semibold"></p>
 
                 </div>
 
@@ -105,7 +105,7 @@
                                                 </div>
 
                                                 <div class="modal-body">
-                                                    <p th:text="|Are you sure want to delete Genre: ${genre.name}?|"></p>
+                                                    <p th:text="|Are you sure want to delete Genre: ${genre.name}?|" style="color: #212529;"></p>
                                                 </div>
 
                                                 <div class="modal-footer border-secondary">

@@ -34,7 +34,7 @@
                             <i class="bi bi-search position-absolute top-50 end-0 translate-middle-y me-3 text-secondary"></i>
                         </form>
 
-                        <p th:text="'Number of Artists: ' + ${numberOfArtists}" class="mb-0 fw-semibold text-light" style="color: #a2a9b0;"></p>
+                        <p th:text="'Number of Artists: ' + ${numberOfArtists}" class="mb-0 fw-semibold"></p>
 
                     </div>
 
@@ -88,7 +88,7 @@
                                                             </div>
 
                                                             <div class="mb-3">
-                                                                <label class="form-label">New Gender</label> <select name="gender" class="form-select bg-transparent text-light">
+                                                                <label class="form-label">New Gender</label> <select name="gender" class="form-select">
                                                                 <option value="Male" th:selected="${artist.gender == 'Male'}">Male</option>
                                                                 <option value="Female" th:selected="${artist.gender == 'Female'}">Female</option>
                                                             </select>
@@ -123,7 +123,7 @@
                                                     </div>
 
                                                     <div class="modal-body">
-                                                        <p th:text="|Are you sure want to delete Artist: ${artist.name}?|"></p>
+                                                        <p th:text="|Are you sure want to delete Artist: ${artist.name}?|" style="color: #212529;"></p>
                                                     </div>
 
                                                     <div class="modal-footer border-secondary">
@@ -169,7 +169,7 @@
 
                                 <div class="mb-3">
                                     <label class="form-label">Gender</label>
-                                    <select th:field="*{gender}" class="form-select bg-transparent">
+                                    <select th:field="*{gender}" class="form-select">
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                     </select>
