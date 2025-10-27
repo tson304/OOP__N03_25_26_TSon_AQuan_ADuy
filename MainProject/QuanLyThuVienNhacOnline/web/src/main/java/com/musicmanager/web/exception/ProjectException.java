@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @ControllerAdvice
 public class ProjectException {
-
+    // TODO: TRY-CATCH
     // Dùng để ghi log lỗi ra console
     private static final Logger logger = LoggerFactory.getLogger(ProjectException.class);
 

@@ -1,82 +1,31 @@
 body {
     background-color: #f8f9fa;
-    font-family: sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     color: #212529;
-}
-
-.side-bar {
-    height: 100%;
-    width: 75px;
-    position: fixed;
-    z-index: 10;
-    top: 0;
-    left: 0;
-    background-color: #ffffff;
-    overflow-x: hidden;
-    padding-top: 20px;
-    transition: width 0.2s ease;
-    border-right: 1px solid #dee2e6;
-}
-
-.side-bar:hover {
-    width: 250px;
-}
-
-.side-bar a {
-    display: flex;
-    align-items: center;
-    padding: 10px 15px;
-    height: 50px;
-    text-decoration: none;
-    font-size: 16px;
-    color: #343a40;
-    background-color: #ffffff;
-    white-space: nowrap;
-    border-radius: 50px;
-    margin: 5px 10px;
-    transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.side-bar a:hover {
-    background-color: #e9ecef;
-}
-
-.side-bar a i {
-    flex-shrink: 0;
-}
-
-.side-bar a span {
-    display: inline-block;
-    opacity: 0;
-    width: 0;
-    overflow: hidden;
-    transition: opacity 0.2s ease, width 0.2s ease;
-}
-
-.side-bar:hover a span {
-    opacity: 1;
-    width: auto;
-    margin-left: 10px;
-}
-
-.menu-indicator {
-    pointer-events: none;
-    cursor: default;
-}
-
-.menu-indicator:hover {
-    /* Nền không đổi khi hover */
-    background-color: #ffffff !important;
+    padding-top: 70px;
 }
 
 .main-content {
     padding: 20px;
-    transition: margin-left 0.2s ease;
-    margin-left: 75px;
+    margin-left: 0;
 }
 
-.side-bar:hover~.main-content {
-    margin-left: 250px;
+.navbar-nav .nav-link {
+    border-radius: 100px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 0 5px;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover {
+    background-color: #e9ecef;
+    transform: translateY(-2px);
+}
+
+.navbar-nav .nav-link.active {
+    color: #212529;
 }
 
 .table thead th {
@@ -114,6 +63,7 @@ body {
     border-radius: 100px;
     border: none;
     font-weight: 500;
+    transition: opacity 0.2s ease-in-out;
 }
 
 .btn-danger {
@@ -140,7 +90,7 @@ body {
 .info-icon {
     color: #0dcaf0;
     font-size: 1.2rem;
-    transition: 0.2s;
+    transition: color 0.2s ease-in-out;
 }
 
 .info-icon:hover {
@@ -148,7 +98,7 @@ body {
 }
 
 .modal-content {
-    background-color: #ffffff !important;
+    background-color: #ffffff;
     color: #212529;
 }
 
@@ -218,8 +168,7 @@ body {
 }
 
 .carousel-item img {
-    max-height: 700px;
+    max-height: 650px;
     object-fit: cover;
     object-position: 15% 25%;
-    width: 80%;
 }
