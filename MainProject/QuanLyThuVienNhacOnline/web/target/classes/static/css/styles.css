@@ -24,10 +24,6 @@ body {
     transform: translateY(-2px);
 }
 
-.navbar-nav .nav-link.active {
-    color: #212529;
-}
-
 .table thead th {
     background-color: #e9ecef;
     color: #212529;
