@@ -23,13 +23,13 @@
 
 <div class="main-content">
     <div class="container-fluid py-4">
-        <h2 class="pb-2 mb-4 text-light">Users <i class="bi bi-people"></i></h2>
+        <h2 class="pb-2 mb-4">Users <i class="bi bi-people"></i></h2>
 
         <div class="d-flex align-items-center gap-3 mb-4">
             <button class="btn btn-success shadow-sm" data-bs-toggle="modal" data-bs-target="#addUserModal">Add</button>
 
             <form th:action="@{/users/search}" method="get" class="search-bar position-relative">
-                <input type="text" class="form-control pe-5 bg-transparent border-secondary text-light"
+                <input type="text" class="form-control pe-5 bg-transparent border-secondary"
                        th:value="${searchQuery}" name="keyword" placeholder="Search...">
                 <i class="bi bi-search position-absolute top-50 end-0 translate-middle-y me-3 text-secondary"></i>
             </form>
