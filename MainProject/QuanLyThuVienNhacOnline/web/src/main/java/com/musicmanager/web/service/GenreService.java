@@ -1,14 +1,12 @@
 package com.musicmanager.web.service;
 
 import com.musicmanager.web.entity.Genre;
-import com.musicmanager.web.entity.Song;
 import com.musicmanager.web.exception.BadRequestException;
 import com.musicmanager.web.exception.ResourceNotFoundException;
 import com.musicmanager.web.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -45,7 +43,7 @@ public class GenreService
 
     // TẠO THỂ LOẠI NHẠC MỚI
     // TODO: THÊM EXCEPTION
-    public void createGenre(Genre request)
+    public Genre createGenre(Genre request)
     {
         if (request.getName() == null || request.getName().isBlank())
         {
@@ -57,6 +55,7 @@ public class GenreService
         }
 
         genreRepository.save(request);
+        return request;
     }
 
     // SỬA THÔNG TIN THỂ LOẠI NHẠC

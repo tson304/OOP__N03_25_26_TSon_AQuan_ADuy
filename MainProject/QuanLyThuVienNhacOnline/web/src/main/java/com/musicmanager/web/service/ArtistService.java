@@ -1,14 +1,12 @@
 package com.musicmanager.web.service;
 
 import com.musicmanager.web.entity.Artist;
-import com.musicmanager.web.entity.Song;
 import com.musicmanager.web.exception.BadRequestException;
 import com.musicmanager.web.exception.ResourceNotFoundException;
 import com.musicmanager.web.repository.ArtistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -42,7 +40,7 @@ public class ArtistService
     }
 
     // TẠO NGHỆ SĨ MỚI
-    public void createArtist(Artist request)
+    public Artist createArtist(Artist request)
     {
         if (request.getName() == null || request.getName().isBlank())
         {
@@ -56,6 +54,7 @@ public class ArtistService
 
         artistRepository.save(request);
 
+        return request;
     }
 
     // SỬA THÔNG TIN NGHỆ SĨ
