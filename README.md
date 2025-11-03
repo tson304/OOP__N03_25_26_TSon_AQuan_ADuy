@@ -2,9 +2,6 @@
 
 Ứng dụng quản lý thư viện nhạc cho phép người dùng quản lý bộ sưu tập nhạc cá nhân, bao gồm thông tin về Bài hát, Nghệ sĩ và Thể loại.
 
-*(Bạn có thể chèn ảnh chụp màn hình trang chủ tại đây để README thêm sinh động)*
-``
-
 ## Tính năng chính
 
 * **Quản lý Bài hát:** Thêm, xem, sửa, xóa các bài hát.
