@@ -15,9 +15,6 @@ public class Genre
     private String name;
     private String informations;
 
-    @OneToMany(mappedBy = "genre")
-    private List<Song> songs = new ArrayList<>();
-
     public Genre() {}
 
     public String getId()
@@ -48,15 +45,5 @@ public class Genre
     public void setInformations(String informations)
     {
         this.informations = informations;
-    }
-
-    public List<Song> getSongs()
-    {
-        return songs;
-    }
-
-    public void setSongs(List<Song> songs)
-    {
-        this.songs = songs;
     }
 }

@@ -2,6 +2,8 @@ package com.musicmanager.web.service;
 
 import com.musicmanager.web.entity.Genre;
 import com.musicmanager.web.entity.Song;
+import com.musicmanager.web.exception.BadRequestException;
+import com.musicmanager.web.exception.ResourceNotFoundException;
 import com.musicmanager.web.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,15 +24,16 @@ public class GenreService
     }
 
     // LẤY RA THÔNG TIN THỂ LOẠI NHẠC THEO ID
-    // TODO: THÊM EXCEPTION
     public Genre getGenre(String id)
     {
-        return genreRepository.findById(id).orElse(null);
+
+        return genreRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Genre with id: " + id + " not found!."));
     }
 
     // TÌM THỂ LOẠI NHẠC THEO TÊN (ĐẠI KHÁI)
     public List<Genre> searchGenresByName(String name)
     {
+
         return genreRepository.findByNameContainingIgnoreCase(name);
     }
 
@@ -40,49 +43,48 @@ public class GenreService
         return genreRepository.findByNameIgnoreCase(name);
     }
 
-    // Lấy ra danh sách bài hát của thể loại nhạc
-    public List<Song> getGenreSongs(String id)
-    {
-        Genre genre = getGenre(id);
-
-        if (genre != null)
-        {
-            return genre.getSongs();
-        }
-
-        return Collections.emptyList();
-    }
-
     // TẠO THỂ LOẠI NHẠC MỚI
     // TODO: THÊM EXCEPTION
     public void createGenre(Genre request)
     {
-        if (searchGenreByName(request.getName()) == null)
+        if (request.getName() == null || request.getName().isBlank())
         {
-            genreRepository.save(request);
+            throw new BadRequestException("Genre name cannot be blank!.");
         }
+        if (searchGenreByName(request.getName()) != null)
+        {
+            throw new BadRequestException("Genre existed!/");
+        }
+
+        genreRepository.save(request);
     }
 
     // SỬA THÔNG TIN THỂ LOẠI NHẠC
-    // TODO: THÊM EXCEPTION
     public void updateGenre(String id, Genre request)
     {
         Genre genre = getGenre(id);
         Genre existingGenre = searchGenreByName(request.getName());
 
-        if (existingGenre == null || existingGenre.getId().equals(id))
+        if (existingGenre != null && !existingGenre.getId().equals(id))
         {
-            genre.setName(request.getName());
-            genre.setInformations(request.getInformations());
-
-            genreRepository.save(genre);
+            throw new BadRequestException("Genre name existed!.");
         }
+
+
+        if (request.getName() != null) genre.setName(request.getName());
+        if (request.getInformations() != null) genre.setInformations(request.getInformations());
+
+        genreRepository.save(genre);
     }
 
     // XÓA THỂ LOẠI NHẠC
-    // TODO: THÊM EXCEPTION
     public void deleteGenre(String id)
     {
+        if (!genreRepository.existsById(id))
+        {
+            throw new ResourceNotFoundException("Cannot find Genre with id: " + id);
+        }
+
         genreRepository.deleteById(id);
     }
 
@@ -90,12 +92,5 @@ public class GenreService
     public long numberOfGenres()
     {
         return genreRepository.count();
-    }
-
-    // SỐ LƯỢNG BÀI HÁT TRONG THỂ LOẠI NHẠC
-    // TODO: THÊM EXCEPTION
-    public long numberOfGenreSongs(String id)
-    {
-        return getGenreSongs(id).size();
     }
 }

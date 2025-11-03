@@ -18,9 +18,6 @@ public class Artist
     private String gender;
     private String informations;
 
-    @OneToMany(mappedBy = "artist")
-    private List<Song> songs = new ArrayList<>();
-
     public Artist() {}
 
     // GETTER VÀ SETTER
@@ -72,15 +69,5 @@ public class Artist
     public void setInformations(String informations)
     {
         this.informations = informations;
-    }
-
-    public List<Song> getSongs()
-    {
-        return songs;
-    }
-
-    public void setSongs(List<Song> songs)
-    {
-        this.songs = songs;
     }
 }
