@@ -1,6 +1,6 @@
 # Ứng dụng Quản lý Thư Viện Nhạc
 
-Ứng dụng quản lý thư viện nhạc cho phép người dùng quản lý bộ sưu tập nhạc cá nhân, bao gồm thông tin về Bài hát, Nghệ sĩ và Thể loại.
+Ứng dụng quản lý thư viện nhạc cho phép quản lý về Người dùng, thông tin về Bài hát, Nghệ sĩ và Thể loại.
 
 ## Tính năng chính
 
