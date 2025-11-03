@@ -1,45 +1,74 @@
+# Ứng dụng Quản lý Thư Viện Nhạc
 
+Ứng dụng quản lý thư viện nhạc cho phép người dùng quản lý bộ sưu tập nhạc cá nhân, bao gồm thông tin về Bài hát, Nghệ sĩ và Thể loại.
 
-🔹 Chức năng Thêm bài hát
+*(Bạn có thể chèn ảnh chụp màn hình trang chủ tại đây để README thêm sinh động)*
+``
 
-Người dùng nhập thông tin bài hát (ID, tên bài hát, ca sĩ, thể loại, thời lượng).
+## Tính năng chính
 
-Hệ thống kiểm tra danh sách còn chỗ trống không.
+* **Quản lý Bài hát:** Thêm, xem, sửa, xóa các bài hát.
+* **Quản lý Nghệ sĩ:** Thêm, xem, sửa, xóa thông tin nghệ sĩ.
+* **Quản lý Thể loại:** Thêm, xem, sửa, xóa các thể loại nhạc.
+* **Tìm kiếm:** Tìm kiếm bài hát nhanh chóng theo tên hoặc nghệ sĩ.
 
-Nếu còn chỗ → thêm bài hát vào danh sách.
+---
 
-Nếu hết chỗ → thông báo không thể thêm.
+## ️ Công nghệ sử dụng
 
-🔹 Chức năng Sửa bài hát
+* **Backend:**
+    * Java 17
+    * Spring Boot 3.x
+    * Spring Data JPA (Hibernate)
+* **Frontend (Server-side):**
+    * Thymeleaf
+    * HTML & CSS
+    * Bootstrap 5
+* **Database:**
+    * Cloud MySQL (Aiven)
 
-Người dùng nhập ID bài hát muốn sửa.
+---
 
-Hệ thống tìm bài hát theo ID:
+## Hướng dẫn chạy chương trình
 
-Nếu tìm thấy: cho phép sửa các thông tin như
+Để chạy dự án này local, làm theo các bước dưới đây.
 
-Tên bài hát
+### 1. Yêu cầu Môi trường
 
-Tên ca sĩ
+Đảm bảo bạn đã cài đặt các công cụ sau trên hệ thống:
 
-Thể loại
+* Java JDK 17
+* Maven
+* Git
+* Một IDE (IntelliJ IDEA, VS Code, ...)
 
-Thời lượng
+### 2. Clone Repository
 
-Nếu không tìm thấy: báo lỗi "Không tồn tại ID này".
+Sử dụng Git để sao chép dự án về máy:
 
-🔹 Chức năng Xóa bài hát
+https://github.com/tson304/OOP__N03_25_26_TSon_AQuan_ADuy
 
-Người dùng nhập ID hoặc Tên bài hát muốn xóa.
+### 3. Cấu hình Database:
 
-Hệ thống tìm bài hát trong danh sách:
+Mở file
+`src/main/resources/application.properties`
 
-Nếu có → xóa khỏi danh sách, dịch chuyển các phần tử còn lại.
+Cập nhật thông tin kết nối
+```properties
+spring.datasource.url=jdbc:mysql://[YOUR_HOST]:[PORT]/[YOUR_DB_NAME]
+spring.datasource.username=[YOUR_USERNAME]
+spring.datasource.password=[YOUR_PASSWORD]
 
-Nếu không có → báo "Không tìm thấy bài hát".
-# UML Diagram
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+```
 
+### 4. Chạy ứng dụng:
+Tìm theo đường dẫn 
+`src/main/java/com/musicmanager/web/MusicManagerApplication.java`
 
+Chạy
+`MusicManagerApplication.java`
 
-<img width="1015" height="733" alt="3c1106be-18c7-4662-a9c7-bfe9ef2eb1ff" src="https://github.com/user-attachments/assets/3b000733-ea62-470a-8c6b-01a51960d7f4" />
-
+Truy cập
+http://localhost:8080
