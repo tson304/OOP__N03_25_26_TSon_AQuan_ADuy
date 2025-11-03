@@ -1,6 +1,7 @@
 package com.musicmanager.web.service;
 
 import com.musicmanager.web.entity.Song;
+
 import com.musicmanager.web.repository.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,13 +14,14 @@ import java.util.stream.Collectors;
 @Service
 public class SongService {
 
-    @Autowired
-    private SongRepository songRepository;
+    @Autowired SongRepository songRepository;
 
     // CREATE
     public Song createSong(Song song) {
-        if (song.getTitle() == null || song.getTitle().isBlank()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tiêu đề không được để trống");
+        if (song.getTitle() == null || song.getTitle().isBlank()||
+            song.getArtist() == null || song.getArtist().isBlank()||
+            song.getGenre() == null || song.getGenre().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "không được để trống");
         }
         return songRepository.save(song);
     }
@@ -37,9 +39,8 @@ public class SongService {
     }
 
     // UPDATE
-    public Song updateSong(String id, Song request) {
+    public void updateSong(String id, Song request) {
         Song song = getSong(id);
-
         if (request.getTitle() != null) song.setTitle(request.getTitle());
         if (request.getArtist() != null) song.setArtist(request.getArtist());
         if (request.getGenre() != null) song.setGenre(request.getGenre());
@@ -47,14 +48,13 @@ public class SongService {
         if (request.getAudioFilePath() != null) song.setAudioFilePath(request.getAudioFilePath());
         if (request.getDuration() != null) song.setDuration(request.getDuration());
 
-        return songRepository.save(song);
+        songRepository.save(song);
     }
 
     // DELETE
     public void deleteSong(String id) {
         if (!songRepository.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, 
-                    "Không tìm thấy bài hát với id: " + id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Không tìm thấy bài hát với id: " + id);
         }
         songRepository.deleteById(id);
     }
