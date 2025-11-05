@@ -7,7 +7,7 @@
 * **Quản lý Bài hát:** Thêm, xem, sửa, xóa các bài hát.
 * **Quản lý Nghệ sĩ:** Thêm, xem, sửa, xóa thông tin nghệ sĩ.
 * **Quản lý Thể loại:** Thêm, xem, sửa, xóa các thể loại nhạc.
-* **Tìm kiếm:** Tìm kiếm bài hát nhanh chóng theo tên hoặc nghệ sĩ.
+* **Tìm kiếm:** Tìm kiếm bài hát nhanh chóng theo tên.
 
 ---
 
